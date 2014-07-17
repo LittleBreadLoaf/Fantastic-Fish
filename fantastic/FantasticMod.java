@@ -97,14 +97,7 @@ public class FantasticMod
 
 		MinecraftForge.EVENT_BUS.register(new FantasticEvents());
 		
-		VillagerRegistry.instance().registerVillagerId(FantasticIds.fishermanID);
-		VillagerRegistry.instance().registerVillagerSkin(FantasticIds.fishermanID, new ResourceLocation(FantasticInfo.ID + ":textures/models/mobs/fantastic_fisherman.png")); //id must be greater than 6
-		VillagerTradeHandler newTradeHandler = new VillagerTradeHandler();
-		VillagerRegistry.instance().registerVillageTradeHandler(FantasticIds.fishermanID, newTradeHandler);
-		FishermanHandler FishermanHut = new FishermanHandler();
-		VillagerRegistry.instance().registerVillageCreationHandler(FishermanHut);
-		VillagerRegistry.instance().getRegisteredVillagers();
-		MapGenStructureIO.func_143031_a(ComponentFishermanHut.class, "Fisherman");
+		proxy.registerVillagers();
 		
 		ChestGenHooks contents = ChestGenHooks.getInfo("FISHERMAN");
 		ItemStack Goggles = new ItemStack(FantasticArmor.goggles, 1, 1);

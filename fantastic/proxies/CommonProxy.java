@@ -12,13 +12,19 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.server.FMLServerHandler;
+import fantastic.FantasticIds;
 import fantastic.events.TickHandler;
+import fantastic.events.VillagerTradeHandler;
+import fantastic.world.ComponentFishermanHut;
+import fantastic.world.FishermanHandler;
 
 public class CommonProxy implements IGuiHandler
 {
@@ -123,6 +129,18 @@ public class CommonProxy implements IGuiHandler
 	public void sendToServer(Packet packet)
 	{
 
+	}
+	
+	
+	public void registerVillagers()
+	{
+		VillagerRegistry.instance().registerVillagerId(FantasticIds.fishermanID);
+		VillagerTradeHandler newTradeHandler = new VillagerTradeHandler();
+		VillagerRegistry.instance().registerVillageTradeHandler(FantasticIds.fishermanID, newTradeHandler);
+		FishermanHandler FishermanHut = new FishermanHandler();
+		VillagerRegistry.instance().registerVillageCreationHandler(FishermanHut);
+		VillagerRegistry.instance().getRegisteredVillagers();
+		MapGenStructureIO.func_143031_a(ComponentFishermanHut.class, "Fisherman");
 	}
 
 }

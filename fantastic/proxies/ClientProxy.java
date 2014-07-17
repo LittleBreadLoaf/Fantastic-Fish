@@ -3,9 +3,13 @@ package fantastic.proxies;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import fantastic.FantasticIds;
+import fantastic.FantasticInfo;
 import fantastic.events.FantasticSounds;
 import fantastic.renders.entity.EntityRender;
 
@@ -68,6 +72,13 @@ public class ClientProxy extends CommonProxy
 	public void sendToServer(Packet packet)
 	{
 		FMLClientHandler.instance().getClient().getNetHandler().addToSendQueue(packet);
+	}
+	
+	@Override
+	public void registerVillagers()
+	{
+		VillagerRegistry.instance().registerVillagerSkin(FantasticIds.fishermanID, new ResourceLocation(FantasticInfo.ID + ":textures/models/mobs/fantastic_fisherman.png")); //id must be greater than 6
+
 	}
 
 }
