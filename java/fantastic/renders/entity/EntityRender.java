@@ -2,6 +2,9 @@ package fantastic.renders.entity;
 
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import fantastic.animations.client.ModelSerpentBoss;
+import fantastic.animations.client.RenderSerpentBoss;
+import fantastic.animations.common.EntitySerpentBoss;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityBlooper;
 import fantastic.entities.EntityCatfish;
@@ -21,8 +24,13 @@ import fantastic.entities.EntitySandStriker;
 import fantastic.entities.EntitySmallCrab;
 import fantastic.entities.EntityStarfish;
 import fantastic.entities.EntityTuna;
-import fantastic.entities.EntityWoodenFishHook;
+import fantastic.entities.sharks.EntityBasicShark;
+import fantastic.entities.sharks.EntityBullShark;
+import fantastic.entities.sharks.EntityGreatWhite;
+import fantastic.entities.sharks.EntityHammerHead;
+import fantastic.entities.sharks.EntityTigerShark;
 import fantastic.renders.models.ModelBasicFish;
+import fantastic.renders.models.ModelBasicShark;
 import fantastic.renders.models.ModelBlooper;
 import fantastic.renders.models.ModelClam;
 import fantastic.renders.models.ModelLobster;
@@ -57,8 +65,13 @@ public class EntityRender
 		RenderingRegistry.registerEntityRenderingHandler(EntityMantaRay.class, new RenderMantaRay(new ModelMantaRay(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCatfish.class, new RenderCatfish(new ModelLongSnout(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySandStriker.class, new RenderSandStriker(new ModelLongSnout(), 0.3F));
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodenFishHook.class, new RenderWoodenFishHook());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBasicShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreatWhite.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBullShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTigerShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHammerHead.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+
+
 		
 		
 	}

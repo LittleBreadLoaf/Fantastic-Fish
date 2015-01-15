@@ -133,7 +133,7 @@ public class EntitySmallCrab extends EntityWaterMob
      */
     protected void playStepSound(int par1, int par2, int par3, int par4)
     {
-        this.playSound("mob.silverfish.step", 0.15F, 1.0F);
+        this.playSound("mob.spider.step", 0.15F, 1.0F);
     }
 
 	

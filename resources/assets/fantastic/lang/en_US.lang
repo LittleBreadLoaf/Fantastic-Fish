@@ -55,6 +55,8 @@ item.crableg.name=Crab Leg
 item.cooked_crableg.name=Cooked Crab Leg
 item.fishstick.name=Fishstick
 item.single_tank.name=Single Air Tank
+item.finsoup.name=Shark Fin Soup
+item.sharkfin.name=Shark Fin
 small_creepedo.name=Small Creepedo
 medium_creepedo.name=Medium Creepedo
 large_creepedo.name=Large Creepedo
@@ -183,6 +185,7 @@ item.shellhelmet_purple.name=Purple Shell Helmet
 item.shellarmor_purple.name=Purple Shell Chestplate
 item.shellbottom_purple.name=Purple Shell Leggings
 item.shellboots_purple.name=Purple Shell Boots
+item.sharktooth.name=Shark Tooth
 
 entity.Trout.name=Fish
 entity.Cave.name=Cave Fish
@@ -203,6 +206,10 @@ entity.Blooper.name=Blooper
 entity.Patrick.name=Patrick Star
 entity.Creepedo.name=Creepedo
 entity.WoodenHook.name=Bobber
+entity.GWShark.name=Great White Shark
+entity.TigerShark.name=Tiger Shark
+entity.BullShark.name=Bull Shark
+entity.HammerShark.name=Hammerhead Shark
 
 
 key.swim.desc=Flipper

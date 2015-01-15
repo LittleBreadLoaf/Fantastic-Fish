@@ -41,6 +41,7 @@ public class EntitySailfish extends EntityWaterMob
 	boolean isBobber;
 	public boolean outOfWater;
 	private static Random rand = new Random();
+	boolean grumpy = false;
 	
 
 	private boolean hasNotSpawned = true;
@@ -63,6 +64,7 @@ public class EntitySailfish extends EntityWaterMob
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		this.ignoreFrustumCheck = true;
 		this.setSize(1.2F, 1.1F);
+		
 	}
 
 
@@ -84,7 +86,17 @@ public class EntitySailfish extends EntityWaterMob
 	protected boolean isAIEnabled()
 	{
 		return true;
-
+	}
+	
+	@Override
+	public boolean hitByEntity(Entity attacker)
+	{
+		if(attacker instanceof EntityPlayer)
+		{
+			grumpy = true;
+		}
+		return false;
+		
 	}
 
 	public int getTotalArmorValue()
@@ -325,97 +337,20 @@ public class EntitySailfish extends EntityWaterMob
 		}
 	}
 	EntityPlayer playerThatsFishing = null;
-	int attackTimer = 40;
+	int grumpyTimer = 400;
 	@Override
 	protected void updateAITasks()
 	{
 		super.updateAITasks();
-		if(getBobber() != null && getBobber().field_146042_b != null && (getBobber().field_146042_b.fishEntity == null)){
-			setBobberID(-1);
-		}
-
 		
 		if(this.isInWater())
 		{
-			--attackTimer;
 			
-			
-			setIsOutOfWater(1);
-			if(getBobber() == null || getBobber().field_146042_b == null || getBobber().isDead || getBobber().field_146042_b.isDead)
+			if(grumpyTimer <=0)
 			{
-				setBobberID(-1);
-				this.bobberTarget = null;
+				grumpyTimer = 400;
+				grumpy = false;
 			}
-			if(ignoreTimer <= 0 && playerThatsFishing != null && playerThatsFishing.fishEntity != null)
-			{
-				if(((EntityFishHook)playerThatsFishing.fishEntity).field_146043_c == null)
-				{
-					((EntityFishHook)playerThatsFishing.fishEntity).field_146043_c = this;
-					setBobberID(playerThatsFishing.fishEntity.getEntityId());
-					((EntityFishHook)playerThatsFishing.fishEntity).field_146042_b.fishEntity = getBobber();
-				}
-			}
-			playerThatsFishing = null;
-			EntityPlayer avoidPlayer= null;
-			
-			if(getBobber() != null)
-			{
-				playerThatsFishing = getBobber().field_146042_b;
-			}
-			
-			if(playerThatsFishing != null && playerThatsFishing.fishEntity == null)
-			{
-				playerThatsFishing = null;
-				setBobberID(-1);
-				this.bobberTarget = null;
-			}
-			
-			if(playerThatsFishing != null)
-			{
-				setBobberID(playerThatsFishing.fishEntity.getEntityId());
-				this.ignoreTimer = 0;
-				this.bobberTarget = null;
-			}
-			if(ignoreTimer <=0)
-			{
-				ignoreTimer = (int) (200*this.getRenderSize());
-				bobberTarget = null;
-			}
-			//Now this will search for all three in first pass.
-			if(playerThatsFishing == null)
-			{
-				if(getBobber() == null)
-				{
-					lookForBobber(this.posX, this.posY, this.posZ);
-				}
-				if(playerThatsFishing == null && getBobber() != null)
-				{
-					playerThatsFishing = getBobber().field_146042_b;
-				}
-				if(worldObj.getClosestPlayerToEntity(this, 20) != null && this.getHealth() < this.getMaxHealth() && attackTimer < 0)
-				{
-					avoidPlayer = worldObj.getClosestPlayerToEntity(this, 20);
-					if(avoidPlayer.ridingEntity != null && avoidPlayer.ridingEntity instanceof EntityBoat && this.getDistanceToEntity(avoidPlayer.ridingEntity) < 2.0)
-					{
-						((EntityBoat)avoidPlayer.ridingEntity).attackEntityFrom(DamageSource.generic, 4.0F);
-					}
-					if(this.getDistanceToEntity(avoidPlayer) < 1.0)
-					{
-						avoidPlayer.attackEntityFrom(DamageSource.generic, 4.0F);
-						attackTimer = 60;
-					}
-					if((avoidPlayer.ridingEntity != null && avoidPlayer.ridingEntity instanceof EntityBoat) || avoidPlayer.isInWater())
-					currentSwimTarget = Vec3.createVectorHelper(avoidPlayer.posX, avoidPlayer.posY, avoidPlayer.posZ);
-				}
-			}
-			
-			if(bobberTarget != null)
-			{
-				this.currentSwimTarget = bobberTarget;
-				ignoreTimer--;
-			}
-			
-			
 			
 			if(this.currentSwimTarget != null)
 			{
@@ -426,11 +361,28 @@ public class EntitySailfish extends EntityWaterMob
 			{
 				this.motionY += 0.0160829F;
 			}
-			findRandomTarget(this.posX, this.posY, this.posZ, false);
+			
+			EntityPlayer avoidPlayer= null;
+			
+			
+			
+			
+				
+				if(worldObj.getClosestPlayerToEntity(this, 20) != null && this.grumpy && grumpyTimer > 0)
+				{
+					avoidPlayer = worldObj.getClosestPlayerToEntity(this, 20);
+					grumpyTimer--;
+					if((avoidPlayer.ridingEntity != null && avoidPlayer.ridingEntity instanceof EntityBoat) || avoidPlayer.isInWater())
+						currentSwimTarget = Vec3.createVectorHelper(avoidPlayer.posX, avoidPlayer.posY, avoidPlayer.posZ);
+				}
+				else
+					currentSwimTarget = findRandomTarget(this.posX, this.posY, this.posZ, false);
+			
+			
+		
 		}
 		else
 		{
-			setIsOutOfWater(0);
 			this.setJumping(true);
 			if(this.onGround)
 				this.addVelocity(0.1*rand.nextDouble() - 0.1*rand.nextDouble(), 0F, 0.1*rand.nextDouble() - 0.1*rand.nextDouble());
@@ -505,14 +457,11 @@ public class EntitySailfish extends EntityWaterMob
 	//If force is set to true, no check will be done to see if a fish is attached.
 	//False will send to setEscape is necessary, which then recalls this method with force
 	//set to true.
-	private void findRandomTarget(double X, double Y, double Z, boolean force) 
+	public Vec3 findRandomTarget(double X, double Y, double Z, boolean force) 
 	{
 		if(isInWater()){
 			movementskip--;
-			if(!force && getBobber() != null && getBobber().field_146043_c == this && getBobber().field_146042_b != null){
-				setEscape(getBobber().field_146042_b, this.posX, this.posY, this.posZ, true);
-				return;
-			}
+			
 			if(movementskip <= 0){
 				//Will cause server and client to produce random yet identical rolls.
 				rand.setSeed(getEntityId() + chunkCoordX + chunkCoordY + chunkCoordZ);
@@ -534,10 +483,10 @@ public class EntitySailfish extends EntityWaterMob
 						if(blockID1 instanceof BlockLiquid){
 							if(blockID2 instanceof BlockLiquid) 
 								break;
-						}
+							}
 						blockID1 = Blocks.bedrock;
 						blockID2 = Blocks.bedrock;
-					}
+						}
 					randomWaterCheck++;
 					xMovement = (rand.nextInt(10) - 5);
 					yMovement = (rand.nextInt(2) - 1);
@@ -552,11 +501,14 @@ public class EntitySailfish extends EntityWaterMob
 					blockID2 = Blocks.bedrock;
 				}
 				if(blockID1 != Blocks.bedrock){
-					this.currentSwimTarget = newPos;
 					this.extraSpeed = 1;
+					return newPos;
 				}
+				else return currentSwimTarget;
 			}
 		}
+		
+		return currentSwimTarget;
 	}
 	
 	float counter = 0;
@@ -602,15 +554,11 @@ public class EntitySailfish extends EntityWaterMob
 
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(par1Entity instanceof EntityFishHook)
+		if(par1Entity instanceof EntityPlayer && grumpy)
 		{
-			EntityFishHook efh = (EntityFishHook) par1Entity;
-			if(efh.field_146043_c == null){
-				setBobberID(efh.getEntityId());
-				getBobber().field_146043_c = this;
-				efh.field_146042_b.fishEntity = getBobber();
-				setEscape(efh.field_146042_b, this.posX, this.posY, this.posZ, true);
-			}
+			((EntityPlayer)par1Entity).attackEntityFrom(DamageSource.generic, 2.0F);
+			grumpy = false;
+			grumpyTimer = 400;
 		}
 		super.collideWithEntity(par1Entity);
 	}

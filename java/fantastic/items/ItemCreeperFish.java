@@ -38,7 +38,14 @@ public class ItemCreeperFish extends Item
 
 	}
 
-
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List data, boolean b)
+	{	
+		data.add("This is a torpedo. Right-click on water to place.");
+		data.add("Swims forward, targets other players and boats.");
+		data.add("'Splodes.");
+	
+	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
@@ -96,7 +103,8 @@ public class ItemCreeperFish extends Item
 			Creep.rotationYaw = (float)(((MathHelper.floor_double((double)(par2EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 			Creep.setHasNotSpawned(false);
     			
-               
+               if(!par2EntityPlayer.capabilities.isCreativeMode)
+            	   par1ItemStack.stackSize--;
             
 
             return true;

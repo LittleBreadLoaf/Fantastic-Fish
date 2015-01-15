@@ -39,6 +39,12 @@ public class ConfigHandler
 		FantasticIds.tier4Depth = config.getInt("Large Min Spawn Depth", "Spawn Depths", FantasticIds.tier4Depth_Default, 1, 30, "");
 		FantasticIds.tier5Depth = config.getInt("Legendary Min Spawn Depth", "Spawn Depths", FantasticIds.tier5Depth_Default, 1, 30, "");
 		
+		config.addCustomCategoryComment("Shark Spawn Rate", "Relative to percentage. Between 1 and 100.");
+		
+		FantasticIds.sharkSpawnRate = config.getInt("Spawn Rate", "Shark Spawn Rate", FantasticIds.sharkSpawnRate_Default, 1, 100, "");
+	
+		
+		
 
 		config.save();
 		

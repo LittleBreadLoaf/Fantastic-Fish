@@ -163,6 +163,9 @@ public class EntityNurseShark extends EntityWaterMob
 		super.dropFewItems(par1, par2);
 		if(this.getFish() > 0)
 		this.entityDropItem(new ItemStack(Items.fish, this.getFish()), 0.0F);
+		
+		if(rand.nextInt(10) == 0)
+			this.entityDropItem(new ItemStack(FantasticItems.sharkFin, 1), 0.0F);
 
 	}
 

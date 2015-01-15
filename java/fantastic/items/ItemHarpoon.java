@@ -1,5 +1,6 @@
 package fantastic.items;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
@@ -51,7 +52,14 @@ public class ItemHarpoon extends Item
 
 	}
 
-
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List data, boolean b)
+	{	
+		data.add("Hold right-click and release to fire harpoon.");
+		data.add("Drag whatever mob you hit around while holding rope.");
+		data.add("Hold and release right-click to fling towards you.");
+	
+	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)

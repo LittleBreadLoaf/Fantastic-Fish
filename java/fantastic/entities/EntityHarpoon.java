@@ -100,8 +100,8 @@ public class EntityHarpoon extends Entity implements IProjectile
 	{
 		super(var1);
 		this.renderDistanceWeight = 10.0D;
-		this.shootingEntity = var2;
 		this.angler = (EntityPlayer)var2;
+		this.shootingEntity = var2;
 
 		this.setSize(0.5F, 0.5F);
 		this.setLocationAndAngles(var2.posX, var2.posY + (double) var2.getEyeHeight(), var2.posZ, var2.rotationYaw, var2.rotationPitch);
@@ -203,8 +203,8 @@ public class EntityHarpoon extends Entity implements IProjectile
 	        {
 	            block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
 	            AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
-
-	            if (axisalignedbb != null && axisalignedbb.isVecInside(this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ)))
+	            Vec3 thisVector = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+	            if (axisalignedbb != null && axisalignedbb.isVecInside(thisVector))
 	            {
 	                this.inGround = true;
 	            }
@@ -238,15 +238,15 @@ public class EntityHarpoon extends Entity implements IProjectile
 		} else
 		{
 			++this.ticksInAir;
-			Vec3 var18 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-			Vec3 var19 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3 var18 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+			Vec3 var19 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			MovingObjectPosition var4 = this.worldObj.func_147447_a(var18, var19, false, true, false);
-            var18 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-			var19 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            var18 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+			var19 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 			if (var4 != null)
 			{
-				var19 = this.worldObj.getWorldVec3Pool().getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
+				var19 = Vec3.createVectorHelper(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
 			}
 
 			

@@ -5,13 +5,14 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
@@ -23,6 +24,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,6 +40,7 @@ import fantastic.entities.EntityMossy;
 import fantastic.entities.EntityNurseShark;
 import fantastic.entities.EntitySalmon;
 import fantastic.entities.EntityTuna;
+import fantastic.entities.sharks.EntityBasicShark;
 import fantastic.items.FantasticItems;
 import fantastic.proxies.CommonProxy;
 
@@ -53,6 +56,16 @@ public class FantasticEvents
 	public void onLivingSpawnEvent(LivingSpawnEvent event)
 	{
 		
+		if(event.entity instanceof EntityBasicShark)
+		{
+			if(((EntityBasicShark)event.entity).getHasNotSpawned())
+			{
+				if(rand.nextInt(100 - FantasticIds.sharkSpawnRate) == 0 )
+					event.entity.setDead();
+				((EntityBasicShark)event.entity).setHasNotSpawned(false);
+			}
+			
+		}
 		float renderSize = 0.9F;
 		int waters = 0;
 		for(int k = -10; k<=10; k++)
@@ -65,7 +78,7 @@ public class FantasticEvents
 		
 		if(waters <= FantasticIds.tier1Depth)
 		{
-			if(rand.nextInt(101 - FantasticIds.smallSpawnRate) == 0)
+			if(rand.nextInt(101 - FantasticIds.smallSpawnRate) <= 1)
 			{
 				renderSize = 0.5F;
 			}
@@ -76,7 +89,7 @@ public class FantasticEvents
 		}
 		else if(waters <= FantasticIds.tier2Depth)
 		{
-			if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) == 0)
+			if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) <= 1)
 			{
 				renderSize = (0.8F);
 			}
@@ -87,15 +100,15 @@ public class FantasticEvents
 		}
 		else if(waters <= FantasticIds.tier3Depth)
 		{
-			if(rand.nextInt(101 - FantasticIds.smallSpawnRate) == 0)
+			if(rand.nextInt(101 - FantasticIds.smallSpawnRate) <= 1)
 			{
 				renderSize = (0.5F);
 			}
-			else if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) == 0)
+			else if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) <= 1)
 			{
 				renderSize = (0.8F);
 			}
-			else if(rand.nextInt(101 - FantasticIds.bigSpawnRate) == 0)
+			else if(rand.nextInt(101 - FantasticIds.bigSpawnRate) <= 1)
 			{
 				renderSize = (1.0F);
 			}
@@ -107,15 +120,15 @@ public class FantasticEvents
 		}
 		else if(waters <= FantasticIds.tier4Depth)
 		{
-			if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) == 0)
+			if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) <= 1)
 			{
 				renderSize = (0.8F);
 			}
-			else if(rand.nextInt(101 - FantasticIds.bigSpawnRate) == 0)
+			else if(rand.nextInt(101 - FantasticIds.bigSpawnRate) <= 1)
 			{
 				renderSize = (1.0F);
 			}
-			else if(rand.nextInt(101 - FantasticIds.largeSpawnRate) == 0)
+			else if(rand.nextInt(101 - FantasticIds.largeSpawnRate) <= 1)
 			{
 				renderSize = (1.3F);
 			}
@@ -126,19 +139,19 @@ public class FantasticEvents
 		}
 		else if(waters > FantasticIds.tier5Depth)
 		{
-			if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) == 0)
+			if(rand.nextInt(101 - FantasticIds.mediumSpawnRate) <= 1)
 			{
 				renderSize = (0.8F);
 			}
-			else if(rand.nextInt(101 - FantasticIds.bigSpawnRate) == 0)
+			else if(rand.nextInt(101 - FantasticIds.bigSpawnRate) <= 1)
 			{
 				renderSize = (1.0F);
 			}
-			else if (rand.nextInt(101 - FantasticIds.largeSpawnRate) == 0)
+			else if (rand.nextInt(101 - FantasticIds.largeSpawnRate) <= 1)
 			{
 				renderSize = (1.3F);
 			}
-			else if(rand.nextInt(101 - FantasticIds.legendarySpawnRate) == 0)
+			else if(rand.nextInt(1001 - FantasticIds.legendarySpawnRate) <= 1)
 			{
 				renderSize = (1.8F);
 			}
@@ -223,12 +236,25 @@ public class FantasticEvents
 		
 		
 		float renderSize = 0.9F;
+		
 		if(event.entity instanceof EntityBasicFish)
 		{
 			EntityBasicFish Fish = (EntityBasicFish)event.entity;
 			if(Fish.getHasNotSpawned())
 			{
-				Fish.setRenderSize(renderSize);
+				if(rand.nextInt(10) == 0)
+					Fish.setRenderSize(1.8F);
+				else if(rand.nextInt(9) == 0)
+					Fish.setRenderSize(1.3F);
+				else if(rand.nextInt(5) == 0)
+					Fish.setRenderSize(1.0F);
+				else if(rand.nextInt(4) == 0)
+					Fish.setRenderSize(0.8F);
+				else if(rand.nextInt(2) == 0)
+					Fish.setRenderSize(0.5F);
+				else 
+					Fish.setRenderSize(0.25F);
+				
 			
 
 			BiomeGenBase spawnBiome = event.entity.worldObj.getBiomeGenForCoords((int)Fish.posX, (int)Fish.posZ);
@@ -454,9 +480,9 @@ public class FantasticEvents
 	@SubscribeEvent
 	public void onLivingJumpEvent(LivingJumpEvent event)
 	{
-		if(event.entityLiving instanceof EntityNurseShark)
+		if(event.entityLiving instanceof EntityNurseShark || event.entityLiving instanceof EntityBasicShark)
 		{
-			event.entityLiving.motionY -= 0.15F;
+			event.entityLiving.motionY -= 0.12F;
 		}
 		
 		
@@ -515,6 +541,11 @@ public class FantasticEvents
 					event.setCanceled(true);
 				}
 			}
+		}
+		if(event.entityLiving instanceof EntityBasicShark)
+		{
+			EntityBasicShark shark = (EntityBasicShark)event.entityLiving;
+			shark.attackTimer = 60;
 		}
 		
 		
@@ -582,6 +613,15 @@ public class FantasticEvents
 	@SubscribeEvent
 	public void onLivingDeathEvent(LivingDeathEvent event)
 	{
+
+		if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityBasicShark)
+		{
+
+				((EntityBasicShark)event.source.getEntity()).setHungry(1200);
+				((EntityBasicShark)event.source.getEntity()).heal(2.0F);
+			
+			
+		}
 		if(!event.entity.worldObj.isRemote)
 		{
 			if(event.entity instanceof EntityPlayer)
@@ -590,6 +630,7 @@ public class FantasticEvents
 				PlayerInfo.saveProxyData(player);
 			}
 		}
+		
 	}
 
 
@@ -606,6 +647,32 @@ public class FantasticEvents
 			
 		}
 
+	}
+	
+	@SubscribeEvent
+	public void onPlayerUseItem(PlayerUseItemEvent.Start event)
+	{
+		if(event.item != null && event.item.getItem() == Items.fishing_rod)
+		{
+			if(event.entityPlayer.fishEntity != null)
+			{
+				EntityFishHook hook = (EntityFishHook)event.entityPlayer.fishEntity;
+				if(hook.field_146043_c == null || !(hook.field_146043_c instanceof EntityWaterMob))
+					return;
+				
+				System.out.println(hook.field_146043_c);
+				double moveX = (hook.posX - event.entityPlayer.posX);
+				double moveY = (hook.posY - event.entityPlayer.posY);
+				double moveZ = (hook.posZ - event.entityPlayer.posZ);
+				double angle = Math.atan2(moveZ, moveX);
+				
+				moveX = -(Math.cos(angle));
+				moveZ = -(Math.sin(angle));
+				moveY = 0.02F;
+				hook.field_146043_c.addVelocity(moveX, moveY, moveZ);
+				event.setCanceled(true);
+			}
+		}
 	}
 	
 	

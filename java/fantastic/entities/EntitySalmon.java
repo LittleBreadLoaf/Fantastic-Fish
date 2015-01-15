@@ -455,7 +455,12 @@ public class EntitySalmon extends EntityWaterMob
 	private void approachTarget(double X, double Y, double Z, int speed) 
 	{
 		Vec3 vec3 = Vec3.createVectorHelper(this.currentSwimTarget.xCoord + 0.5D - X, this.currentSwimTarget.yCoord + 0.1D - Y, this.currentSwimTarget.zCoord + 0.5D - Z).normalize();
-			this.motionX += (vec3.xCoord * 0.5D - this.motionX) * 0.05000000149011612D * speed;
+		if(getBobber() != null)
+		{
+			speed = 1;
+			getBobber().setPosition(this.posX, this.posY, this.posZ);
+		}	
+		this.motionX += (vec3.xCoord * 0.5D - this.motionX) * 0.05000000149011612D * speed;
 			this.motionY += (vec3.yCoord * 0.699999988079071D - this.motionY) * 0.05000000149011612D * speed;
 			this.motionZ += (vec3.zCoord * 0.5D - this.motionZ) * 0.05000000149011612D * speed;
 		
@@ -464,10 +469,7 @@ public class EntitySalmon extends EntityWaterMob
 			this.moveForward = 0.15F * speed;
 			this.rotationYaw += f1;
 			this.motionY += 0.0160829F;
-			if(getBobber() != null)
-			{
-				getBobber().setPosition(this.posX, this.posY, this.posZ);
-			}
+			
 			Block blockID = worldObj.getBlock(MathHelper.floor_double(this.currentSwimTarget.xCoord), MathHelper.floor_double(this.currentSwimTarget.yCoord), MathHelper.floor_double(this.currentSwimTarget.zCoord));
 		if(currentSwimTarget != null && (currentSwimTarget.squareDistanceTo((int)X, (int)Y, (int)Z) < 3 || blockID == null || !(blockID instanceof BlockLiquid)))
 		{
@@ -504,6 +506,10 @@ public class EntitySalmon extends EntityWaterMob
 		
 		else if(Jump)
 		{
+			xMovement = -(int) Math.round(escapeDirection.xCoord * 3);
+			yMovement = -(int) Math.round(escapeDirection.yCoord * 3);
+			zMovement = -(int) Math.round(escapeDirection.zCoord * 3);
+	        currentSwimTarget = Vec3.createVectorHelper(-X, Y, -Z);
 			this.jumpTimer--;
 			if(this.jumpTimer < 0)
 			{
@@ -582,7 +588,7 @@ public class EntitySalmon extends EntityWaterMob
 	{
 		//List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(8.0D, 8.0D, 8.0D));
 		Vec3 normalizer = Vec3.createVectorHelper(this.motionX, this.motionY, this.motionZ).normalize();
-		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.copy().expand(Math.abs(normalizer.xCoord * 3.0D) + 1, Math.abs(normalizer.yCoord * 3.0D) + 1, Math.abs(normalizer.zCoord * 3.0D) + 1));
+		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.copy().expand(Math.abs(normalizer.xCoord * 4.0D) + 3, Math.abs(normalizer.yCoord * 4.0D) + 3, Math.abs(normalizer.zCoord * 4.0D) + 3));
 		for (int l = 0; l < list.size(); ++l)
 		{
 			Entity entity1 = (Entity) list.get(l);

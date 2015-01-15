@@ -48,6 +48,9 @@ public class FantasticItems
 	//public static Item woodenRod;
 	public static Item randomFish;
 	public static Item harpoon;
+	public static Item sharkFin;
+	public static Item finSoup;
+	public static Item sharkTooth;
 	
 	public static final CreativeTabs tabFantastic = new CreativeTabs("Fantastic Fish Mod")
 	{
@@ -117,8 +120,9 @@ public class FantasticItems
 		//woodenRod = new ItemWoodenRod().setTextureName("fantastic:" + Names.Wooden_Rod_UnlocalizedName);
 		randomFish = new ItemRandomFish().setTextureName("fantastic:" + Names.RandomFish_UnlocalizedName);
 		harpoon = new ItemHarpoon().setTextureName("fantastic:harpoon");
-		
-		
+		sharkFin = new ItemSharkFin().setTextureName("fantastic:sharkfin");
+		finSoup = (new ItemFinSoup(7, 0.8F, true)).setUnlocalizedName("finsoup").setTextureName("fantastic:finsoup");
+		sharkTooth = new ItemSharkTooth().setTextureName("fantastic:sharktooth");
 		
 		GameRegistry.registerItem(fishingNet, Names.FishingNet_Name);
 		GameRegistry.registerItem(tinyFish, Names.TinyFish_Name[1]); 
@@ -152,6 +156,9 @@ public class FantasticItems
 		//GameRegistry.registerItem(woodenRod, "Rod");
 		GameRegistry.registerItem(randomFish , "Fish");
 		GameRegistry.registerItem(harpoon, "Harpoon");
+		GameRegistry.registerItem(sharkFin, "Shark Fin");
+		GameRegistry.registerItem(finSoup, "Shark Fin Soup");
+		GameRegistry.registerItem(sharkTooth, "Shark Tooth");
 				
 	}
 	

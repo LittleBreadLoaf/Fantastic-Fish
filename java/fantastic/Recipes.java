@@ -151,6 +151,7 @@ public class Recipes
 				
 				
 				GameRegistry.addShapelessRecipe(new ItemStack(FantasticArmor.diverChest, 1), new ItemStack(FantasticArmor.singleTank, 1), new ItemStack(Items.iron_chestplate, 1));
+				GameRegistry.addShapelessRecipe(new ItemStack(FantasticItems.finSoup, 1), new ItemStack(FantasticItems.seaweed, 1), new ItemStack(Items.bowl, 1), new ItemStack(Items.water_bucket, 1), new ItemStack(FantasticItems.sharkFin, 1));
 				for(int i = 0; i < 8400; i++)
 				GameRegistry.addShapelessRecipe(new ItemStack(FantasticArmor.diverChest, 1, i), new ItemStack(FantasticArmor.singleTank, 1), new ItemStack(FantasticArmor.diverChest, 1, i));
 				

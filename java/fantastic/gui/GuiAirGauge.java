@@ -36,7 +36,7 @@ public class GuiAirGauge extends Gui
 	@SubscribeEvent
 	public void onRenderExperienceBar(RenderGameOverlayEvent event)
 	{
-		ScaledResolution var5 = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+		ScaledResolution var5 = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
         int var6 = var5.getScaledWidth();
         int var7 = var5.getScaledHeight();
         int var233 = var7 - 38;

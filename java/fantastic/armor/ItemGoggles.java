@@ -54,9 +54,9 @@ public class ItemGoggles extends ItemArmor
 			ItemStack chest = player.getEquipmentInSlot(3);
 			ItemStack pants = player.getEquipmentInSlot(2);
 			ItemStack boots = player.getEquipmentInSlot(1);
-			if(player.isInsideOfMaterial(Material.water))
+			if(player.isInsideOfMaterial(Material.water) && world.isDaytime())
 			{
-				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 11, 11));
+				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 280, 0));
 			}
 			else
 			{

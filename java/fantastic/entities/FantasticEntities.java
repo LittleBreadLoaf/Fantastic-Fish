@@ -3,7 +3,11 @@ package fantastic.entities;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import fantastic.FantasticMod;
+import fantastic.animations.common.EntitySerpentBoss;
+import fantastic.entities.sharks.EntityBullShark;
+import fantastic.entities.sharks.EntityGreatWhite;
+import fantastic.entities.sharks.EntityHammerHead;
+import fantastic.entities.sharks.EntityTigerShark;
 
 public class FantasticEntities 
 
@@ -71,10 +75,29 @@ public class FantasticEntities
 		EntityRegistry.registerGlobalEntityID(EntityMantaRay.class, "Manta", EntityRegistry.findGlobalUniqueEntityId(), 0x000060, 0x5E7E9E);
 		EntityRegistry.addSpawn(EntityMantaRay.class, 3, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean});
 			
-		//Sand Striker
-		EntityRegistry.registerGlobalEntityID(EntitySandStriker.class, "Sand", EntityRegistry.findGlobalUniqueEntityId(), 0x3366CC, 0x3300CC);
-		EntityRegistry.addSpawn(EntitySandStriker.class, 2, 1, 3, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.desert, BiomeGenBase.desertHills});
-						
+//		//Sand Striker
+//		EntityRegistry.registerGlobalEntityID(EntitySandStriker.class, "Sand", EntityRegistry.findGlobalUniqueEntityId(), 0x3366CC, 0x3300CC);
+//		EntityRegistry.addSpawn(EntitySandStriker.class, 2, 1, 3, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.desert, BiomeGenBase.desertHills});
+		
+		
+		//Great White Shark
+		EntityRegistry.registerGlobalEntityID(EntityGreatWhite.class, "GWShark", EntityRegistry.findGlobalUniqueEntityId(), 0x6585E6, 0xE6E6FF);
+		EntityRegistry.addSpawn(EntityGreatWhite.class, 1, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+				
+		//Bull Shark
+		EntityRegistry.registerGlobalEntityID(EntityBullShark.class, "BullShark", EntityRegistry.findGlobalUniqueEntityId(), 0x7C6496, 0x8686A2);
+		EntityRegistry.addSpawn(EntityBullShark.class, 1, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		
+		//Bull Shark
+		EntityRegistry.registerGlobalEntityID(EntityTigerShark.class, "TigerShark", EntityRegistry.findGlobalUniqueEntityId(), 0x966C43, 0xB26B24);
+		EntityRegistry.addSpawn(EntityTigerShark.class, 1, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		
+		//Hammerhead Shark
+		EntityRegistry.registerGlobalEntityID(EntityHammerHead.class, "HammerShark", EntityRegistry.findGlobalUniqueEntityId(), 0x6E538A, 0x6B6BB2);
+		EntityRegistry.addSpawn(EntityHammerHead.class, 1, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		
+		
+	
 		
 		//Blooper
 		EntityRegistry.registerGlobalEntityID(EntityBlooper.class, "Blooper", EntityRegistry.findGlobalUniqueEntityId());
@@ -86,8 +109,6 @@ public class FantasticEntities
 		EntityRegistry.registerGlobalEntityID(EntityCreepedo.class, "Creepedo", EntityRegistry.findGlobalUniqueEntityId());
 								
 		//Arrows
-		EntityRegistry.registerModEntity(EntityWoodenFishHook.class, "WoodenHook", 1, FantasticMod.instance, 75, 1, true);
-		EntityRegistry.registerModEntity(EntityHarpoon.class, "Harpoon", 2, FantasticMod.instance, 75, 1, true);
 		
 		
 		
