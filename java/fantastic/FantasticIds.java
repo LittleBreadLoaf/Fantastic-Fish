@@ -4,16 +4,16 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class FantasticIds 
 {
-	// This is a test
 	
-	//BLOCKS
-	
+
 	public static int airCompressorRenderingID;
 	public static int ACRendID_Default = 123;
 
 	public static int fishermanID;
 	public static final int fishermanID_Default = 12;
 	
+	public static int airCompressorFillingRate;
+	public static final int airCompressorFillingRateDefault = 100;
 	
 	public static int tinySpawnRate;
 	public static final int tinySpawnRate_Default = 100;

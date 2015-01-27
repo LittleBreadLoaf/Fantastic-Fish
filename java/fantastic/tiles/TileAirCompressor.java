@@ -1,6 +1,7 @@
 package fantastic.tiles;
 
 import net.minecraft.nbt.NBTTagCompound;
+import fantastic.FantasticIds;
 import fantastic.FantasticMod;
 
 
@@ -9,6 +10,7 @@ public class TileAirCompressor extends TileFantastic
 	private boolean hasDoubleTank;
 	private boolean hasSingleTank;
 	private int tankDamage = 0;
+	private boolean pumped = false;
 	
 	public TileAirCompressor()
 	{
@@ -19,32 +21,61 @@ public class TileAirCompressor extends TileFantastic
 	{
 		super.updateEntity();
 		
-		if(this.worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && this.getTankDamage() % 2 == 0)
+		//Only functionnal when a tank is on
+		if (this.hasDoubleTank || this.hasSingleTank)
 		{
-			if(this.hasDoubleTank || this.hasSingleTank)
+			if(this.worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && (!pumped))
 			{
-				if(this.tankDamage > 0)
-				{
-					this.tankDamage--;
-					this.worldObj.playSound(xCoord, yCoord, zCoord, "tile.piston.in", 1.0F, 1.0F, true);		    	
+				pumped=true;
 
-				}
+					if(this.tankDamage > 0)
+					{
+						//Tank can still be filled
+						this.tankDamage=this.tankDamage - Math.min(this.tankDamage, FantasticIds.airCompressorFillingRate);
+						this.worldObj.playSound(xCoord, yCoord, zCoord, "fantastic:airCompressor", 1.0F, 1.0F, true);		    	
+					}
+					else
+					{
+						//Tank is full, streaming a different sound as a hint
+						this.worldObj.playSound(xCoord, yCoord, zCoord, "fantastic:tankFull", 1.0F, 1.0F, true);
+					}
+
 			}
-		}
-		else if(!this.worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && this.getTankDamage() % 2 != 0)
-		{
-			if(this.hasDoubleTank || this.hasSingleTank)
+			else if (!this.worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) 
 			{
-				if(this.tankDamage > 0)
-				{
-					this.tankDamage--;
-					this.worldObj.playSound(xCoord, yCoord, zCoord, "tile.piston.out", 1.0F, 1.0F, true);
-
-				}
-				
-			}
+				//Made sure that the block was no longer powered to simulate the pump effect.
+				pumped=false;
+			}		
 		}
 		
+		
+		
+//	if(this.worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && this.getTankDamage() % 2 == 0)
+//	{
+//		if(this.hasDoubleTank || this.hasSingleTank)
+//		{
+//			if(this.tankDamage > 0)
+//			{
+//				this.tankDamage--;
+//				this.worldObj.playSound(xCoord, yCoord, zCoord, "tile.piston.in", 1.0F, 1.0F, true);		    	
+//
+//			}
+//		}
+//	}
+//	else if(!this.worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && this.getTankDamage() % 2 != 0)
+//	{
+//		if(this.hasDoubleTank || this.hasSingleTank)
+//		{
+//			if(this.tankDamage > 0)
+//			{
+//				this.tankDamage--;
+//				this.worldObj.playSound(xCoord, yCoord, zCoord, "tile.piston.out", 1.0F, 1.0F, true);
+//
+//			}
+//			
+//		}
+//	}
+//	
 	}
 
 	public void setDoubleTank(boolean var1)

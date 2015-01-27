@@ -2,7 +2,9 @@
     "clamShut": {"category": "master","sounds": [{"name": "clamShut","stream": false}]},
     "lobster_hurt": {"category": "master","sounds": [{"name": "lobster_hurt","stream": false}]},
 "lobster_idle1": {"category": "master","sounds": [{"name": "lobster_idle1","stream": false}]},
-"lobster_idle2": {"category": "master","sounds": [{"name": "lobster_idle2","stream": false}]}
-     
+"lobster_idle2": {"category": "master","sounds": [{"name": "lobster_idle2","stream": false}]},
+"airCompressor": {"category": "master","sounds": [{"name": "airCompressor","stream": false}]},
+"tankFull": {"category": "master","sounds": [{"name": "tankFull","stream": false}]}
+  
 
 }

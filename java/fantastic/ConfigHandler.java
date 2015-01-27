@@ -43,8 +43,9 @@ public class ConfigHandler
 		
 		FantasticIds.sharkSpawnRate = config.getInt("Spawn Rate", "Shark Spawn Rate", FantasticIds.sharkSpawnRate_Default, 1, 100, "");
 	
+		config.addCustomCategoryComment("Air Compressor Filling Rate", "Amount of air units filled by a single redstone activation. A repeating on and off signal will be necessary to pump the air compressor. Use a lever or a repeating redstone signal. One second of air represents 20 air units. A small tank has 2400 air units and a double one has 6000 air units.");
 		
-		
+		FantasticIds.airCompressorFillingRate = config.getInt("Filling Rate", "Air Compressor Filling Rate", FantasticIds.airCompressorFillingRateDefault, 1, 200, "");
 
 		config.save();
 		
