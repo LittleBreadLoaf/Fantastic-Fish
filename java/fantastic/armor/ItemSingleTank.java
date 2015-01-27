@@ -21,7 +21,8 @@ import fantastic.items.FantasticItems;
 
 public class ItemSingleTank extends ItemArmor 
 {
-
+	private static final int AIR_UNIT = 2400;
+	
 	public ItemSingleTank(ArmorMaterial par2, int par3, int par4) 
 	{
 		super(par2, par3, par4);
@@ -47,7 +48,7 @@ public class ItemSingleTank extends ItemArmor
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List data, boolean b)
 	{
-		int left = 2400 - itemStack.getItemDamage();
+		int left = AIR_UNIT - itemStack.getItemDamage();
 		int seconds = left/20;
 		int minutes = 0;
 		while(seconds >= 60)
@@ -67,7 +68,7 @@ public class ItemSingleTank extends ItemArmor
 		ItemStack chest = player.getEquipmentInSlot(3);
 		ItemStack pants = player.getEquipmentInSlot(2);
 		ItemStack boots = player.getEquipmentInSlot(1);
-		if(player.isInsideOfMaterial(Material.water) && stack.getItemDamage() < 3600)
+		if(player.isInsideOfMaterial(Material.water) && stack.getItemDamage() < (AIR_UNIT-1))
 		{
 			stack.damageItem(1, player);
 			player.setAir(300);
