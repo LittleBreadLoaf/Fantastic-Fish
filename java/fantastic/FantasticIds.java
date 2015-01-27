@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class FantasticIds 
 {
+	// This is a test
 	
 	//BLOCKS
 	
