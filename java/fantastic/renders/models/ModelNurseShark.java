@@ -464,8 +464,8 @@ public class ModelNurseShark extends ModelBase
     Head2.render(f5);
     FinL.render(f5);
     FinR.render(f5);
-    if(((EntityNurseShark)entity).getFish() > 0)
-    {
+ //   if(((EntityNurseShark)entity).getFish() > 0)
+ //   {
     	head.render(f5);
 //    	lip.render(f5);
 //    	body1.render(f5);
@@ -489,9 +489,9 @@ public class ModelNurseShark extends ModelBase
 //    	raw7.render(f5);
 //    	raw8.render(f5);
     }
-    if(((EntityNurseShark)entity).getFish() > 1)
-    {
-    	head2.render(f5);
+//    if(((EntityNurseShark)entity).getFish() > 1)
+//    {
+//    	head2.render(f5);
 //    	lip2.render(f5);
 //    	body12.render(f5);
 //    	body22.render(f5);
@@ -513,9 +513,9 @@ public class ModelNurseShark extends ModelBase
 //    	raw62.render(f5);
 //    	raw72.render(f5);
 //    	raw82.render(f5);
-    }
+//    }
    
-  }
+  //}
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
   {
@@ -532,7 +532,7 @@ public class ModelNurseShark extends ModelBase
     this.Head2.rotateAngleY = (float)(0.1*(MathHelper.cos(f2 * 0.2F)) ) + 0.05F;
     this.Body2.rotateAngleZ = (float)(0.15*(MathHelper.cos(f2 * 0.2F - (float)(Math.PI/2) )) );
     this.Body3.rotateAngleY = (float)(0.2*(MathHelper.cos(f2 * 0.2F)) );
-    if(((EntityNurseShark)entity).getIsOutOfWater() == 0)
+    if(((EntityNurseShark)entity).GetIsOutOfWater() == 0)
     {
     	this.FinL.rotateAngleZ = -(float)(0.2*(MathHelper.cos(f2 * 0.6F)) );
     	this.FinR.rotateAngleZ = -(float)(0.2*(MathHelper.sin(f2 * 0.6F)) );

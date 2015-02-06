@@ -212,7 +212,7 @@ public class EntityGreatWhite extends EntityBasicShark
 		{
 			if(Target instanceof EntityBasicFish)
 			{	
-				priorityEntity = ((EntityBasicFish)Target).getRenderSize() > ((EntityBasicFish)entity1).getRenderSize() ? Target : entity1;
+				priorityEntity = ((EntityBasicFish)Target).GetFishSize().ordinal() > ((EntityBasicFish)entity1).GetFishSize().ordinal() ? Target : entity1;
 			}
 			else		
 				priorityEntity = entity1;

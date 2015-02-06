@@ -12,6 +12,12 @@ public class Names
 	public static final String Pike_UnlocalizedName = "pike";
 	public static final String Pike_Name = "Pike";
 	
+	public static final String Basic_Fish_UnlocalizedName = "basic";
+	public static final String Basic_Fish_Name = "Basic";
+	
+	public static final String Cave_Fish_UnlocalizedName = "cave_fish";
+	public static final String Cave_Fish_Name = "Cave Fish";
+	
 	public static final String RawFillet_UnlocalizedName = "fillet_raw";
 	public static final String RawFillet_Name = "Raw Fish Fillet";
 	
@@ -96,7 +102,7 @@ public class Names
 	public static final String BigFish_Name[] = {"Big Green Fish", "Big Grey Fish", "Big Red Fish", "Big Yellow Fish", "Big Blue Fish", "Big Purple Fish", "Big Cave Fish", "Big Spotted Bottom Feeder", "Big Mossy Bottom Feeder", "Big Tuna", "Big Catfish", "Big Grey Salmon", "Big Red Salmon", "Big Fungus Fish","Big Pike"};
 	public static final String LargeFish_UnlocalizedName[] = {"lgreenfishie", "lgreyfishie", "lredfishie", "lyellowfishie", "lbluefishie", "lpurplefishie", "lcavefishie", "lspottedfeeder", "lmossyfeeder", "ltuna", "lcatfish", "lsalmon", "lsalmon2", "lfungus","lpike"};
 	public static final String LargeFish_Name[] = {"Large Green Fish", "Large Grey Fish", "Large Red Fish", "Large Yellow Fish", "Large Blue Fish", "Large Purple Fish", "Large Cave Fish", "Large Spotted Bottom Feeder", "Large Mossy Bottom Feeder", "Large Tuna", "Large Catfish", "Large Grey Salmon", "Large Red Salmon", "Large Fungus","Large Pike"};
-	public static final String LegendaryFish_UnlocalizedName[] = {"ogreenfishie", "ogreyfishie", "oredfishie", "oyellowfishie", "obluefishie", "opurplefishie", "ocavefishie", "ospottedfeeder", "omossyfeeder", "otuna", "ocatfish", "osalmon", "osalmon2", "ofungus","oPike"};
+	public static final String LegendaryFish_UnlocalizedName[] = {"ogreenfishie", "ogreyfishie", "oredfishie", "oyellowfishie", "obluefishie", "opurplefishie", "ocavefishie", "ospottedfeeder", "omossyfeeder", "otuna", "ocatfish", "osalmon", "osalmon2", "ofungus","opike"};
 	public static final String LegendaryFish_Name[] = {"Legendary Green Fish", "Legendary Grey Fish", "Legendary Red Fish", "Legendary Yellow Fish", "Legendary Blue Fish", "Legendary Purple Fish", "Legendary Cave Fish", "Legendary Spotted Bottom Feeder", "Legendary Mossy Bottom Feeder", "Legendary Tuna", "Legendary Catfish", "Legendary Grey Salmon", "Legendary Red Salmon", "Legendary Fungus Fish","Legendary Pike"};
 	public static final String Clam_UnlocalizedNam[] = {"live_clam", "live_clam2", "live_clam3", "live_clam4"};
 	public static final String Clam_Name[] = {"Blue Clam", "Green Clam", "Yellow Clam", "Purple Clam"};

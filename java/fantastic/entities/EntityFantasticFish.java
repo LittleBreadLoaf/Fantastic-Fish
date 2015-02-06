@@ -1,11 +1,14 @@
 package fantastic.entities;
 
+import java.lang.reflect.Constructor;
+
 import sun.security.action.GetIntegerAction;
 import cpw.mods.fml.common.FMLCommonHandler;
 import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.entities.AI.AIRegistry;
 import fantastic.entities.AI.FishMovementHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +16,7 @@ import net.minecraft.world.World;
 
 public class EntityFantasticFish extends EntityWaterMob
 {
-	public static enum FishSize {Tiny,Small,Medium,Big,Large,Legendary, OneSize, Null};
+	public static enum FishSize { Null,Tiny,Small,Medium,Big,Large,Legendary, OneSize};
 
 	private static int DATAWATCHER_OUT_OF_WATER = 17;
 	private static int DATAWATCHER_TEXTURE = 19;
@@ -156,6 +159,63 @@ public class EntityFantasticFish extends EntityWaterMob
 
 		return _size;
 	}
+	
+	public static void SpawnFromItemDamage(World aWorld, FishSize aSize, int isOutOfWater, double posX, double posY, double posZ, int anItemDamage)
+	{
+		switch (anItemDamage)
+		{
+			case 0 : SpawnSizedFish(aWorld,EntityBasicFish.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 1 : SpawnSizedFish(aWorld,EntityBasicFish.class,2, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 2 : SpawnSizedFish(aWorld,EntityBasicFish.class,3, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 3 : SpawnSizedFish(aWorld,EntityBasicFish.class,4, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 4 : SpawnSizedFish(aWorld,EntityBasicFish.class,5, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 5 : SpawnSizedFish(aWorld,EntityBasicFish.class,6, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 6 : SpawnSizedFish(aWorld,EntityCaveFish.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 7 : SpawnSizedFish(aWorld,EntityFeeder.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 8 : SpawnSizedFish(aWorld,EntityMossy.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 9 : SpawnSizedFish(aWorld,EntityTuna.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 10 : SpawnSizedFish(aWorld,EntityCatfish.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 11 : SpawnSizedFish(aWorld,EntitySalmon.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 12 : SpawnSizedFish(aWorld,EntitySalmon.class,2, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 13 : SpawnSizedFish(aWorld,EntityFungus.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 14 : SpawnSizedFish(aWorld,EntityPike.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 15 : SpawnSizedFish(aWorld,EntityPike.class,2, aSize,isOutOfWater,posX,posY,posZ);break;
+			default : SpawnSizedFish(aWorld,EntityBasicFish.class,1, aSize,isOutOfWater,posX,posY,posZ);break; //on a bug, a basic fish will be returned
+			
+		}	
+	}
+	
+	public static void SpawnSizedFish(World aWorld,Class aFishClass, int aTextureIndex, FishSize aSize,  int isOutOfWater, double posX, double posY, double posZ)
+	{
+		
+		if ((aFishClass!=null) && (aTextureIndex>-1))
+		{
+			try
+			{
+				//Set the parameter array to get the constructor by reflection
+				Class[] _typeList = new Class[]{World.class, FishSize.class,int.class,int.class};
+				
+				//Get the constructor
+				Constructor _cons = aFishClass.getConstructor(_typeList);
+				
+				//Set the parameter values array for the constructor
+				Object[] _objList = {aWorld,aSize,aTextureIndex,isOutOfWater};
+				
+				//Instantiate the fish
+				Object _newFish = _cons.newInstance(_objList);
+				
+				//Spawn it
+				((Entity)_newFish).setLocationAndAngles(posX, posY, posZ, 0, 0);
+				aWorld.spawnEntityInWorld((Entity)_newFish);
+				
+			} catch (Exception e) 
+			{
+				FantasticDebug.Output(e.getStackTrace().toString());
+			}			
+		}
+
+	}
+
 	
 
     /*public float GetRenderDropDownFromSide()

@@ -290,7 +290,7 @@ public class ModelLongSnout extends ModelBase
     
     	
     
-    if(entity instanceof EntityCatfish)
+    /*if(entity instanceof EntityCatfish)
     {
     	EntityCatfish Fish = (EntityCatfish)entity;
     	extraSpeed = Fish.extraSpeed;
@@ -304,7 +304,7 @@ public class ModelLongSnout extends ModelBase
     	{
     		sizeChange = 1;
     	}
-  }
+  }*/
   
 
     

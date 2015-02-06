@@ -74,10 +74,11 @@ public static void SwimStill(EntityWaterMob aWaterMob)
 	{
         if (!aWaterMob.worldObj.isRemote)
         {
-			FantasticDebug.Output("SWIMMING STILL");
+			aWaterMob.setVelocity(0D, 0D, 0D);
+        	/*FantasticDebug.Output("SWIMMING STILL");
         	aWaterMob.motionX = 0D;
 			aWaterMob.motionZ = 0D;
-			aWaterMob.motionY = 0D;
+			aWaterMob.motionY = 0D;*/
         }
 		
 	}

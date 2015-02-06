@@ -40,7 +40,7 @@ import fantastic.items.FantasticItems;
 public class EntitySalmon extends EntityFantasticFish
 {
 	//Textures
-	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/salmon.png");
+	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/salmon1.png");
 	private final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/salmon2.png");
 
 	

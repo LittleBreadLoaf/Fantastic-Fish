@@ -18,6 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fantastic.FantasticInfo;
 import fantastic.Names;
+import fantastic.entities.EntityFantasticFish.FishSize;
 import fantastic.entities.EntityMantaRay;
 import fantastic.entities.EntityNurseShark;
 import fantastic.entities.EntitySailfish;
@@ -92,8 +93,8 @@ public class ItemRandomFish extends Item
             {
             	EntitySailfish Fish = new EntitySailfish(par3World);
             	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-            	Fish.setRenderSize(1.0F);
-            	Fish.setHasNotSpawned(false);
+            	//Fish.setRenderSize(1.0F);
+            	//Fish.setHasNotSpawned(false);
             	par3World.spawnEntityInWorld(Fish);
 	
             	if (Fish != null)
@@ -111,10 +112,10 @@ public class ItemRandomFish extends Item
             }
             else if(par1ItemStack.getItemDamage() > 0 && par1ItemStack.getItemDamage() < 4)
             {
-            	EntityNurseShark Fish = new EntityNurseShark(par3World, 0, (15 * par1ItemStack.getItemDamage() + 5));
+            	EntityNurseShark Fish = new EntityNurseShark(par3World, FishSize.Big,0,0);
             	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-            	Fish.setRenderSize(1.0F);
-            	Fish.setHasNotSpawned(false);
+            	//Fish.setRenderSize(1.0F);
+            	//Fish.setHasNotSpawned(false);
             	par3World.spawnEntityInWorld(Fish);
 	
             	if (Fish != null)
@@ -135,8 +136,8 @@ public class ItemRandomFish extends Item
             {
             	EntityMantaRay Fish = new EntityMantaRay(par3World);
             	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-            	Fish.setRenderSize(1.0F);
-            	Fish.setHasNotSpawned(false);
+            	//Fish.setRenderSize(1.0F);
+            	//Fish.setHasNotSpawned(false);
             	par3World.spawnEntityInWorld(Fish);
 	
             	if (Fish != null)
@@ -199,8 +200,8 @@ public class ItemRandomFish extends Item
                     	{
                     		EntitySailfish Fish = new EntitySailfish(par2World);
                     		Fish.setLocationAndAngles(i, j, k, 0, 0);
-                    		Fish.setRenderSize(1.0F);
-                    		Fish.setHasNotSpawned(false);
+                    		//Fish.setRenderSize(1.0F);
+                    		//Fish.setHasNotSpawned(false);
                     		par2World.spawnEntityInWorld(Fish);
 	
                     		if (Fish != null)
@@ -218,10 +219,10 @@ public class ItemRandomFish extends Item
                     	}	
                     	else if(par1ItemStack.getItemDamage() > 0 && par1ItemStack.getItemDamage() < 4)
                     	{
-                    		EntityNurseShark Fish = new EntityNurseShark(par2World, 0, (15 * par1ItemStack.getItemDamage() + 5));
+                    		EntityNurseShark Fish = new EntityNurseShark(par2World, FishSize.Big,0,0);
                     		Fish.setLocationAndAngles(i, j, k, 0, 0);
-                    		Fish.setRenderSize(1.0F);
-                    		Fish.setHasNotSpawned(false);
+                    		//Fish.setRenderSize(1.0F);
+                    		//Fish.setHasNotSpawned(false);
                     		par2World.spawnEntityInWorld(Fish);
 	
                     		if (Fish != null)
@@ -241,8 +242,8 @@ public class ItemRandomFish extends Item
                     	{
                     		EntityMantaRay Fish = new EntityMantaRay(par2World);
                     		Fish.setLocationAndAngles(i, j, k, 0, 0);
-                    		Fish.setRenderSize(1.0F);
-                    		Fish.setHasNotSpawned(false);
+                    		//Fish.setRenderSize(1.0F);
+                    		//Fish.setHasNotSpawned(false);
                     		par2World.spawnEntityInWorld(Fish);
 	
                     		if (Fish != null)

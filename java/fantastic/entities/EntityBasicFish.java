@@ -179,7 +179,7 @@ public class EntityBasicFish extends EntityFantasticFish
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
-		this.entityDropItem(new ItemStack(FantasticItems.rawSalmonFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
+		this.entityDropItem(new ItemStack(FantasticItems.filletRaw, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
 	}
 
 	/**

@@ -34,6 +34,15 @@ public class FantasticEntities
 		EntityRegistry.registerModEntity(EntityPike.class, Names.Pike_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
 		_id++;
 		
+		//Basic Fish
+		EntityRegistry.registerModEntity(EntityBasicFish.class, "Trout", _id, FantasticMod.instance, 64, 3, true);
+		_id++;
+		
+		//Basic Fish
+		EntityRegistry.registerModEntity(EntityCaveFish.class, Names.Cave_Fish_Name, _id, FantasticMod.instance, 64, 3, true);
+		_id++;
+
+		
 		//EntityRegistry.registerGlobalEntityID(EntitySalmon.class, "Salmon", EntityRegistry.findGlobalUniqueEntityId(), 0xA3A3A3, 0xFF9999);
 		//EntityRegistry.addSpawn(EntitySalmon.class, 6, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river});
 

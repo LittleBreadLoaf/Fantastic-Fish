@@ -1,19 +1,36 @@
 package fantastic.items;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.Names;
 import fantastic.blocks.FantasticBlocks;
+import fantastic.entities.EntityBasicFish;
+import fantastic.entities.EntityCatfish;
+import fantastic.entities.EntityCaveFish;
+import fantastic.entities.EntityFantasticFish;
+import fantastic.entities.EntityFantasticFish.FishSize;
+import fantastic.entities.EntityFeeder;
+import fantastic.entities.EntityFungus;
+import fantastic.entities.EntityMossy;
+import fantastic.entities.EntityPike;
+import fantastic.entities.EntitySalmon;
+import fantastic.entities.EntityTuna;
 
 public class FantasticItems 
 {
@@ -194,6 +211,14 @@ public class FantasticItems
 		
 	}
 	
+
+	
+	
+
+	
 	
 
 }
+
+
+

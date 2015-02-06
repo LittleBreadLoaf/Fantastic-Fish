@@ -242,7 +242,7 @@ public class SmartSpawnerControl
 			{
 				//If a fish size is returned, then a texture is chosen
 				int _texture = rand.nextInt(anEntity.GetNumberOfTextures()+1);
-				//The fish is finaly initialized correctly.
+				//The fish is finally initialized correctly.
 				anEntity.InitializeFish(_size,_texture,0);
 				return anEntity;
 			}
