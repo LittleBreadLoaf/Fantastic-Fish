@@ -12,13 +12,14 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import fantastic.FantasticInfo;
 import fantastic.entities.EntitySailfish;
 import fantastic.renders.models.ModelLongSnout;
 
 public class RenderSailfish extends RenderLiving
 {
-	private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/sailfish.png");
+	//private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/Sailfish.png");
+	//private static final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/Sailfish2.png");
+
 	protected ModelLongSnout model;
 
 	public RenderSailfish(ModelBase par1ModelBase, float par2)
@@ -48,7 +49,8 @@ public class RenderSailfish extends RenderLiving
 
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-				return texture1;
+		return ((EntitySailfish)entity).GetTexture();
+
 	}
 
 	
@@ -64,36 +66,56 @@ public class RenderSailfish extends RenderLiving
     
     protected void scaleFish(EntitySailfish par1, float par2)
     {
-    	float scale = (float)par1.getRenderSize();
-        GL11.glScalef(0.5F, 0.5F, 0.5F);
+    	float scale = (float)par1.GetRenderValueFromSize();
+        GL11.glScalef(scale, scale, scale);
     }
 
 	
 	
 	
 	protected void func_82430_a(EntitySailfish par1, float par2, float par3, float par4)
-    {
+    {		
 		float par6 = 0;
-		if (par1.getIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY - 1, (int)par1.posZ) != Blocks.water)
-        {
-        	
-            par4 = 90F + par1.rotationYaw;
-            par6 = 90F;
-        }
-        else
-        {
-        	par4 = 0;
-        	par6 = 0;
-        }
-
-        GL11.glRotatef(par6, 0.0F, 0.0F, 1.0F);
-        GL11.glRotatef(par4, 1.0F, 0.0F, 0.0F);
-      
-        GL11.glTranslatef(0.0F, (float)(-0.7F * par1.getRenderSize()), 0.0F);
-        
-        super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
-
+	//if (par1.getIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY - 1, (int)par1.posZ) != Blocks.water)
+	if (par1.GetIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ) != Blocks.water)
+    {
+    	
+        par4 = 90F + par1.rotationYaw;
+        par6 = 90F;
     }
+    else
+    {
+    	par4 = 0;
+    	par6 = 0;
+    }
+
+    GL11.glRotatef(par6, 0.0F, 0.0F, 1.0F);
+    GL11.glRotatef(par4, 1.0F, 0.0F, 0.0F);
+    /*if(par1.GetRenderValueFromSize() == 1.8F)
+    {
+        GL11.glTranslatef(0.0F, (float)(1.4F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else if(par1.GetRenderValueFromSize() == 1.3F)
+    {
+    	GL11.glTranslatef(0.0F, (float)(1.2F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else if(par1.GetRenderValueFromSize() == 1.0F)
+    {
+    	GL11.glTranslatef(0.0F, (float)(1.0F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else if(par1.GetRenderValueFromSize() == 0.8F)
+    {
+    	GL11.glTranslatef(0.0F, (float)(0.9F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else
+    {
+
+        GL11.glTranslatef(0.0F, (float)(-0.7F * par1.GetRenderValueFromSize()), 0.0F);
+    }*/
+    GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
+    super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
+
+}
 	
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
     {

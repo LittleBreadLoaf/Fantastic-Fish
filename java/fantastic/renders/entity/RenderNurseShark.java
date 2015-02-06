@@ -2,26 +2,24 @@ package fantastic.renders.entity;
 
 
 
-import org.lwjgl.opengl.GL11;
-
-import fantastic.FantasticInfo;
-import fantastic.entities.EntityBasicFish;
-import fantastic.entities.EntityNurseShark;
-import fantastic.renders.models.ModelNurseShark;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import fantastic.entities.EntityNurseShark;
+import fantastic.renders.models.ModelNurseShark;
 
 public class RenderNurseShark extends RenderLiving
 {
-	private static final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/nurse_shark.png");
-	private static final ResourceLocation texture3 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/nurse_shark_stripe.png");
-	private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/nurse_shark_spot.png");
+	//private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/NurseShark.png");
+	//private static final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/NurseShark2.png");
+
 	protected ModelNurseShark model;
 
 	public RenderNurseShark(ModelBase par1ModelBase, float par2)
@@ -51,15 +49,7 @@ public class RenderNurseShark extends RenderLiving
 
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		switch (((EntityNurseShark) entity).getTexture())
-		{
-			case 0:
-				return texture2;
-			case 1:
-				return texture3;
-			default:
-				return texture1;
-		}
+		return ((EntityNurseShark)entity).GetTexture();
 
 	}
 
@@ -71,15 +61,65 @@ public class RenderNurseShark extends RenderLiving
 	@Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
     {
-        this.scaleNurseShark((EntityNurseShark)par1EntityLivingBase, par2);
+        this.scaleFish((EntityNurseShark)par1EntityLivingBase, par2);
     }
     
-    protected void scaleNurseShark(EntityNurseShark par1, float par2)
+    protected void scaleFish(EntityNurseShark par1, float par2)
     {
-    	
-        GL11.glTranslated(0.0, 0.0, 0.0);
-        GL11.glScaled(0.7F, 0.7F, 0.7F);
+    	float scale = (float)par1.GetRenderValueFromSize();
+        GL11.glScalef(scale, scale, scale);
     }
 
 	
+	
+	
+	protected void func_82430_a(EntityNurseShark par1, float par2, float par3, float par4)
+    {		
+		float par6 = 0;
+	//if (par1.getIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY - 1, (int)par1.posZ) != Blocks.water)
+	if (par1.GetIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ) != Blocks.water)
+    {
+    	
+        par4 = 90F + par1.rotationYaw;
+        par6 = 90F;
+    }
+    else
+    {
+    	par4 = 0;
+    	par6 = 0;
+    }
+
+    GL11.glRotatef(par6, 0.0F, 0.0F, 1.0F);
+    GL11.glRotatef(par4, 1.0F, 0.0F, 0.0F);
+    /*if(par1.GetRenderValueFromSize() == 1.8F)
+    {
+        GL11.glTranslatef(0.0F, (float)(1.4F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else if(par1.GetRenderValueFromSize() == 1.3F)
+    {
+    	GL11.glTranslatef(0.0F, (float)(1.2F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else if(par1.GetRenderValueFromSize() == 1.0F)
+    {
+    	GL11.glTranslatef(0.0F, (float)(1.0F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else if(par1.GetRenderValueFromSize() == 0.8F)
+    {
+    	GL11.glTranslatef(0.0F, (float)(0.9F)*(-par1.GetRenderValueFromSize()), 0.0F);
+    }
+    else
+    {
+
+        GL11.glTranslatef(0.0F, (float)(-0.7F * par1.GetRenderValueFromSize()), 0.0F);
+    }*/
+    GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
+    super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
+
+}
+	
+	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
+    {
+        this.func_82430_a((EntityNurseShark)par1EntityLivingBase, par2, par3, par4);
+        
+    }
 }
