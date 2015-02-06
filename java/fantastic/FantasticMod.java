@@ -37,6 +37,7 @@ import fantastic.network.ACMessage;
 import fantastic.network.DecideMessage;
 import fantastic.network.MoveMessage;
 import fantastic.proxies.CommonProxy;
+import fantastic.spawner.SmartSpawnerControl;
 import fantastic.tiles.TileAirCompressor;
 import fantastic.world.ComponentFishermanHut;
 import fantastic.world.CoralGenerator;
@@ -61,6 +62,9 @@ public class FantasticMod
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
+		//Set to true to turn on the debug mode in output window.
+		FantasticDebug.DebugMode=false;
+		
 		proxy.initRenderers();
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("FantasticChannel");
@@ -90,6 +94,8 @@ public class FantasticMod
 
 		Recipes.init();
 
+		SmartSpawnerControl.Init();
+		
 		proxy.loadKeys();
 
 

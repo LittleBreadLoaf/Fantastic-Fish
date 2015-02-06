@@ -28,6 +28,7 @@ import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.armor.FantasticArmor;
 import fantastic.entities.EntityBasicFish;
@@ -43,6 +44,7 @@ import fantastic.entities.EntityTuna;
 import fantastic.entities.sharks.EntityBasicShark;
 import fantastic.items.FantasticItems;
 import fantastic.proxies.CommonProxy;
+import fantastic.spawner.SmartSpawnerControl;
 
 public class FantasticEvents 
 {
@@ -51,12 +53,25 @@ public class FantasticEvents
 	Random rand = new Random();
 	private int texture = 0;
 
+	@SubscribeEvent
+	public void entitySpawned (EntityJoinWorldEvent event)
+	{
+
+		FantasticDebug.Output("ENTITY SPAWNED EVENT: "+event.entity.getClass());
+		if (!event.world.isRemote)
+		{
+			//Spawning is controlled server side.
+			//SmartSpawnerControl.ProcessSpawn(event.entity);
+		}
+	}
+	
 	
 	@SubscribeEvent
 	public void onLivingSpawnEvent(LivingSpawnEvent event)
 	{
 		
-		if(event.entity instanceof EntityBasicShark)
+		
+		/*if(event.entity instanceof EntityBasicShark)
 		{
 			if(((EntityBasicShark)event.entity).getHasNotSpawned())
 			{
@@ -227,7 +242,7 @@ public class FantasticEvents
 					Fish.setRenderSize(0.8F);
 			
 			}
-		}
+		}*/
 	}
 
 	@SubscribeEvent
@@ -235,7 +250,7 @@ public class FantasticEvents
 	{
 		
 		
-		float renderSize = 0.9F;
+		/*float renderSize = 0.9F;
 		
 		if(event.entity instanceof EntityBasicFish)
 		{
@@ -406,7 +421,7 @@ public class FantasticEvents
 				Feeder.setRenderSize(renderSize);
 			}
 			Feeder.setHasNotSpawned(false);
-		}
+		}*/
 		
 		
 		
@@ -614,6 +629,15 @@ public class FantasticEvents
 	public void onLivingDeathEvent(LivingDeathEvent event)
 	{
 
+		if (!event.entity.worldObj.isRemote)
+		{
+			if (event.entity!=null)
+			{
+				SmartSpawnerControl.ProcessDespawn(event.entity);
+			}
+		}
+		
+		
 		if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityBasicShark)
 		{
 

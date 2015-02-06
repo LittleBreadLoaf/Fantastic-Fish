@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -51,6 +52,15 @@ public class FantasticItems
 	public static Item sharkFin;
 	public static Item finSoup;
 	public static Item sharkTooth;
+	public static Item reinforcedFishingRod;
+	
+	
+	
+	//SeaFood
+	public static Item rawSalmonFillet;
+	public static Item cookedSalmonFillet;
+	public static Item rawPikeFillet;
+	public static Item cookedPikeFillet;	
 	
 	public static final CreativeTabs tabFantastic = new CreativeTabs("Fantastic Fish Mod")
 	{
@@ -123,7 +133,16 @@ public class FantasticItems
 		sharkFin = new ItemSharkFin().setTextureName("fantastic:sharkfin");
 		finSoup = (new ItemFinSoup(7, 0.8F, true)).setUnlocalizedName("finsoup").setTextureName("fantastic:finsoup");
 		sharkTooth = new ItemSharkTooth().setTextureName("fantastic:sharktooth");
+		reinforcedFishingRod = new ItemReinforcedFishingRod().setUnlocalizedName(Names.ReinforcedFishingRod_UnlocalizedName).setTextureName("fantastic:reinforced_fishing_rod_uncast");
 		
+		//Seafood
+		rawSalmonFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Salmon_Fillet_UnlocalizedName).setTextureName("fantastic:raw_salmon_fillet").setCreativeTab(FantasticItems.tabFantastic);
+		cookedSalmonFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Salmon_Fillet_UnlocalizedName).setTextureName("fantastic:cooked_salmon_fillet").setCreativeTab(FantasticItems.tabFantastic);
+		rawPikeFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Pike_Fillet_UnlocalizedName).setTextureName("fantastic:raw_pike_fillet").setCreativeTab(FantasticItems.tabFantastic);
+		cookedPikeFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Pike_Fillet_UnlocalizedName).setTextureName("fantastic:cooked_pike_fillet").setCreativeTab(FantasticItems.tabFantastic);
+
+		
+		GameRegistry.registerItem(reinforcedFishingRod, Names.ReinforcedFishingRod_Name);
 		GameRegistry.registerItem(fishingNet, Names.FishingNet_Name);
 		GameRegistry.registerItem(tinyFish, Names.TinyFish_Name[1]); 
 		GameRegistry.registerItem(smallFish , Names.SmallFish_Name[1]);
@@ -159,7 +178,20 @@ public class FantasticItems
 		GameRegistry.registerItem(sharkFin, "Shark Fin");
 		GameRegistry.registerItem(finSoup, "Shark Fin Soup");
 		GameRegistry.registerItem(sharkTooth, "Shark Tooth");
-				
+		
+		
+		//Seafood
+		GameRegistry.registerItem(rawSalmonFillet, Names.Raw_Salmon_Fillet_Name);
+		GameRegistry.registerItem(cookedSalmonFillet, Names.Cooked_Salmon_Fillet_Name);
+		GameRegistry.registerItem(rawPikeFillet, Names.Raw_Pike_Fillet_Name);
+		GameRegistry.registerItem(cookedPikeFillet, Names.Cooked_Pike_Fillet_Name);
+
+		
+		//Smelting 
+		GameRegistry.addSmelting(rawSalmonFillet,new ItemStack(cookedSalmonFillet), 1.0F);
+		GameRegistry.addSmelting(rawPikeFillet,new ItemStack(cookedPikeFillet), 1.0F);
+
+		
 	}
 	
 	

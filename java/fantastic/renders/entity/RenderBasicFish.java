@@ -31,11 +31,13 @@ public class RenderBasicFish extends RenderLiving
 	{
 		super(par1ModelBase, par2);
 		model = ((ModelBasicFish) mainModel);
+
 	}
 
 	public void renderBasicFish(EntityBasicFish par1, double par2, double par3, double par4, float par5, float par6)
 	{
 		super.doRender(par1, par2, par3, par4, par5, par6);
+
 		
 	}
 

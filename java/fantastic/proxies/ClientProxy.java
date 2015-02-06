@@ -3,6 +3,7 @@ package fantastic.proxies;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderFish;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,6 +15,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
 import fantastic.entities.EntityHarpoon;
+import fantastic.entities.EntityReinforcedFishingHook;
 import fantastic.events.FantasticKeyHandler;
 import fantastic.events.FantasticSounds;
 import fantastic.gui.GuiAirGauge;

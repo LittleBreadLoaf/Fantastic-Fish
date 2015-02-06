@@ -2,6 +2,7 @@ package fantastic.armor;
 
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBiped;
@@ -24,6 +25,8 @@ import fantastic.items.FantasticItems;
 public class ItemScubaTank extends ItemArmor 
 {
 	private static final int AIR_UNIT = 6000;
+	private static long bubbleLoopTimer = 0;
+	private static Random rand = new Random();
 	
 	public ItemScubaTank(ArmorMaterial par2, int par3, int par4) 
 	{
@@ -71,6 +74,22 @@ public class ItemScubaTank extends ItemArmor
 		{
 			stack.damageItem(1, player);
 			player.setAir(300);
+			PlayBubbles(world,player);
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void PlayBubbles(World aWorld, EntityPlayer aPlayer)
+	{
+		//Will play one of the 3 bubbles sound every 12 seconds when the tank is used under water.
+		long _currentTime = System.currentTimeMillis();
+		
+		if ((_currentTime - bubbleLoopTimer)>12000)
+		{
+			bubbleLoopTimer = _currentTime;
+			int _i = rand.nextInt(4)+1;
+//			System.out.println("Playing sound fantastic:bubbles_"+Integer.toString(_i));
+			aWorld.playSoundAtEntity(aPlayer,"fantastic:bubbles_"+Integer.toString(_i),1.0F,1.0F);
 		}
 	}
 

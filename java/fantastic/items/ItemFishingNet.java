@@ -23,6 +23,7 @@ public class ItemFishingNet extends Item
 	        this.setMaxDamage(64);
 	        this.setMaxStackSize(1);
 
+
 		}
 
 		@Override

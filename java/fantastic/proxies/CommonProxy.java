@@ -8,10 +8,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import fantastic.FantasticIds;
+import fantastic.FantasticMod;
+import fantastic.Names;
+import fantastic.entities.EntityReinforcedFishingHook;
 import fantastic.events.VillagerTradeHandler;
 import fantastic.world.ComponentFishermanHut;
 import fantastic.world.FishermanHandler;
@@ -22,7 +27,6 @@ public class CommonProxy implements IGuiHandler
 	private static HashMap<String, NBTTagCompound> extendedEntityData = new HashMap<String, NBTTagCompound>();
 	
 
-	
 	
 	public void initRenderers()
 	{

@@ -1,6 +1,7 @@
 package fantastic.items;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,11 +22,14 @@ import fantastic.Names;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityCatfish;
 import fantastic.entities.EntityCaveFish;
+import fantastic.entities.EntityFantasticFish.FishSize;
 import fantastic.entities.EntityFeeder;
 import fantastic.entities.EntityFungus;
 import fantastic.entities.EntityMossy;
+import fantastic.entities.EntityPike;
 import fantastic.entities.EntitySalmon;
 import fantastic.entities.EntityTuna;
+
 
 public class ItemTinyFish extends Item
 {
@@ -77,226 +81,227 @@ public class ItemTinyFish extends Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
-        if (par3World.isRemote)
-        {
-            return true;
-        }
-        else
-        {
-        	  Block i1 = par3World.getBlock(par4, par5, par6);
-              par4 += Facing.offsetsXForSide[par7];
-              par5 += Facing.offsetsYForSide[par7];
-              par6 += Facing.offsetsZForSide[par7];
-              double d0 = 0.0D;
-
-              if (par7 == 1 && i1 != null && i1.getRenderType() == 11)
-              {
-                  d0 = 0.5D;
-              }
-
-            if(par1ItemStack.getItemDamage() < 6)
-            {
-            	EntityBasicFish Fish = new EntityBasicFish(par3World, this.getDamage(par1ItemStack), 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-            else if(par1ItemStack.getItemDamage() == 6)
-            {
-            	EntityCaveFish Fish = new EntityCaveFish(par3World, 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-          
-            else if(par1ItemStack.getItemDamage() == 7)
-            {
-            	EntityFeeder Fish = new EntityFeeder(par3World, 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-            else if(par1ItemStack.getItemDamage() == 8)
-            {
-            	EntityMossy Fish = new EntityMossy(par3World, 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-            else if(par1ItemStack.getItemDamage() == 9)
-            {
-            	EntityTuna Fish = new EntityTuna(par3World, 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-            else if(par1ItemStack.getItemDamage() == 10)
-            {
-            	EntityCatfish Fish = new EntityCatfish(par3World, 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-            else if(par1ItemStack.getItemDamage() == 11)
-            {
-            	EntitySalmon Fish = new EntitySalmon(par3World, 0, 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-            else if(par1ItemStack.getItemDamage() == 12)
-            {
-            	EntitySalmon Fish = new EntitySalmon(par3World, 0, 1);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-            else if(par1ItemStack.getItemDamage() == 13)
-            {
-            	EntityFungus Fish = new EntityFungus(par3World, 0);
-            	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
-    			Fish.setRenderSize(0.25F);
-    			Fish.setHasNotSpawned(false);
-    			par3World.spawnEntityInWorld(Fish);
-    			
-                if (Fish != null)
-                {
-                    if (par1ItemStack.hasDisplayName())
-                    {
-                        Fish.setCustomNameTag(par1ItemStack.getDisplayName());
-                    }
-
-                    if (!par2EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }
+//// public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+//// {
+////     if (par3World.isRemote)
+////     {
+////         return true;
+////     }
+////     else
+////     {
+////     	  Block i1 = par3World.getBlock(par4, par5, par6);
+////           par4 += Facing.offsetsXForSide[par7];
+////           par5 += Facing.offsetsYForSide[par7];
+////           par6 += Facing.offsetsZForSide[par7];
+////           double d0 = 0.0D;
+////
+////           if (par7 == 1 && i1 != null && i1.getRenderType() == 11)
+////           {
+////               d0 = 0.5D;
+////           }
+////
+////         if(par1ItemStack.getItemDamage() < 6)
+////         {
+////         	EntityBasicFish Fish = new EntityBasicFish(par3World, this.getDamage(par1ItemStack), 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////         else if(par1ItemStack.getItemDamage() == 6)
+////         {
+////         	EntityCaveFish Fish = new EntityCaveFish(par3World, 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////       
+////         else if(par1ItemStack.getItemDamage() == 7)
+////         {
+////         	EntityFeeder Fish = new EntityFeeder(par3World, 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////         else if(par1ItemStack.getItemDamage() == 8)
+////         {
+////         	EntityMossy Fish = new EntityMossy(par3World, 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////         else if(par1ItemStack.getItemDamage() == 9)
+////         {
+////         	EntityTuna Fish = new EntityTuna(par3World, 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////         else if(par1ItemStack.getItemDamage() == 10)
+////         {
+////         	EntityCatfish Fish = new EntityCatfish(par3World, 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////         else if(par1ItemStack.getItemDamage() == 11)
+////         {
+////         	EntitySalmon Fish = new EntitySalmon(par3World, FishSize.Tiny, 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			//Fish.setRenderSize(EntitySalmon.GetRenderValueFromSize(FishSize.Tiny));
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////         else if(par1ItemStack.getItemDamage() == 12)
+////         {
+////         	EntitySalmon Fish = new EntitySalmon(par3World,FishSize.Tiny, 1);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			//Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////         else if(par1ItemStack.getItemDamage() == 13)
+////         {
+////         	EntityFungus Fish = new EntityFungus(par3World, 0);
+////         	Fish.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D, 0, 0);
+//// 			Fish.setRenderSize(0.25F);
+//// 			Fish.setHasNotSpawned(false);
+//// 			par3World.spawnEntityInWorld(Fish);
+//// 			
+////             if (Fish != null)
+////             {
+////                 if (par1ItemStack.hasDisplayName())
+////                 {
+////                     Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+////                 }
+////
+////                 if (!par2EntityPlayer.capabilities.isCreativeMode)
+////                 {
+////                     --par1ItemStack.stackSize;
+////                 }
+////             }
+////         }
+////
+////         return true;
+////     }
+//// }
 
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
-        if (par2World.isRemote)
+    	Random _rand = new Random();
+    	if (par2World.isRemote)
         {
             return par1ItemStack;
         }
@@ -438,7 +443,7 @@ public class ItemTinyFish extends Item
                         {
                         	EntityCatfish Fish = new EntityCatfish(par2World, 0);
                         	Fish.setLocationAndAngles((double)i, (double)j, (double)k, 0, 0);
-                			Fish.setRenderSize(0.25F);
+                			//Fish.setRenderSize(0.25F);
                 			Fish.setHasNotSpawned(false);
                 			par2World.spawnEntityInWorld(Fish);
                 			
@@ -457,10 +462,10 @@ public class ItemTinyFish extends Item
                         }
                         else if(par1ItemStack.getItemDamage() == 12)
                         {
-                        	EntitySalmon Fish = new EntitySalmon(par2World, 0, 0);
+                        	EntitySalmon Fish = new EntitySalmon(par2World, FishSize.Tiny, _rand.nextInt(EntitySalmon.GetNumberOfTextures())+1,0);
                         	Fish.setLocationAndAngles((double)i, (double)j, (double)k, 0, 0);
-                			Fish.setRenderSize(0.25F);
-                			Fish.setHasNotSpawned(false);
+                			//Fish.setRenderSize(0.25F);
+                			//Fish.setHasNotSpawned(false);
                 			par2World.spawnEntityInWorld(Fish);
                 			
                             if (Fish != null)
@@ -478,10 +483,11 @@ public class ItemTinyFish extends Item
                         }
                         else if(par1ItemStack.getItemDamage() == 12)
                         {
-                        	EntitySalmon Fish = new EntitySalmon(par2World, 0, 1);
+                        	EntitySalmon Fish = new EntitySalmon(par2World, FishSize.Tiny, _rand.nextInt(EntitySalmon.GetNumberOfTextures())+1,0);
                         	Fish.setLocationAndAngles((double)i, (double)j, (double)k, 0, 0);
-                			Fish.setRenderSize(0.25F);
-                			Fish.setHasNotSpawned(false);
+                			//Fish.setRenderSize(0.25F);
+                        	//Fish.currentSize=FishSize.Tiny;
+                			//Fish.setHasNotSpawned(false);
                 			par2World.spawnEntityInWorld(Fish);
                 			
                             if (Fish != null)
@@ -503,6 +509,29 @@ public class ItemTinyFish extends Item
                         	Fish.setLocationAndAngles((double)i, (double)j, (double)k, 0, 0);
                 			Fish.setRenderSize(0.25F);
                 			Fish.setHasNotSpawned(false);
+                			par2World.spawnEntityInWorld(Fish);
+                			
+                            if (Fish != null)
+                            {
+                                if (par1ItemStack.hasDisplayName())
+                                {
+                                    Fish.setCustomNameTag(par1ItemStack.getDisplayName());
+                                }
+
+                                if (!par3EntityPlayer.capabilities.isCreativeMode)
+                                {
+                                    --par1ItemStack.stackSize;
+                                }
+                            }
+                        }
+                        else if(par1ItemStack.getItemDamage() == 14)
+                        {
+
+                        	EntityPike Fish = new EntityPike(par2World, FishSize.Tiny, _rand.nextInt(EntityPike.GetNumberOfTextures())+1,0);
+                        	Fish.setLocationAndAngles((double)i, (double)j, (double)k, 0, 0);
+                			//Fish.setRenderSize(0.8F);
+                        	//Fish.currentSize=FishSize.Medium;
+                			//Fish.setHasNotSpawned(false);
                 			par2World.spawnEntityInWorld(Fish);
                 			
                             if (Fish != null)

@@ -1,6 +1,7 @@
 package fantastic.renders.entity;
 
 
+import net.minecraft.client.renderer.entity.RenderFish;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import fantastic.animations.client.ModelSerpentBoss;
 import fantastic.animations.client.RenderSerpentBoss;
@@ -18,6 +19,8 @@ import fantastic.entities.EntityMantaRay;
 import fantastic.entities.EntityMossy;
 import fantastic.entities.EntityNurseShark;
 import fantastic.entities.EntityPatrick;
+import fantastic.entities.EntityPike;
+import fantastic.entities.EntityReinforcedFishingHook;
 import fantastic.entities.EntitySailfish;
 import fantastic.entities.EntitySalmon;
 import fantastic.entities.EntitySandStriker;
@@ -38,6 +41,7 @@ import fantastic.renders.models.ModelLongSnout;
 import fantastic.renders.models.ModelMantaRay;
 import fantastic.renders.models.ModelNurseShark;
 import fantastic.renders.models.ModelPatrick;
+import fantastic.renders.models.ModelPike;
 import fantastic.renders.models.ModelSmallCrab;
 import fantastic.renders.models.ModelStarfish;
 
@@ -46,6 +50,7 @@ public class EntityRender
 
 	public static void renderEntities()
 	{
+		
 		RenderingRegistry.registerEntityRenderingHandler(EntityBasicFish.class, new RenderBasicFish(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCaveFish.class, new RenderCaveFish(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLobster.class, new RenderLobster(new ModelLobster(), 0.3F));
@@ -70,6 +75,9 @@ public class EntityRender
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTigerShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHammerHead.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, new RenderPike(new ModelPike(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityReinforcedFishingHook.class, new RenderFish());
+		
 
 
 		

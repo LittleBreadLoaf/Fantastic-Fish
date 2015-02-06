@@ -132,6 +132,15 @@ public class Recipes
 
 					'#', Items.stick, '*', Items.string
 				});
+				
+				//Fishing Net
+				GameRegistry.addRecipe(new ItemStack(FantasticItems.reinforcedFishingRod, 1), new Object[]{
+					"  *",
+					" *$",
+					"# $",
+
+					'#',Items.iron_ingot,'*', Items.stick, '$', Items.string
+				});
 		//Air Compressor
 				GameRegistry.addRecipe(new ItemStack(FantasticBlocks.airComp, 1), new Object[]{
 					"  $",

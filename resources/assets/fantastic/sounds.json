@@ -4,7 +4,12 @@
 "lobster_idle1": {"category": "master","sounds": [{"name": "lobster_idle1","stream": false}]},
 "lobster_idle2": {"category": "master","sounds": [{"name": "lobster_idle2","stream": false}]},
 "airCompressor": {"category": "master","sounds": [{"name": "airCompressor","stream": false}]},
-"tankFull": {"category": "master","sounds": [{"name": "tankFull","stream": false}]}
-  
+"tankFull": {"category": "master","sounds": [{"name": "tankFull","stream": false}]},
+"bubbles_1": {"category": "master","sounds": [{"name": "bubbles_1","stream": false}]},
+"bubbles_2": {"category": "master","sounds": [{"name": "bubbles_2","stream": false}]},
+"bubbles_3": {"category": "master","sounds": [{"name": "bubbles_3","stream": false}]},
+"bubbles_4": {"category": "master","sounds": [{"name": "bubbles_4","stream": false}]},
+"reelSmooth": {"category": "master","sounds": [{"name": "reelSmooth","stream": false}]},
+"throwLine": {"category": "master","sounds": [{"name": "throwLine","stream": false}]}
 
 }

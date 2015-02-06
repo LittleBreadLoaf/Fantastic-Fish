@@ -9,6 +9,7 @@ import net.minecraft.util.MathHelper;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityCaveFish;
 import fantastic.entities.EntityCreepedo;
+import fantastic.entities.EntityFantasticFish;
 import fantastic.entities.EntityFeeder;
 import fantastic.entities.EntityMossy;
 import fantastic.entities.EntitySalmon;
@@ -265,117 +266,125 @@ public class ModelBasicFish extends ModelBase
     model.rotateAngleZ = z;
   }
    
-  int extraSpeed = 1;
-  float sizeChange = 1;
+  //int extraSpeed = 1;
+  //float sizeChange = 1;
   
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
   {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    EntityFantasticFish _fish = (EntityFantasticFish)entity;
     
     this.mouth.rotateAngleX = 0.17F*(MathHelper.cos(f2 * 0.06662F) ) + 0.8726646F;
     
-    if(entity instanceof EntityBasicFish)
-    {
-    	EntityBasicFish Fish = (EntityBasicFish)entity;
-    	extraSpeed = Fish.extraSpeed;
-    	if(Fish.isInWater())
-    	{
-    		sizeChange = (float)0.7/Fish.getRenderSize();
-    		if(Fish.getRenderSize() < 0.9F)
-    			sizeChange = 1.3F;
-    	}
-    	else
-    	{
-    		sizeChange = 1;
-    	}
-  }
-    if(entity instanceof EntitySalmon)
-    {
-    	EntitySalmon Fish = (EntitySalmon)entity;
-    	extraSpeed = Fish.extraSpeed;
-    	if(Fish.isInWater())
-    	{
-    		sizeChange = (float)0.7/Fish.getRenderSize();
-    		if(Fish.getRenderSize() < 0.9F)
-    			sizeChange = 1.3F;
-    	}
-    	else
-    	{
-    		sizeChange = 1;
-    	}
-    }
-    if(entity instanceof EntityTuna)
-    {
-    	EntityTuna Fish = (EntityTuna)entity;
-    	extraSpeed = Fish.extraSpeed;
-    	if(Fish.isInWater())
-    	{
-    		sizeChange = (float)0.7/Fish.getRenderSize();
-    		if(Fish.getRenderSize() < 0.9F)
-    			sizeChange = 1.3F;
-    	}
-    	else
-    	{
-    		sizeChange = 1;
-    	}
-    }
-    if(entity instanceof EntityCaveFish)
-    {
-    	EntityCaveFish Fish = (EntityCaveFish)entity;
-    	extraSpeed = Fish.extraSpeed;
-    	if(Fish.isInWater())
-    	{
-    		sizeChange = (float)0.7/Fish.getRenderSize();
-    		if(Fish.getRenderSize() < 0.9F)
-    			sizeChange = 1.3F;
-    	}
-    	else
-    	{
-    		sizeChange = 1;
-    	}
-    }
-    if(entity instanceof EntityFeeder)
-    {
-    	EntityFeeder Fish = (EntityFeeder)entity;
-    	extraSpeed = Fish.extraSpeed; 
-    	if(Fish.isInWater())
-    	{
-    		sizeChange = (float)0.7/Fish.getRenderSize();
-    		if(Fish.getRenderSize() < 0.9F)
-    			sizeChange = 1.3F;
-    	}
-    	else
-    	{
-    		sizeChange = 1;
-    	}  
-  }
-    if(entity instanceof EntityMossy)
-    {
-    	EntityMossy Fish = (EntityMossy)entity;
-    	extraSpeed = Fish.extraSpeed;
-    	if(Fish.isInWater())
-    	{
-    		sizeChange = (float)0.7/Fish.getRenderSize();
-    		if(Fish.getRenderSize() < 0.9F)
-    			sizeChange = 1.3F;
-    	}
-    	else
-    	{
-    		sizeChange = 1;
-    	}
-    	
+//  if(entity instanceof EntityBasicFish)
+//  {
+//  	EntityBasicFish Fish = (EntityBasicFish)entity;
+//  	extraSpeed = Fish.extraSpeed;
+//  	if(Fish.isInWater())
+//  	{
+//  		sizeChange = (float)0.7/Fish.getRenderSize();
+//  		if(Fish.getRenderSize() < 0.9F)
+//  			sizeChange = 1.3F;
+//  	}
+//  	else
+//  	{
+//  		sizeChange = 1;
+//  	}
+//}
+//  if(entity instanceof EntitySalmon)
+//  {
+//  	EntitySalmon Fish = (EntitySalmon)entity;
+//  	extraSpeed = Fish.extraSpeed;
+//  	if(Fish.isInWater())
+//  	{
+//  		sizeChange = (float)0.7/Fish.getRenderSize();
+//  		if(Fish.getRenderSize() < 0.9F)
+//  			sizeChange = 1.3F;
+//  	}
+//  	else
+//  	{
+//  		sizeChange = 1;
+//  	}
+//  }
+//  if(entity instanceof EntityTuna)
+//  {
+//  	EntityTuna Fish = (EntityTuna)entity;
+//  	extraSpeed = Fish.extraSpeed;
+//  	if(Fish.isInWater())
+//  	{
+//  		sizeChange = (float)0.7/Fish.getRenderSize();
+//  		if(Fish.getRenderSize() < 0.9F)
+//  			sizeChange = 1.3F;
+//  	}
+//  	else
+//  	{
+//  		sizeChange = 1;
+//  	}
+//  }
+//  if(entity instanceof EntityCaveFish)
+//  {
+//  	EntityCaveFish Fish = (EntityCaveFish)entity;
+//  	extraSpeed = Fish.extraSpeed;
+//  	if(Fish.isInWater())
+//  	{
+//  		sizeChange = (float)0.7/Fish.getRenderSize();
+//  		if(Fish.getRenderSize() < 0.9F)
+//  			sizeChange = 1.3F;
+//  	}
+//  	else
+//  	{
+//  		sizeChange = 1;
+//  	}
+//  }
+//  if(entity instanceof EntityFeeder)
+//  {
+//  	EntityFeeder Fish = (EntityFeeder)entity;
+//  	extraSpeed = Fish.extraSpeed; 
+//  	if(Fish.isInWater())
+//  	{
+//  		sizeChange = (float)0.7/Fish.getRenderSize();
+//  		if(Fish.getRenderSize() < 0.9F)
+//  			sizeChange = 1.3F;
+//  	}
+//  	else
+//  	{
+//  		sizeChange = 1;
+//  	}  
+//}
+//  if(entity instanceof EntityMossy)
+//  {
+//  	EntityMossy Fish = (EntityMossy)entity;
+//  	extraSpeed = Fish.extraSpeed;
+//  	if(Fish.isInWater())
+//  	{
+//  		sizeChange = (float)0.7/Fish.getRenderSize();
+//  		if(Fish.getRenderSize() < 0.9F)
+//  			sizeChange = 1.3F;
+//  	}
+//  	else
+//  	{
+//  		sizeChange = 1;
+//  	}
+//  	
+//
+//}
+//  
+//  
 
-  }
-    
-    
+    this.bodysection1.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F) );
+    this.bodysection2.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/6)) );
+    this.bodysection3.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/3)) );
+    this.bodysection4.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/2)) );
+    this.bodysection5.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(2*Math.PI/3)) );
+    this.bodysection6.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(5*Math.PI/6)) );
 
     
-    this.bodysection1.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F) );
-    this.bodysection2.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(Math.PI/6)) );
-    this.bodysection3.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(Math.PI/3)) );
-    this.bodysection4.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(Math.PI/2)) );
-    this.bodysection5.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(2*Math.PI/3)) );
-    this.bodysection6.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(5*Math.PI/6)) );
+//    this.bodysection1.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F) );
+//    this.bodysection2.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(Math.PI/6)) );
+//    this.bodysection3.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(Math.PI/3)) );
+//    this.bodysection4.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(Math.PI/2)) );
+//    this.bodysection5.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(2*Math.PI/3)) );
+//    this.bodysection6.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F - (float)(5*Math.PI/6)) );
     
    
   }
