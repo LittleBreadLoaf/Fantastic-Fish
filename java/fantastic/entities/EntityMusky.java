@@ -35,22 +35,20 @@ import fantastic.FantasticInfo;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
-public class EntityPike extends EntityFantasticFish
+public class EntityMusky extends EntityFantasticFish
 {
 	//Textures
-	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/pike1.png");
-	private final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/pike2.png");
-
+	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/musky1.png");
 	
 	//CONSTRUCTOR
-	public EntityPike(World aWorld)
+	public EntityMusky(World aWorld)
 	{
 		super(aWorld);
 		InitializeAI();
 	}
 
 	//CONSTRUCTOR
-	public EntityPike(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
+	public EntityMusky(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
 	{
 		this(aWorld);
 		InitializeFish(aSize,aTextureIndex,isOutOfWater);
@@ -146,7 +144,6 @@ public class EntityPike extends EntityFantasticFish
 		switch (GetTextureIndex())
 		{
 			case 1: return texture1;
-			case 2: return texture2;
 			default: return texture1;
 		}
 		
@@ -155,7 +152,7 @@ public class EntityPike extends EntityFantasticFish
 
 	public static int GetNumberOfTextures()
 	{
-		return 2;
+		return 1;
 	}
 	
 	//*** PROTECTED METHOD ***
@@ -171,7 +168,7 @@ public class EntityPike extends EntityFantasticFish
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
-		this.entityDropItem(new ItemStack(FantasticItems.rawPikeFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
+		this.entityDropItem(new ItemStack(FantasticItems.rawMuskyFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
 	}
 
 	/**
@@ -225,7 +222,7 @@ public class EntityPike extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-
+	
 	}
 
 	    

@@ -30,27 +30,34 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
+import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
+import fantastic.entities.AI.EntityFFAI.AIState;
+import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
+import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
+import fantastic.entities.AI.FFAI_SwimJumpForFlies;
+import fantastic.entities.AI.FFAI_SwimStayStill;
+import fantastic.entities.AI.FFAI_SwimWander;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
-public class EntityPike extends EntityFantasticFish
+public class EntityTrout extends EntityFantasticFish
 {
 	//Textures
-	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/pike1.png");
-	private final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/pike2.png");
+	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/trout1.png");
+	private final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/trout2.png");
 
 	
 	//CONSTRUCTOR
-	public EntityPike(World aWorld)
+	public EntityTrout(World aWorld)
 	{
 		super(aWorld);
 		InitializeAI();
 	}
 
 	//CONSTRUCTOR
-	public EntityPike(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
+	public EntityTrout(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
 	{
 		this(aWorld);
 		InitializeFish(aSize,aTextureIndex,isOutOfWater);
@@ -65,6 +72,7 @@ public class EntityPike extends EntityFantasticFish
 		SetIsOutOfWater(isOutOfWater);
 		this.ignoreFrustumCheck = true;
 		SetHasNotSpawned(false);
+		this.setSize(1.0F, 1.0F);
 	}
 	
 	//This property tells if the class has different size of fish for the same class. By default, it return false. 
@@ -78,18 +86,24 @@ public class EntityPike extends EntityFantasticFish
 	@Override
 	public float GetTailFlapSpeed()
 	{
+		
+
 		//return 0.5F;
-		switch (GetFishSize())
-		{
-			case Tiny : return 1.0F;
-			case Small : return 0.8F;
-			case Medium : return 0.7F;
-			case Big : return 0.6F;
-			case Large : return 0.5F;
-			case Legendary : return 0.4F;
-			default: return 1.0F; 
-		}	
+			switch (GetFishSize())
+			{
+				
+				case Tiny : return 1.0F*currentTailFlapSpeedMult;
+				case Small : return 0.8F*currentTailFlapSpeedMult;
+				case Medium : return 0.7F*currentTailFlapSpeedMult;
+				case Big : return 0.6F*currentTailFlapSpeedMult;
+				case Large : return 0.5F*currentTailFlapSpeedMult;
+				case Legendary : return 0.4F*currentTailFlapSpeedMult;
+				default: return 1.0F; 
+
+
+			}
 	}
+	
 	
 	@Override
 	public void onDeath(DamageSource par1DamageSource)
@@ -105,36 +119,51 @@ public class EntityPike extends EntityFantasticFish
 		
 	}
 	
-    @Override
-    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
-    {
-    	this.moveEntity(this.motionX, this.motionY, this.motionZ);
-    }
+
 
     @Override
 	public float GetRenderValueFromSize()
 	{
 		switch (GetFishSize())
 		{
-			case Tiny : return 0.10F;
-			case Small : return 0.30F;
-			case Medium : return 0.50F;
-			case Big : return 0.75F;
-			case Large : return 0.9F;
-			case Legendary : return 1.2F;
-			default: return 0.20F; 
+			case Tiny : return 0.15F;
+			case Small : return 0.40F;
+			case Medium : return 0.60F;
+			case Big : return 0.9F;
+			case Large : return 1.1F;
+			case Legendary : return 1.3F;
+			default: return 0.15F; 
 		}
 	}
     
-    /*@Override
-    public float GetRenderDropDownFromSide()
+    @Override
+    public double GetSpeedFromAIState(AIState aState)
     {
-		switch (GetFishSize())
-		{
-			case Legendary : return 0.2F;
-			default: return 0F; 
-		}   
-    }*/
+    	if (aState==AIState.StayStill)
+    	{
+    		return 1;
+    	}
+    	
+    	if (aState==AIState.Wander)
+    	{
+    		return 1;
+    	}
+
+    	if (aState==AIState.Fleeing)
+    	{
+    		return 6;
+    	}
+    	
+    	if (aState==AIState.Jump)
+    	{
+    		return 10;
+    	}
+    	
+    	//default
+    	return 1;
+    	
+    }
+    
 	
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
@@ -152,7 +181,6 @@ public class EntityPike extends EntityFantasticFish
 		
 	}
 	
-
 	public static int GetNumberOfTextures()
 	{
 		return 2;
@@ -171,7 +199,7 @@ public class EntityPike extends EntityFantasticFish
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
-		this.entityDropItem(new ItemStack(FantasticItems.rawPikeFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
+		this.entityDropItem(new ItemStack(FantasticItems.rawTroutFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
 	}
 
 	/**
@@ -225,7 +253,13 @@ public class EntityPike extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
+        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
+        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,2));
+        brain.AddActionToList(new FFAI_SwimWander(brain,this,2,40,7,1,4));
+        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 3,30,3));
+        //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
 
+        
 	}
 
 	    

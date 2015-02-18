@@ -22,29 +22,59 @@ public class FantasticEntities
 	{
 		int _id = 1;
 		
+
 		//Reinforced Fishing Hook
 		EntityRegistry.registerModEntity(EntityReinforcedFishingHook.class, Names.ReinforcedFishingRod_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
 		_id++;
 		
-		//Salmon
-		EntityRegistry.registerModEntity(EntitySalmon.class, Names.Salmon_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		//Basic Fish
+		EntityRegistry.registerModEntity(EntityBasicFish.class, Names.Colorfish_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
 		_id++;
 		
+		//Salmon
+		EntityRegistry.registerModEntity(EntitySalmon.class, Names.Salmon_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		//EntityRegistry.addSpawn(EntitySalmon.class, 6, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river,BiomeGenBase.coldTaigaHills,BiomeGenBase.extremeHills,BiomeGenBase.iceMountains,BiomeGenBase.megaTaigaHills,BiomeGenBase.taigaHills});
+		_id++;
+		
+		//Trout
+		EntityRegistry.registerModEntity(EntityTrout.class, Names.Trout_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		//EntityRegistry.addSpawn(EntitySalmon.class, 6, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river,BiomeGenBase.coldTaigaHills,BiomeGenBase.extremeHills,BiomeGenBase.iceMountains,BiomeGenBase.megaTaigaHills,BiomeGenBase.taigaHills});
+		_id++;
+
 		//Pike
 		EntityRegistry.registerModEntity(EntityPike.class, Names.Pike_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
 		_id++;
 		
-		//Basic Fish
-		EntityRegistry.registerModEntity(EntityBasicFish.class, "Trout", _id, FantasticMod.instance, 64, 3, true);
+		//Musky Fish
+		EntityRegistry.registerModEntity(EntityMusky.class, Names.Musky_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
 		_id++;
 		
-		//Basic Fish
-		EntityRegistry.registerModEntity(EntityCaveFish.class, Names.Cave_Fish_Name, _id, FantasticMod.instance, 64, 3, true);
+		//Catfish
+		EntityRegistry.registerModEntity(EntityCatfish.class, Names.Catfish_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		_id++;
+
+		//Tuna
+		EntityRegistry.registerModEntity(EntityTuna.class, Names.Tuna_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		_id++;
+		
+		//Fungus
+		EntityRegistry.registerModEntity(EntityFungus.class, Names.Fungus_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		_id++;
+
+		//Mossy
+		EntityRegistry.registerModEntity(EntityMossy.class, Names.Mossy_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		_id++;
+
+		//Feeder
+		EntityRegistry.registerModEntity(EntityFeeder.class, Names.Feeder_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
 		_id++;
 
 		
+		//EntityRegistry.addSpawn(EntityCatfish.class, 3, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.river, BiomeGenBase.roofedForest, BiomeGenBase.swampland});
+
+
+		
 		//EntityRegistry.registerGlobalEntityID(EntitySalmon.class, "Salmon", EntityRegistry.findGlobalUniqueEntityId(), 0xA3A3A3, 0xFF9999);
-		//EntityRegistry.addSpawn(EntitySalmon.class, 6, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river});
 
 		
 		

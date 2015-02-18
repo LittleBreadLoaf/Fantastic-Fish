@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fantastic.FantasticInfo;
-import fantastic.entities.AI.EntityAISwimStayStill;
 import fantastic.items.FantasticItems;
 
 public class EntityCaveFish extends EntityFantasticFish
@@ -196,8 +195,7 @@ public class EntityCaveFish extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-		//this.tasks.addTask(1, new EntityAISwimAwayFromPlayer(this, EntityPlayer.class, 5.0F, 1.0F,5 ));
-        this.tasks.addTask(0, new EntityAISwimStayStill(this));		
+
 	}
 
 	

@@ -32,8 +32,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
-import fantastic.entities.AI.EntityAISwimAwayFromPlayer;
-import fantastic.entities.AI.EntityAISwimStayStill;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
@@ -227,8 +225,7 @@ public class EntityNurseShark extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-		//this.tasks.addTask(1, new EntityAISwimAwayFromPlayer(this, EntityPlayer.class, 5.0F, 1.0F,5 ));
-        this.tasks.addTask(0, new EntityAISwimStayStill(this));		
+	
 	}
 
 	    

@@ -15,10 +15,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import fantastic.FantasticDebug;
+import fantastic.FantasticIds;
+import fantastic.entities.EntityBasicFish;
+import fantastic.entities.EntityCatfish;
 import fantastic.entities.EntityFantasticFish;
 import fantastic.entities.EntityFantasticFish.FishSize;
+import fantastic.entities.EntityFeeder;
+import fantastic.entities.EntityFungus;
+import fantastic.entities.EntityMossy;
+import fantastic.entities.EntityMusky;
 import fantastic.entities.EntityPike;
 import fantastic.entities.EntitySalmon;
+import fantastic.entities.EntityTrout;
+import fantastic.entities.EntityTuna;
 import fantastic.entities.AI.FishMovementHelper;
 
 public class SmartSpawnerControl 
@@ -39,8 +48,88 @@ public class SmartSpawnerControl
 	{
 		FantasticDebug.Output("SmartSpawnerControl.Init();");
 		//Set the spawn control parameters
-		AddClassControlItem(EntityPike.class,FishSize.Medium,1,5,500);
-		AddClassControlItem(EntitySquid.class,20,5,750);
+		
+		//ColorFish
+		AddClassControlItem(EntityBasicFish.class, FishSize.Tiny, FantasticIds.tinyColorFishMaxInstances, FantasticIds.tinyColorFishMinDepth, FantasticIds.tinyColorFishSpawnProbability);
+		AddClassControlItem(EntityBasicFish.class, FishSize.Small, FantasticIds.smallColorFishMaxInstances, FantasticIds.smallColorFishMinDepth, FantasticIds.smallColorFishSpawnProbability);
+		AddClassControlItem(EntityBasicFish.class, FishSize.Medium, FantasticIds.mediumColorFishMaxInstances, FantasticIds.mediumColorFishMinDepth, FantasticIds.mediumColorFishSpawnProbability);
+		AddClassControlItem(EntityBasicFish.class, FishSize.Big, FantasticIds.bigColorFishMaxInstances, FantasticIds.bigColorFishMinDepth, FantasticIds.bigColorFishSpawnProbability);
+		AddClassControlItem(EntityBasicFish.class, FishSize.Large, FantasticIds.largeColorFishMaxInstances, FantasticIds.largeColorFishMinDepth, FantasticIds.largeColorFishSpawnProbability);
+		AddClassControlItem(EntityBasicFish.class, FishSize.Legendary, FantasticIds.legColorFishMaxInstances, FantasticIds.legColorFishMinDepth, FantasticIds.legColorFishSpawnProbability);
+
+		//Salmon
+		AddClassControlItem(EntitySalmon.class, FishSize.Tiny, FantasticIds.tinySalmonMaxInstances, FantasticIds.tinySalmonMinDepth, FantasticIds.tinySalmonSpawnProbability);
+		AddClassControlItem(EntitySalmon.class, FishSize.Small, FantasticIds.smallSalmonMaxInstances, FantasticIds.smallSalmonMinDepth, FantasticIds.smallSalmonSpawnProbability);
+		AddClassControlItem(EntitySalmon.class, FishSize.Medium, FantasticIds.mediumSalmonMaxInstances, FantasticIds.mediumSalmonMinDepth, FantasticIds.mediumSalmonSpawnProbability);
+		AddClassControlItem(EntitySalmon.class, FishSize.Big, FantasticIds.bigSalmonMaxInstances, FantasticIds.bigSalmonMinDepth, FantasticIds.bigSalmonSpawnProbability);
+		AddClassControlItem(EntitySalmon.class, FishSize.Large, FantasticIds.largeSalmonMaxInstances, FantasticIds.largeSalmonMinDepth, FantasticIds.largeSalmonSpawnProbability);
+		AddClassControlItem(EntitySalmon.class, FishSize.Legendary, FantasticIds.legSalmonMaxInstances, FantasticIds.legSalmonMinDepth, FantasticIds.legSalmonSpawnProbability);
+		
+		//Trout
+		AddClassControlItem(EntityTrout.class, FishSize.Tiny, FantasticIds.tinyTroutMaxInstances, FantasticIds.tinyTroutMinDepth, FantasticIds.tinyTroutSpawnProbability);
+		AddClassControlItem(EntityTrout.class, FishSize.Small, FantasticIds.smallTroutMaxInstances, FantasticIds.smallTroutMinDepth, FantasticIds.smallTroutSpawnProbability);
+		AddClassControlItem(EntityTrout.class, FishSize.Medium, FantasticIds.mediumTroutMaxInstances, FantasticIds.mediumTroutMinDepth, FantasticIds.mediumTroutSpawnProbability);
+		AddClassControlItem(EntityTrout.class, FishSize.Big, FantasticIds.bigTroutMaxInstances, FantasticIds.bigTroutMinDepth, FantasticIds.bigTroutSpawnProbability);
+		AddClassControlItem(EntityTrout.class, FishSize.Large, FantasticIds.largeTroutMaxInstances, FantasticIds.largeTroutMinDepth, FantasticIds.largeTroutSpawnProbability);
+		AddClassControlItem(EntityTrout.class, FishSize.Legendary, FantasticIds.legTroutMaxInstances, FantasticIds.legTroutMinDepth, FantasticIds.legTroutSpawnProbability);
+
+		//Pike
+		AddClassControlItem(EntityPike.class, FishSize.Tiny, FantasticIds.tinyPikeMaxInstances, FantasticIds.tinyPikeMinDepth, FantasticIds.tinyPikeSpawnProbability);
+		AddClassControlItem(EntityPike.class, FishSize.Small, FantasticIds.smallPikeMaxInstances, FantasticIds.smallPikeMinDepth, FantasticIds.smallPikeSpawnProbability);
+		AddClassControlItem(EntityPike.class, FishSize.Medium, FantasticIds.mediumPikeMaxInstances, FantasticIds.mediumPikeMinDepth, FantasticIds.mediumPikeSpawnProbability);
+		AddClassControlItem(EntityPike.class, FishSize.Big, FantasticIds.bigPikeMaxInstances, FantasticIds.bigPikeMinDepth, FantasticIds.bigPikeSpawnProbability);
+		AddClassControlItem(EntityPike.class, FishSize.Large, FantasticIds.largePikeMaxInstances, FantasticIds.largePikeMinDepth, FantasticIds.largePikeSpawnProbability);
+		AddClassControlItem(EntityPike.class, FishSize.Legendary, FantasticIds.legPikeMaxInstances, FantasticIds.legPikeMinDepth, FantasticIds.legPikeSpawnProbability);
+
+		//Musky
+		AddClassControlItem(EntityMusky.class, FishSize.Tiny, FantasticIds.tinyMuskyMaxInstances, FantasticIds.tinyMuskyMinDepth, FantasticIds.tinyMuskySpawnProbability);
+		AddClassControlItem(EntityMusky.class, FishSize.Small, FantasticIds.smallMuskyMaxInstances, FantasticIds.smallMuskyMinDepth, FantasticIds.smallMuskySpawnProbability);
+		AddClassControlItem(EntityMusky.class, FishSize.Medium, FantasticIds.mediumMuskyMaxInstances, FantasticIds.mediumMuskyMinDepth, FantasticIds.mediumMuskySpawnProbability);
+		AddClassControlItem(EntityMusky.class, FishSize.Big, FantasticIds.bigMuskyMaxInstances, FantasticIds.bigMuskyMinDepth, FantasticIds.bigMuskySpawnProbability);
+		AddClassControlItem(EntityMusky.class, FishSize.Large, FantasticIds.largeMuskyMaxInstances, FantasticIds.largeMuskyMinDepth, FantasticIds.largeMuskySpawnProbability);
+		AddClassControlItem(EntityMusky.class, FishSize.Legendary, FantasticIds.legMuskyMaxInstances, FantasticIds.legMuskyMinDepth, FantasticIds.legMuskySpawnProbability);
+		
+		//Catfish
+		AddClassControlItem(EntityCatfish.class, FishSize.Tiny, FantasticIds.tinyCatfishMaxInstances, FantasticIds.tinyCatfishMinDepth, FantasticIds.tinyCatfishSpawnProbability);
+		AddClassControlItem(EntityCatfish.class, FishSize.Small, FantasticIds.smallCatfishMaxInstances, FantasticIds.smallCatfishMinDepth, FantasticIds.smallCatfishSpawnProbability);
+		AddClassControlItem(EntityCatfish.class, FishSize.Medium, FantasticIds.mediumCatfishMaxInstances, FantasticIds.mediumCatfishMinDepth, FantasticIds.mediumCatfishSpawnProbability);
+		AddClassControlItem(EntityCatfish.class, FishSize.Big, FantasticIds.bigCatfishMaxInstances, FantasticIds.bigCatfishMinDepth, FantasticIds.bigCatfishSpawnProbability);
+		AddClassControlItem(EntityCatfish.class, FishSize.Large, FantasticIds.largeCatfishMaxInstances, FantasticIds.largeCatfishMinDepth, FantasticIds.largeCatfishSpawnProbability);
+		AddClassControlItem(EntityCatfish.class, FishSize.Legendary, FantasticIds.legCatfishMaxInstances, FantasticIds.legCatfishMinDepth, FantasticIds.legCatfishSpawnProbability);
+		
+		//Tuna
+		AddClassControlItem(EntityTuna.class, FishSize.Tiny, FantasticIds.tinyTunaMaxInstances, FantasticIds.tinyTunaMinDepth, FantasticIds.tinyTunaSpawnProbability);
+		AddClassControlItem(EntityTuna.class, FishSize.Small, FantasticIds.smallTunaMaxInstances, FantasticIds.smallTunaMinDepth, FantasticIds.smallTunaSpawnProbability);
+		AddClassControlItem(EntityTuna.class, FishSize.Medium, FantasticIds.mediumTunaMaxInstances, FantasticIds.mediumTunaMinDepth, FantasticIds.mediumTunaSpawnProbability);
+		AddClassControlItem(EntityTuna.class, FishSize.Big, FantasticIds.bigTunaMaxInstances, FantasticIds.bigTunaMinDepth, FantasticIds.bigTunaSpawnProbability);
+		AddClassControlItem(EntityTuna.class, FishSize.Large, FantasticIds.largeTunaMaxInstances, FantasticIds.largeTunaMinDepth, FantasticIds.largeTunaSpawnProbability);
+		AddClassControlItem(EntityTuna.class, FishSize.Legendary, FantasticIds.legTunaMaxInstances, FantasticIds.legTunaMinDepth, FantasticIds.legTunaSpawnProbability);
+
+		//Fungus
+		AddClassControlItem(EntityFungus.class, FishSize.Tiny, FantasticIds.tinyFungusMaxInstances, FantasticIds.tinyFungusMinDepth, FantasticIds.tinyFungusSpawnProbability);
+		AddClassControlItem(EntityFungus.class, FishSize.Small, FantasticIds.smallFungusMaxInstances, FantasticIds.smallFungusMinDepth, FantasticIds.smallFungusSpawnProbability);
+		AddClassControlItem(EntityFungus.class, FishSize.Medium, FantasticIds.mediumFungusMaxInstances, FantasticIds.mediumFungusMinDepth, FantasticIds.mediumFungusSpawnProbability);
+		AddClassControlItem(EntityFungus.class, FishSize.Big, FantasticIds.bigFungusMaxInstances, FantasticIds.bigFungusMinDepth, FantasticIds.bigFungusSpawnProbability);
+		AddClassControlItem(EntityFungus.class, FishSize.Large, FantasticIds.largeFungusMaxInstances, FantasticIds.largeFungusMinDepth, FantasticIds.largeFungusSpawnProbability);
+		AddClassControlItem(EntityFungus.class, FishSize.Legendary, FantasticIds.legFungusMaxInstances, FantasticIds.legFungusMinDepth, FantasticIds.legFungusSpawnProbability);
+
+		//Mossy
+		AddClassControlItem(EntityMossy.class, FishSize.Tiny, FantasticIds.tinyMossyMaxInstances, FantasticIds.tinyMossyMinDepth, FantasticIds.tinyMossySpawnProbability);
+		AddClassControlItem(EntityMossy.class, FishSize.Small, FantasticIds.smallMossyMaxInstances, FantasticIds.smallMossyMinDepth, FantasticIds.smallMossySpawnProbability);
+		AddClassControlItem(EntityMossy.class, FishSize.Medium, FantasticIds.mediumMossyMaxInstances, FantasticIds.mediumMossyMinDepth, FantasticIds.mediumMossySpawnProbability);
+		AddClassControlItem(EntityMossy.class, FishSize.Big, FantasticIds.bigMossyMaxInstances, FantasticIds.bigMossyMinDepth, FantasticIds.bigMossySpawnProbability);
+		AddClassControlItem(EntityMossy.class, FishSize.Large, FantasticIds.largeMossyMaxInstances, FantasticIds.largeMossyMinDepth, FantasticIds.largeMossySpawnProbability);
+		AddClassControlItem(EntityMossy.class, FishSize.Legendary, FantasticIds.legMossyMaxInstances, FantasticIds.legMossyMinDepth, FantasticIds.legMossySpawnProbability);
+
+		//Feeder
+		AddClassControlItem(EntityFeeder.class, FishSize.Tiny, FantasticIds.tinyFeederMaxInstances, FantasticIds.tinyFeederMinDepth, FantasticIds.tinyFeederSpawnProbability);
+		AddClassControlItem(EntityFeeder.class, FishSize.Small, FantasticIds.smallFeederMaxInstances, FantasticIds.smallFeederMinDepth, FantasticIds.smallFeederSpawnProbability);
+		AddClassControlItem(EntityFeeder.class, FishSize.Medium, FantasticIds.mediumFeederMaxInstances, FantasticIds.mediumFeederMinDepth, FantasticIds.mediumFeederSpawnProbability);
+		AddClassControlItem(EntityFeeder.class, FishSize.Big, FantasticIds.bigFeederMaxInstances, FantasticIds.bigFeederMinDepth, FantasticIds.bigFeederSpawnProbability);
+		AddClassControlItem(EntityFeeder.class, FishSize.Large, FantasticIds.largeFeederMaxInstances, FantasticIds.largeFeederMinDepth, FantasticIds.largeFeederSpawnProbability);
+		AddClassControlItem(EntityFeeder.class, FishSize.Legendary, FantasticIds.legFeederMaxInstances, FantasticIds.legFeederMinDepth, FantasticIds.legFeederSpawnProbability);
+
+
 
 	}
 

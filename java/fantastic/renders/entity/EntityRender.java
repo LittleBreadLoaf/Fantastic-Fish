@@ -17,6 +17,7 @@ import fantastic.entities.EntityFungus;
 import fantastic.entities.EntityLobster;
 import fantastic.entities.EntityMantaRay;
 import fantastic.entities.EntityMossy;
+import fantastic.entities.EntityMusky;
 import fantastic.entities.EntityNurseShark;
 import fantastic.entities.EntityPatrick;
 import fantastic.entities.EntityPike;
@@ -26,6 +27,7 @@ import fantastic.entities.EntitySalmon;
 import fantastic.entities.EntitySandStriker;
 import fantastic.entities.EntitySmallCrab;
 import fantastic.entities.EntityStarfish;
+import fantastic.entities.EntityTrout;
 import fantastic.entities.EntityTuna;
 import fantastic.entities.sharks.EntityBasicShark;
 import fantastic.entities.sharks.EntityBullShark;
@@ -76,6 +78,8 @@ public class EntityRender
 		RenderingRegistry.registerEntityRenderingHandler(EntityTigerShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHammerHead.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, new RenderPike(new ModelPike(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMusky.class, new RenderMusky(new ModelPike(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTrout.class, new RenderTrout(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityReinforcedFishingHook.class, new RenderFish());
 		
 

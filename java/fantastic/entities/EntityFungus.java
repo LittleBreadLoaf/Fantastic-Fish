@@ -7,7 +7,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import fantastic.FantasticInfo;
-import fantastic.entities.AI.EntityAISwimStayStill;
 import fantastic.items.FantasticItems;
 
 public class EntityFungus extends EntityFantasticFish
@@ -194,8 +193,7 @@ public class EntityFungus extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-		//this.tasks.addTask(1, new EntityAISwimAwayFromPlayer(this, EntityPlayer.class, 5.0F, 1.0F,5 ));
-        this.tasks.addTask(0, new EntityAISwimStayStill(this));		
+
 	}
 
 	    

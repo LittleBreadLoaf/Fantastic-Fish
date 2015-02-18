@@ -2,7 +2,9 @@ package fantastic.entities.AI;
 
 import java.util.Random;
 
+import scala.Int;
 import fantastic.FantasticDebug;
+import fantastic.entities.EntityFantasticFish;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
@@ -75,11 +77,27 @@ public static void SwimStill(EntityWaterMob aWaterMob)
         if (!aWaterMob.worldObj.isRemote)
         {
 			aWaterMob.setVelocity(0D, 0D, 0D);
-        	/*FantasticDebug.Output("SWIMMING STILL");
-        	aWaterMob.motionX = 0D;
-			aWaterMob.motionZ = 0D;
-			aWaterMob.motionY = 0D;*/
+
         }
+		
+	}
+}
+
+
+public static void AddToRotationDegree(EntityWaterMob aWaterMob,float degreesAdded)
+{
+	
+
+	if ((!aWaterMob.isDead) && (aWaterMob!=null))
+	{
+		FantasticDebug.Output("ROTATING "+Float.toString(degreesAdded),true);
+		//if (!aWaterMob.worldObj.isRemote)
+        //{
+			//aWaterMob.setVelocity(0D, 0D, 0D);
+        	aWaterMob.rotationYaw += degreesAdded;
+    		
+
+        //}
 		
 	}
 }
@@ -97,10 +115,103 @@ public static void FleeOtherEntity(EntityWaterMob aWaterMob, Entity aScaryEntity
 		
 		if (_fleeingCoor!=null)
 		{
-			FantasticDebug.Output("ESCAPING at x:"+Double.toString(_fleeingCoor.xCoord)+" y:"+Double.toString(_fleeingCoor.yCoord)+" z:"+Double.toString(_fleeingCoor.zCoord));
-			approachTarget(aWaterMob,_fleeingCoor.xCoord,_fleeingCoor.yCoord,_fleeingCoor.zCoord, speed);
+			FantasticDebug.Output("ESCAPING at x:"+Double.toString(_fleeingCoor.xCoord)+" y:"+Double.toString(_fleeingCoor.yCoord)+" z:"+Double.toString(_fleeingCoor.zCoord),true);
+			SwimTo((EntityFantasticFish)aWaterMob,_fleeingCoor.xCoord,_fleeingCoor.yCoord,_fleeingCoor.zCoord, speed);
+
 		}
 	}
+}
+
+public static Vec3 GetFleeingCoordinate(EntityWaterMob aWaterMob, Entity aScaryEntity, int xzFleeZoneSize, int yFleeZoneSize)
+{
+	
+	if ((!aWaterMob.isDead) && (aWaterMob!=null) && (!aScaryEntity.isDead) && (aScaryEntity!=null))
+	{
+		double scaryXPos = aScaryEntity.posX;
+		double scaryYPos = aScaryEntity.posY;
+		double scaryZPos = aScaryEntity.posZ;
+		Vec3 scaryVectorPos = Vec3.createVectorHelper(scaryXPos,scaryYPos,scaryZPos);
+		Vec3 _fleeingCoor = findRandomTargetBlockAwayFrom(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos);
+		
+		if (_fleeingCoor==null)
+		{
+			//if not path was found away from the player, the fish may be cornered. A new set off coordinate will be tried close to the player
+			_fleeingCoor = findRandomTargetBlockTowards(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos);
+		}
+		
+		return _fleeingCoor;
+
+	}
+	return null;
+
+}
+
+public static Vec3 findRandomTarget(EntityCreature p_75463_0_, int p_75463_1_, int p_75463_2_)
+{
+
+    return findRandomTargetBlock(p_75463_0_, p_75463_1_, p_75463_2_, (Vec3)null);
+}
+
+public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone, int anAscendRate)
+{
+    Random random = aWaterMob.getRNG();
+    Vec3 _block = findRandomTargetBlock(aWaterMob, aXZZone,1, (Vec3)null);
+    int _ascendValue = random.nextInt(anAscendRate)+1;
+
+    if (_block!=null)
+    {
+    	for (int _i=_ascendValue;_i>=0;_i--)
+    	{
+    		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord+_i, (int)_block.zCoord) == Blocks.water)
+    		{
+    			FantasticDebug.Output("ACSCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord+_i)+" z:"+Double.toString(_block.zCoord),true);
+    			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord+_i, _block.zCoord);
+    		}
+    	}
+    }
+    
+	if (_block!=null)
+	{
+		FantasticDebug.Output("NO ASCENSSION x:"+Double.toString(_block.xCoord)+" y:"+Double.toString(_block.yCoord)+" z:"+Double.toString(_block.zCoord),true);
+	}
+    return _block;
+}
+
+public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone, int aDescendRate)
+{
+    Random random = aWaterMob.getRNG();
+    Vec3 _block = findRandomTargetBlock(aWaterMob, aXZZone,1, (Vec3)null);
+    int _descendValue = random.nextInt(aDescendRate)+1;
+
+    if (_block!=null)
+    {
+    	for (int _i=_descendValue;_i>=0;_i--)
+    	{
+    		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord-_i, (int)_block.zCoord) == Blocks.water)
+    		{
+    			FantasticDebug.Output("DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord-_i)+" z:"+Double.toString(_block.zCoord),true);
+    			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord-_i, _block.zCoord);
+    		}
+    	}
+    }
+    
+	if (_block!=null)
+	{
+		FantasticDebug.Output("NO DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Double.toString(_block.yCoord)+" z:"+Double.toString(_block.zCoord),true);
+	}
+    return _block;
+}
+
+
+
+/**
+ * finds a random target within par1(x,z) and par2 (y) blocks in the direction of the point par3
+ */
+public static Vec3 findRandomTargetBlockTowards(EntityCreature aWaterMob, int xzFleeZoneSize, int yFleeZoneSize, Vec3 aTargetVectorPos)
+{
+
+    Vec3 _fleeingVector = Vec3.createVectorHelper(aTargetVectorPos.xCoord - aWaterMob.posX,aTargetVectorPos.yCoord - aWaterMob.posY,aTargetVectorPos.zCoord - aWaterMob.posZ);
+    return findRandomTargetBlock(aWaterMob, xzFleeZoneSize, yFleeZoneSize,_fleeingVector);
 }
 
 
@@ -134,7 +245,7 @@ private static Vec3 findRandomTargetBlock(EntityCreature p_75462_0_, int p_75462
        flag1 = false;
    }
 
-   for (int l1 = 0; l1 < 10; ++l1)
+   for (int l1 = 0; l1 < 20; ++l1)
    {
        int j1 = random.nextInt(2 * p_75462_1_) - p_75462_1_;
        int i2 = random.nextInt(2 * p_75462_2_) - p_75462_2_;
@@ -170,15 +281,18 @@ private static Vec3 findRandomTargetBlock(EntityCreature p_75462_0_, int p_75462
    }
    else
    {
-       return null;
+       FantasticDebug.Output("PATH NOT FOUND");
+	   return null;
    }
 }
 
 
 
 
+
+
 //Math converted to use more accurate and readable Vec3's
-public static void approachTarget(EntityWaterMob aWaterMob, double xCoor, double yCoor, double zCoor, int speed) 
+/*public static void approachTarget(EntityWaterMob aWaterMob, double xCoor, double yCoor, double zCoor, int speed) 
 {
 	if ((!aWaterMob.isDead) && (aWaterMob!=null))
 	{
@@ -192,11 +306,102 @@ public static void approachTarget(EntityWaterMob aWaterMob, double xCoor, double
 		aWaterMob.rotationYaw += f1;
 		aWaterMob.motionY += 0.0160829F;
 	}
+}*/
+
+
+//Math converted to use more accurate and readable Vec3's
+public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yCoor, double zCoor, double speed) 
+{
+
+	if ((aWaterMob!=null) && (aWaterMob.isEntityAlive()))
+	{
+		if (!aWaterMob.worldObj.isRemote)
+		{
+	
+			//Distance to target
+			double distX = Math.abs(xCoor - aWaterMob.posX);
+			double distY = Math.abs(yCoor - aWaterMob.posY);
+			double distZ = Math.abs(zCoor - aWaterMob.posZ);
+			double speedAdjustment;
+		
+	
+			if ((distX<=0.5) && (distY<=0.5) && (distZ<=0.5))
+			{
+				//Stay still
+				aWaterMob.SetCurrentTailFlapSpeedMult(3.0F);
+				aWaterMob.setVelocity(0, 0, 0);
+			}
+			else
+			{	
+				//Create vector
+				Vec3 vec3 = Vec3.createVectorHelper(xCoor - aWaterMob.posX, yCoor - aWaterMob.posY, zCoor - aWaterMob.posZ).normalize();
+				
+				//Get approaching speed
+				speedAdjustment = ProvideApproachingSpeed(distX, distY, distZ);			
+				
+				//Set motion and angles
+				aWaterMob.motionX = (vec3.xCoord * speed)*speedAdjustment;
+				aWaterMob.motionY = (vec3.yCoord * speed)*speedAdjustment;
+				aWaterMob.motionZ = (vec3.zCoord * speed)*speedAdjustment;
+				
+				float f = (float) (Math.atan2(aWaterMob.motionZ, aWaterMob.motionX) * 180.0D / Math.PI) - 90.0F;
+				float f1 = MathHelper.wrapAngleTo180_float(f - aWaterMob.rotationYaw);
+				aWaterMob.rotationYaw += f1;
+				//aWaterMob.renderYawOffset += (-((float)Math.atan2(aWaterMob.motionX, aWaterMob.motionZ)) * 180.0F / (float)Math.PI - aWaterMob.renderYawOffset) * 0.1F;
+				//aWaterMob.rotationYaw = aWaterMob.renderYawOffset;
+				
+				//Pitch not rendered yet
+				//double f = MathHelper.sqrt_double(aWaterMob.motionX * aWaterMob.motionX + aWaterMob.motionZ * aWaterMob.motionZ);
+				//aWaterMob.rotationPitch += (-((float)Math.atan2((double)f, aWaterMob.motionY)) * 180.0F / (float)Math.PI - aWaterMob.rotationPitch) * 0.1F;
+	
+			}
+		}
+	}
+}
+
+private static double ProvideApproachingSpeed(double aDistX, double aDistY, double aDistZ)
+{
+	if ((aDistX<=1) && (aDistY<=1) && (aDistZ<=1))
+	{
+		return 0.025;
+	}
+	
+	if ((aDistX<=2) && (aDistY<=2) && (aDistZ<=2))
+	{
+		return 0.05D;
+	}
+	
+	//Default
+	return 0.1D;
+}
+
+public static Vec3 GetSurfaveAirBlock(World aWorld,Vec3 aCoor)
+{
+	double _y=aCoor.yCoord+1;
+	Block _watchedBlock=null;
+	
+	while (true)
+	{
+		_watchedBlock=aWorld.getBlock((int)aCoor.xCoord, (int)_y, (int)aCoor.zCoord);
+		if (_watchedBlock == Blocks.water)
+		{
+			_y++;
+		}
+		else if (_watchedBlock == Blocks.air)
+		{
+			FantasticDebug.Output("Air found at "+Double.toString(_y));
+			return Vec3.createVectorHelper(aCoor.xCoord,_y, aCoor.zCoord);
+		}
+		else
+		{
+			FantasticDebug.Output("Did not found air at "+Double.toString(_y)+" Block: "+_watchedBlock.getClass().toString());
+			return null;
+		}
+	}
+
 }
 
 
-	
-	
 	
 	
 	

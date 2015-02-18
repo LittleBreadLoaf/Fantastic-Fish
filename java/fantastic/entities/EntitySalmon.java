@@ -30,10 +30,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
+import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
-import fantastic.entities.AI.EntityAISwimAwayFromPlayer;
-import fantastic.entities.AI.EntityAISwimStayStill;
+import fantastic.entities.AI.EntityFFAI.AIState;
+import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
+import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
+import fantastic.entities.AI.FFAI_SwimJumpForFlies;
+import fantastic.entities.AI.FFAI_SwimStayStill;
+import fantastic.entities.AI.FFAI_SwimWander;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
@@ -67,6 +72,7 @@ public class EntitySalmon extends EntityFantasticFish
 		SetIsOutOfWater(isOutOfWater);
 		this.ignoreFrustumCheck = true;
 		SetHasNotSpawned(false);
+		this.setSize(1.0F, 1.0F);
 	}
 	
 	//This property tells if the class has different size of fish for the same class. By default, it return false. 
@@ -80,18 +86,24 @@ public class EntitySalmon extends EntityFantasticFish
 	@Override
 	public float GetTailFlapSpeed()
 	{
+		
+
 		//return 0.5F;
-		switch (GetFishSize())
-		{
-			case Tiny : return 1.0F;
-			case Small : return 0.8F;
-			case Medium : return 0.7F;
-			case Big : return 0.6F;
-			case Large : return 0.5F;
-			case Legendary : return 0.4F;
-			default: return 1.0F; 
-		}	
+			switch (GetFishSize())
+			{
+				
+				case Tiny : return 1.0F*currentTailFlapSpeedMult;
+				case Small : return 0.8F*currentTailFlapSpeedMult;
+				case Medium : return 0.7F*currentTailFlapSpeedMult;
+				case Big : return 0.6F*currentTailFlapSpeedMult;
+				case Large : return 0.5F*currentTailFlapSpeedMult;
+				case Legendary : return 0.4F*currentTailFlapSpeedMult;
+				default: return 1.0F; 
+
+
+			}
 	}
+	
 	
 	@Override
 	public void onDeath(DamageSource par1DamageSource)
@@ -107,36 +119,51 @@ public class EntitySalmon extends EntityFantasticFish
 		
 	}
 	
-    @Override
-    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
-    {
-    	this.moveEntity(this.motionX, this.motionY, this.motionZ);
-    }
+
 
     @Override
 	public float GetRenderValueFromSize()
 	{
 		switch (GetFishSize())
 		{
-			case Tiny : return 0.20F;
-			case Small : return 0.50F;
-			case Medium : return 0.75F;
-			case Big : return 1F;
+			case Tiny : return 0.15F;
+			case Small : return 0.40F;
+			case Medium : return 0.60F;
+			case Big : return 0.9F;
 			case Large : return 1.1F;
-			case Legendary : return 1.4F;
-			default: return 0.20F; 
+			case Legendary : return 1.3F;
+			default: return 0.15F; 
 		}
 	}
     
-    /*@Override
-    public float GetRenderDropDownFromSide()
+    @Override
+    public double GetSpeedFromAIState(AIState aState)
     {
-		switch (GetFishSize())
-		{
-			case Legendary : return 0.2F;
-			default: return 0F; 
-		}   
-    }*/
+    	if (aState==AIState.StayStill)
+    	{
+    		return 1;
+    	}
+    	
+    	if (aState==AIState.Wander)
+    	{
+    		return 1;
+    	}
+
+    	if (aState==AIState.Fleeing)
+    	{
+    		return 6;
+    	}
+    	
+    	if (aState==AIState.Jump)
+    	{
+    		return 10;
+    	}
+    	
+    	//default
+    	return 1;
+    	
+    }
+    
 	
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
@@ -226,8 +253,13 @@ public class EntitySalmon extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-		//this.tasks.addTask(1, new EntityAISwimAwayFromPlayer(this, EntityPlayer.class, 5.0F, 1.0F,5 ));
-        this.tasks.addTask(0, new EntityAISwimStayStill(this));		
+        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
+        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,2));
+        brain.AddActionToList(new FFAI_SwimWander(brain,this,2,40,7,1,4));
+        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 3,70,3));
+        //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
+
+        
 	}
 
 	    

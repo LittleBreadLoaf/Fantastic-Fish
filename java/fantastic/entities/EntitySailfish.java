@@ -7,7 +7,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import fantastic.FantasticInfo;
-import fantastic.entities.AI.EntityAISwimStayStill;
 import fantastic.items.FantasticItems;
 
 public class EntitySailfish extends EntityFantasticFish
@@ -42,7 +41,7 @@ public class EntitySailfish extends EntityFantasticFish
 	}
 	
 	//This property tells if the class has different size of fish for the same class. By default, it return false. 
-	//Override that methof if the class has multiple size.
+	//Override that method if the class has multiple size.
 	@Override
 	public boolean GetHasDifferentSize()
 	{
@@ -194,8 +193,7 @@ public class EntitySailfish extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-		//this.tasks.addTask(1, new EntityAISwimAwayFromPlayer(this, EntityPlayer.class, 5.0F, 1.0F,5 ));
-        this.tasks.addTask(0, new EntityAISwimStayStill(this));		
+	
 	}
 
 	    

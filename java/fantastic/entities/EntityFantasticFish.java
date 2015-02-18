@@ -6,8 +6,10 @@ import sun.security.action.GetIntegerAction;
 import cpw.mods.fml.common.FMLCommonHandler;
 import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
-import fantastic.entities.AI.AIRegistry;
+import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FishMovementHelper;
+import fantastic.entities.AI.EntityFFAI.AIState;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.projectile.EntityFishHook;
@@ -18,6 +20,7 @@ public class EntityFantasticFish extends EntityWaterMob
 {
 	public static enum FishSize { Null,Tiny,Small,Medium,Big,Large,Legendary, OneSize};
 
+
 	private static int DATAWATCHER_OUT_OF_WATER = 17;
 	private static int DATAWATCHER_TEXTURE = 19;
 	private static int DATAWATCHER_FISH_SIZE = 21;
@@ -26,18 +29,22 @@ public class EntityFantasticFish extends EntityWaterMob
 	private static String DATAWATCHER_FISH_SIZE_STRING = "FishSize";
 	private static String DATAWATCHER_HAS_NOT_SPAWNED_STRING = "HasNotSpawned";
 
-	public AIRegistry aiRegistry;
+
+	public EntityFFAI brain;
 	public int currentSpeed=1;
 	public FishSize currentSize = FishSize.Null;
 	
 	private boolean hasNotSpawned = true;
+	
+	protected float currentTailFlapSpeedMult = 1.0F;
+
 	
 
 	//CONSTRUCTOR
 	public EntityFantasticFish(World aWorld) 
 	{
 		super(aWorld);
-		aiRegistry=new AIRegistry();
+		brain=new EntityFFAI(this,10000,15000,22500,4000,9500,14000);
 	}
 
 	public void InitializeFish(FishSize aSize, int aTextureIndex, int isOutOfWater)
@@ -160,6 +167,8 @@ public class EntityFantasticFish extends EntityWaterMob
 		return _size;
 	}
 	
+	
+
 	public static void SpawnFromItemDamage(World aWorld, FishSize aSize, int isOutOfWater, double posX, double posY, double posZ, int anItemDamage)
 	{
 		switch (anItemDamage)
@@ -180,6 +189,10 @@ public class EntityFantasticFish extends EntityWaterMob
 			case 13 : SpawnSizedFish(aWorld,EntityFungus.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 			case 14 : SpawnSizedFish(aWorld,EntityPike.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 			case 15 : SpawnSizedFish(aWorld,EntityPike.class,2, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 16 : SpawnSizedFish(aWorld,EntityMusky.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 17 : SpawnSizedFish(aWorld,EntityTrout.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 18 : SpawnSizedFish(aWorld,EntityTrout.class,2, aSize,isOutOfWater,posX,posY,posZ);break;
+
 			default : SpawnSizedFish(aWorld,EntityBasicFish.class,1, aSize,isOutOfWater,posX,posY,posZ);break; //on a bug, a basic fish will be returned
 			
 		}	
@@ -232,6 +245,30 @@ public class EntityFantasticFish extends EntityWaterMob
 				this.dataWatcher.updateObject(DATAWATCHER_FISH_SIZE, GetDataWatcherIntValueForSize(aFishSize));
 		}
 				
+	}
+	
+    
+	//Will disable gravity if the fish is in the water. Will enable gravity if the fish is out of the water.
+	@Override
+    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
+    {
+
+		if (this.isInWater())
+		{
+			this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		}
+		else
+		{
+			super.moveEntityWithHeading(p_70612_1_,p_70612_2_);
+		}
+
+    }
+	
+	
+	@Override
+	protected void updateAITasks()
+	{
+		brain.Tick();
 	}
 
 	
@@ -295,6 +332,21 @@ public class EntityFantasticFish extends EntityWaterMob
 		return 1.0F;
 	}
 	
+	public void SetCurrentTailFlapSpeedMult(float aMult)
+	{
+		currentTailFlapSpeedMult=aMult;
+	}
+	
+	public float GetCurrentTailFlapSpeedMuld()
+	{
+		return currentTailFlapSpeedMult;
+	}
+	
+    public double GetSpeedFromAIState(AIState aState)
+    {
+    	//default
+    	return 1;
+    }
 
 
 

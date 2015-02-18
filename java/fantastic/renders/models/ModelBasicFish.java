@@ -6,6 +6,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import fantastic.FantasticDebug;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityCaveFish;
 import fantastic.entities.EntityCreepedo;
@@ -370,7 +371,7 @@ public class ModelBasicFish extends ModelBase
 //}
 //  
 //  
-
+    //FantasticDebug.Output("TAIL SPEED "+Float.toString(_fish.GetTailFlapSpeed()),true);
     this.bodysection1.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F) );
     this.bodysection2.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/6)) );
     this.bodysection3.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/3)) );
