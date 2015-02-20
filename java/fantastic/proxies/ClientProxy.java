@@ -3,7 +3,6 @@ package fantastic.proxies;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderFish;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,8 +13,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
+import fantastic.blocks.decoration.TileSkeletonBlock;
 import fantastic.entities.EntityHarpoon;
-import fantastic.entities.EntityReinforcedFishingHook;
 import fantastic.events.FantasticKeyHandler;
 import fantastic.events.FantasticSounds;
 import fantastic.gui.GuiAirGauge;
@@ -31,6 +30,7 @@ import fantastic.renders.models.armor.ModelGoggles;
 import fantastic.renders.models.armor.ModelScubaTank;
 import fantastic.renders.models.armor.ModelSingleTank;
 import fantastic.renders.tiles.RenderAirCompressor;
+import fantastic.renders.tiles.RenderSkeletonBlock;
 import fantastic.tiles.TileAirCompressor;
 
 public class ClientProxy extends CommonProxy
@@ -135,6 +135,9 @@ public class ClientProxy extends CommonProxy
 	{
 		FantasticIds.airCompressorRenderingID = RenderingRegistry.getNextAvailableRenderId();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileAirCompressor.class, new RenderAirCompressor());
+		
+		FantasticIds.skeletonRenderingID = RenderingRegistry.getNextAvailableRenderId();
+		ClientRegistry.bindTileEntitySpecialRenderer(TileSkeletonBlock.class, new RenderSkeletonBlock());
 	}
 	
 	

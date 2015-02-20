@@ -38,12 +38,12 @@ import fantastic.items.FantasticItems;
 public class EntityBasicFish extends EntityFantasticFish
 {
 	//Textures
-	private static final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishgreen.png");
-	private static final ResourceLocation texture3 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishgrey.png");
-	private static final ResourceLocation texture4 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishred.png");
-	private static final ResourceLocation texture5 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishyellow.png");
+	private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishgreen.png");
+	private static final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishgrey.png");
+	private static final ResourceLocation texture3 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishred.png");
+	private static final ResourceLocation texture4 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishyellow.png");
 	private static final ResourceLocation texture6 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishpurple.png");
-	private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishblue.png");
+	private static final ResourceLocation texture5 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/fishblue.png");
 	
 	//CONSTRUCTOR
 	public EntityBasicFish(World aWorld)

@@ -309,7 +309,6 @@ public class BlockAquariumGlass extends Block
        
         return j1;
     }
-
     @Override
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides

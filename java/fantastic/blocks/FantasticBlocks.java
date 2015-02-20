@@ -16,6 +16,7 @@ import fantastic.blocks.bushcoral.BlockLeafyCoralCyan;
 import fantastic.blocks.bushcoral.BlockLeafyCoralRed;
 import fantastic.blocks.bushcoral.BlockSnakeCoralBlue;
 import fantastic.blocks.bushcoral.BlockSnakeCoralPink;
+import fantastic.blocks.decoration.BlockSkeleton;
 import fantastic.blocks.seaplant.BlockPlantKelp;
 import fantastic.blocks.seaplant.BlockPlantSeaweed;
 import fantastic.blocks.wholecoral.BlockBrainCoralNormal;
@@ -76,6 +77,8 @@ public class FantasticBlocks
     
     public static Block airComp;
     
+    public static Block skeleton;
+    
    // public static Block lobsterPot;
 	
 	public static void init() 
@@ -126,6 +129,7 @@ public class FantasticBlocks
     	
         airComp = new BlockAirCompressor(Material.iron).setBlockTextureName(FantasticInfo.ID + ":compressor_item");
     	
+        skeleton = new BlockSkeleton(Material.clay).setBlockTextureName("fantastic:skeleton_item");
        // lobsterPot = new BlockLobsterPot().setBlockTextureName(FantasticInfo.ID + ":compressor_item");
         /*
     	 * Register Blocks
@@ -170,6 +174,8 @@ public class FantasticBlocks
         GameRegistry.registerBlock(smokeBlock, "Smoke Rock");
         
         GameRegistry.registerBlock(airComp, "Air Compressor");
+        
+        GameRegistry.registerBlock(skeleton, "Skeleton Block");
         
         //GameRegistry.registerBlock(lobsterPot, "Lobster Pot");
 
