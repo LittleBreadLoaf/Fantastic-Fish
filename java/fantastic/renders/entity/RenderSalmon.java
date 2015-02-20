@@ -21,8 +21,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSalmon extends RenderLiving
 {
-	//private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/salmon.png");
-	//private static final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/salmon2.png");
 
 	protected ModelBasicFish model;
 
@@ -74,59 +72,21 @@ public class RenderSalmon extends RenderLiving
         GL11.glScalef(scale, scale, scale);
     }
 
-	
-	
-	
 	protected void func_82430_a(EntitySalmon par1, float par2, float par3, float par4)
     {		
 		float par6 = 0;
 		if (par1.worldObj.isAirBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ))
 		{
-			FantasticDebug.Output("JUMPING !!!!!!!!!!!!!",true);
-			//par6 = 0;
-			//par4 = -90F;
-		    GL11.glRotatef(90F, 1.0F, 0.0F, 0.0F);
+			FantasticDebug.Output("JUMPING !!!!!!!!!!!!!");
+		    GL11.glRotatef(180F, 1.0F, 1.0F, 0.0F);
 		}
-		else
-		{
-			//GL11.glRotatef(0.0F, 1.0F, 1.0F, 1.0F);
-			//par4 = 0;
-			//par6 = 0;
-		}
+		GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
+		super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
 
-
-	    //GL11.glRotatef(par4, 1.0F, 0.0F, 0.0F);
-		//GL11.glRotatef(par6, 0.0F, 0.0F, 1.0F);
-
-    /*if(par1.GetRenderValueFromSize() == 1.8F)
-    {
-        GL11.glTranslatef(0.0F, (float)(1.4F)*(-par1.GetRenderValueFromSize()), 0.0F);
     }
-    else if(par1.GetRenderValueFromSize() == 1.3F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(1.2F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else if(par1.GetRenderValueFromSize() == 1.0F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(1.0F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else if(par1.GetRenderValueFromSize() == 0.8F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(0.9F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else
-    {
-
-        GL11.glTranslatef(0.0F, (float)(-0.7F * par1.GetRenderValueFromSize()), 0.0F);
-    }*/
-    GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
-    super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
-
-}
 	
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
     {
         this.func_82430_a((EntitySalmon)par1EntityLivingBase, par2, par3, par4);
-        
     }
 }

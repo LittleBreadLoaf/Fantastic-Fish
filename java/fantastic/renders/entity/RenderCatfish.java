@@ -2,23 +2,25 @@ package fantastic.renders.entity;
 
 
 
+import org.lwjgl.opengl.GL11;
+
+import fantastic.FantasticDebug;
+import fantastic.FantasticInfo;
+import fantastic.entities.EntityBasicFish;
+import fantastic.entities.EntityCatfish;
+import fantastic.renders.models.ModelLongSnout;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-import fantastic.entities.EntityCatfish;
-import fantastic.renders.models.ModelLongSnout;
-
 public class RenderCatfish extends RenderLiving
 {
-	//private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/Catfish.png");
-	//private static final ResourceLocation texture2 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/Catfish2.png");
 
 	protected ModelLongSnout model;
 
@@ -52,7 +54,6 @@ public class RenderCatfish extends RenderLiving
 		return ((EntityCatfish)entity).GetTexture();
 
 	}
-
 	
 	/**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
@@ -70,56 +71,21 @@ public class RenderCatfish extends RenderLiving
         GL11.glScalef(scale, scale, scale);
     }
 
-	
-	
-	
 	protected void func_82430_a(EntityCatfish par1, float par2, float par3, float par4)
     {		
 		float par6 = 0;
-	//if (par1.getIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY - 1, (int)par1.posZ) != Blocks.water)
-	if (par1.GetIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ) != Blocks.water)
-    {
-    	
-        par4 = 90F + par1.rotationYaw;
-        par6 = 90F;
-    }
-    else
-    {
-    	par4 = 0;
-    	par6 = 0;
-    }
+		if (par1.worldObj.isAirBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ))
+		{
+			FantasticDebug.Output("JUMPING !!!!!!!!!!!!!");
+		    GL11.glRotatef(180F, 1.0F, 1.0F, 0.0F);
+		}
+		GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
+		super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
 
-    GL11.glRotatef(par6, 0.0F, 0.0F, 1.0F);
-    GL11.glRotatef(par4, 1.0F, 0.0F, 0.0F);
-    /*if(par1.GetRenderValueFromSize() == 1.8F)
-    {
-        GL11.glTranslatef(0.0F, (float)(1.4F)*(-par1.GetRenderValueFromSize()), 0.0F);
     }
-    else if(par1.GetRenderValueFromSize() == 1.3F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(1.2F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else if(par1.GetRenderValueFromSize() == 1.0F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(1.0F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else if(par1.GetRenderValueFromSize() == 0.8F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(0.9F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else
-    {
-
-        GL11.glTranslatef(0.0F, (float)(-0.7F * par1.GetRenderValueFromSize()), 0.0F);
-    }*/
-    GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
-    super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
-
-}
 	
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
     {
         this.func_82430_a((EntityCatfish)par1EntityLivingBase, par2, par3, par4);
-        
     }
 }

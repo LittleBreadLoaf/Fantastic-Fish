@@ -47,7 +47,7 @@ public class DecideMessage implements IMessage
 			 if(message.id == 0)
 			 {
 				 if(player instanceof EntityPlayerMP)
-					 FantasticMod.network.sendTo(new MoveMessage(0.2F), (EntityPlayerMP)player);
+					 FantasticNetwork.network.sendTo(new MoveMessage(0.2F), (EntityPlayerMP)player);
 			 }
 			 
 			return null;

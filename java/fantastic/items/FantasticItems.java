@@ -60,6 +60,7 @@ public class FantasticItems
 	public static Item crableg;
 	public static Item cookedcrableg;
 	public static Item smallCrab;
+	public static Item hermitCrab;
 	public static Item squid;
 	public static Item swordfishSword;
 	public static Item creeperFish;
@@ -78,7 +79,10 @@ public class FantasticItems
 	public static Item cookedSalmonFillet;
 	public static Item rawTroutFillet;
 	public static Item cookedTroutFillet;
+	public static Item rawCatfishFillet;
+	public static Item cookedCatfishFillet;
 
+	
 	public static Item rawPikeFillet;
 	public static Item cookedPikeFillet;	
 	public static Item rawMuskyFillet;
@@ -146,6 +150,7 @@ public class FantasticItems
 		lobster = new ItemLobster().setTextureName("fantastic:" + Names.Lobster_UnlocalizedName);
 		starfish = new ItemStarfish().setTextureName("fantastic:" + Names.Starfish_UnlocalizedName);
 		smallCrab = new ItemSmallCrab().setTextureName("fantastic:" + Names.SmallCrab_UnlocalizedName);
+		hermitCrab = new ItemHermitCrab().setTextureName("fantastic:" + Names.HermitCrab_UnlocalizedName);
 		squid = new ItemSquid().setTextureName("fantastic:" + Names.Squid_UnlocalizedName);
 		swordfishSword = new ItemFishSword(ToolMaterial.IRON).setUnlocalizedName(Names.SwordfishSword_UnlocalizedName).setCreativeTab(tabFantastic).setTextureName("fantastic:" + Names.SwordfishSword_UnlocalizedName);
 		creeperFish = new ItemCreeperFish().setTextureName("fantastic:" + Names.CreeperFish_UnlocalizedName);
@@ -166,6 +171,8 @@ public class FantasticItems
 		cookedPikeFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Pike_Fillet_UnlocalizedName).setTextureName("fantastic:cooked_pike_fillet").setCreativeTab(FantasticItems.tabFantastic);
 		rawMuskyFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Musky_Fillet_UnlocalizedName).setTextureName("fantastic:raw_pike_fillet").setCreativeTab(FantasticItems.tabFantastic); //same fillet texture as the pike
 		cookedMuskyFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Musky_Fillet_UnlocalizedName).setTextureName("fantastic:cooked_pike_fillet").setCreativeTab(FantasticItems.tabFantastic); //same fillet texture as the pike
+		rawCatfishFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Catfish_Fillet_Name).setTextureName("fantastic:fillet_raw").setCreativeTab(FantasticItems.tabFantastic);
+		cookedCatfishFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Catfish_Fillet_UnlocalizedName).setTextureName("fantastic:fillet_cooked").setCreativeTab(FantasticItems.tabFantastic);
 
 		
 		GameRegistry.registerItem(reinforcedFishingRod, Names.ReinforcedFishingRod_Name);
@@ -195,6 +202,7 @@ public class FantasticItems
 		GameRegistry.registerItem(lobster , Names.Lobster_Name[1]);
 		GameRegistry.registerItem(starfish , Names.Starfish_Name[1]);
 		GameRegistry.registerItem(smallCrab , Names.SmallCrab_Name[1]);
+		GameRegistry.registerItem(hermitCrab , Names.HermitCrab_Name[1]);
 		GameRegistry.registerItem(squid , Names.Squid_Name);
 		GameRegistry.registerItem(swordfishSword, Names.SwordfishSword_Name); 
 		GameRegistry.registerItem(creeperFish, "Creepedo");
@@ -215,6 +223,8 @@ public class FantasticItems
 		GameRegistry.registerItem(cookedPikeFillet, Names.Cooked_Pike_Fillet_Name);
 		GameRegistry.registerItem(rawMuskyFillet, Names.Raw_Musky_Fillet_Name);
 		GameRegistry.registerItem(cookedMuskyFillet, Names.Cooked_Musky_Fillet_Name);
+		GameRegistry.registerItem(rawCatfishFillet, Names.Raw_Catfish_Fillet_Name);
+		GameRegistry.registerItem(cookedCatfishFillet, Names.Cooked_Catfish_Fillet_Name);
 
 		
 		//Smelting 
@@ -222,6 +232,7 @@ public class FantasticItems
 		GameRegistry.addSmelting(rawTroutFillet,new ItemStack(cookedTroutFillet), 1.0F);
 		GameRegistry.addSmelting(rawPikeFillet,new ItemStack(cookedPikeFillet), 1.0F);
 		GameRegistry.addSmelting(rawMuskyFillet,new ItemStack(cookedMuskyFillet), 1.0F);
+		GameRegistry.addSmelting(rawCatfishFillet,new ItemStack(cookedCatfishFillet), 1.0F);
 
 		
 	}

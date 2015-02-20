@@ -18,7 +18,7 @@ import fantastic.spawner.SpawnControlItem;
 public class EntityFFAI 
 {
 
-	public static enum AIState {Idle,Fleeing,StayStill,Wander,Jump};
+	public static enum AIState {Idle,Fleeing,StayStill,Wander,Jump, Pursuing};
 	
 	protected Random rand = new Random();
 	private EntityFantasticFish ffish = null;
@@ -28,7 +28,6 @@ public class EntityFFAI
 	private long startDawnTime = -1;
 	private long endDawnTime = -1;
 	
-	double currentSpeed=4;
 	private long lastExecutionTime = System.currentTimeMillis();
 	private boolean executing = false;
 	protected int minTimerBetweenAction = -1; //in ms 
@@ -43,9 +42,7 @@ public class EntityFFAI
 	
 	List actionList = new ArrayList();
 	
-	//AI
-	
-	
+
 	
 	public EntityFFAI(EntityFantasticFish aFish, int aMinTimerBetweenAction, int aMaxTimerBetweenAction,long aStartDawnTime, long anEndDawnTime, long aStartDuskTime, long anEndDuskTime)
 	{
@@ -132,11 +129,7 @@ public class EntityFFAI
 		}
 	}
 	
-	public void SetCurrentSpeed(double aSpeed)
-	{
-		currentSpeed=aSpeed;
-	}
-	
+
 	public void SetLastExecutionTime(long aTime)
 	{
 		lastExecutionTime=aTime;

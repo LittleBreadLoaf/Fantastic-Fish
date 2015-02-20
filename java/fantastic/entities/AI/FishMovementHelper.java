@@ -84,24 +84,6 @@ public static void SwimStill(EntityWaterMob aWaterMob)
 }
 
 
-public static void AddToRotationDegree(EntityWaterMob aWaterMob,float degreesAdded)
-{
-	
-
-	if ((!aWaterMob.isDead) && (aWaterMob!=null))
-	{
-		FantasticDebug.Output("ROTATING "+Float.toString(degreesAdded),true);
-		//if (!aWaterMob.worldObj.isRemote)
-        //{
-			//aWaterMob.setVelocity(0D, 0D, 0D);
-        	aWaterMob.rotationYaw += degreesAdded;
-    		
-
-        //}
-		
-	}
-}
-
 public static void FleeOtherEntity(EntityWaterMob aWaterMob, Entity aScaryEntity, int xzFleeZoneSize, int yFleeZoneSize, int speed)
 {
 	
@@ -115,7 +97,7 @@ public static void FleeOtherEntity(EntityWaterMob aWaterMob, Entity aScaryEntity
 		
 		if (_fleeingCoor!=null)
 		{
-			FantasticDebug.Output("ESCAPING at x:"+Double.toString(_fleeingCoor.xCoord)+" y:"+Double.toString(_fleeingCoor.yCoord)+" z:"+Double.toString(_fleeingCoor.zCoord),true);
+			FantasticDebug.Output("ESCAPING at x:"+Double.toString(_fleeingCoor.xCoord)+" y:"+Double.toString(_fleeingCoor.yCoord)+" z:"+Double.toString(_fleeingCoor.zCoord));
 			SwimTo((EntityFantasticFish)aWaterMob,_fleeingCoor.xCoord,_fleeingCoor.yCoord,_fleeingCoor.zCoord, speed);
 
 		}
@@ -164,7 +146,7 @@ public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone,
     	{
     		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord+_i, (int)_block.zCoord) == Blocks.water)
     		{
-    			FantasticDebug.Output("ACSCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord+_i)+" z:"+Double.toString(_block.zCoord),true);
+    			FantasticDebug.Output("ACSCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord+_i)+" z:"+Double.toString(_block.zCoord));
     			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord+_i, _block.zCoord);
     		}
     	}
@@ -172,7 +154,7 @@ public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone,
     
 	if (_block!=null)
 	{
-		FantasticDebug.Output("NO ASCENSSION x:"+Double.toString(_block.xCoord)+" y:"+Double.toString(_block.yCoord)+" z:"+Double.toString(_block.zCoord),true);
+		FantasticDebug.Output("NO ASCENSSION x:"+Double.toString(_block.xCoord)+" y:"+Double.toString(_block.yCoord)+" z:"+Double.toString(_block.zCoord));
 	}
     return _block;
 }
@@ -189,7 +171,7 @@ public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone
     	{
     		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord-_i, (int)_block.zCoord) == Blocks.water)
     		{
-    			FantasticDebug.Output("DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord-_i)+" z:"+Double.toString(_block.zCoord),true);
+    			FantasticDebug.Output("DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord-_i)+" z:"+Double.toString(_block.zCoord));
     			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord-_i, _block.zCoord);
     		}
     	}
@@ -197,7 +179,7 @@ public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone
     
 	if (_block!=null)
 	{
-		FantasticDebug.Output("NO DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Double.toString(_block.yCoord)+" z:"+Double.toString(_block.zCoord),true);
+		FantasticDebug.Output("NO DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Double.toString(_block.yCoord)+" z:"+Double.toString(_block.zCoord));
 	}
     return _block;
 }
@@ -328,11 +310,11 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 			if ((distX<=0.5) && (distY<=0.5) && (distZ<=0.5))
 			{
 				//Stay still
-				aWaterMob.SetCurrentTailFlapSpeedMult(3.0F);
 				aWaterMob.setVelocity(0, 0, 0);
 			}
 			else
 			{	
+				aWaterMob.SetCurrentTailFlapSpeedMult((float)speed);
 				//Create vector
 				Vec3 vec3 = Vec3.createVectorHelper(xCoor - aWaterMob.posX, yCoor - aWaterMob.posY, zCoor - aWaterMob.posZ).normalize();
 				
@@ -347,6 +329,7 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 				float f = (float) (Math.atan2(aWaterMob.motionZ, aWaterMob.motionX) * 180.0D / Math.PI) - 90.0F;
 				float f1 = MathHelper.wrapAngleTo180_float(f - aWaterMob.rotationYaw);
 				aWaterMob.rotationYaw += f1;
+
 				//aWaterMob.renderYawOffset += (-((float)Math.atan2(aWaterMob.motionX, aWaterMob.motionZ)) * 180.0F / (float)Math.PI - aWaterMob.renderYawOffset) * 0.1F;
 				//aWaterMob.rotationYaw = aWaterMob.renderYawOffset;
 				

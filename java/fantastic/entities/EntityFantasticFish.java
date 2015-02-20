@@ -6,9 +6,12 @@ import sun.security.action.GetIntegerAction;
 import cpw.mods.fml.common.FMLCommonHandler;
 import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
+import fantastic.FantasticMod;
 import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.entities.AI.EntityFFAI.AIState;
+import fantastic.network.FantasticNetwork;
+import fantastic.network.TailSpeedMessage;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityWaterMob;
@@ -44,7 +47,7 @@ public class EntityFantasticFish extends EntityWaterMob
 	public EntityFantasticFish(World aWorld) 
 	{
 		super(aWorld);
-		brain=new EntityFFAI(this,10000,15000,22500,4000,9500,14000);
+		
 	}
 
 	public void InitializeFish(FishSize aSize, int aTextureIndex, int isOutOfWater)
@@ -334,10 +337,20 @@ public class EntityFantasticFish extends EntityWaterMob
 	
 	public void SetCurrentTailFlapSpeedMult(float aMult)
 	{
-		currentTailFlapSpeedMult=aMult;
+		if (aMult!=currentTailFlapSpeedMult)
+		{
+			if (!this.worldObj.isRemote)
+			{
+				
+				FantasticNetwork.network.sendToAll(new TailSpeedMessage(this.getEntityId(), currentTailFlapSpeedMult));
+			}
+			
+			currentTailFlapSpeedMult=aMult;
+		}
+
 	}
 	
-	public float GetCurrentTailFlapSpeedMuld()
+	public float GetCurrentTailFlapSpeedMult()
 	{
 		return currentTailFlapSpeedMult;
 	}

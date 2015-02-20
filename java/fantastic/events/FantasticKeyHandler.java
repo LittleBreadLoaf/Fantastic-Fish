@@ -12,6 +12,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import fantastic.FantasticMod;
 import fantastic.network.DecideMessage;
+import fantastic.network.FantasticNetwork;
 import fantastic.network.MoveMessage;
 public class FantasticKeyHandler
 {
@@ -45,7 +46,7 @@ public class FantasticKeyHandler
 		{
 			if (keys[SWIM].isPressed()) 
 			{
-				FantasticMod.network.sendToServer(new DecideMessage(0));
+				FantasticNetwork.network.sendToServer(new DecideMessage(0));
 			}
 			
 		}

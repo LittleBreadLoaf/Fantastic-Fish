@@ -69,6 +69,10 @@ public class FantasticEntities
 		EntityRegistry.registerModEntity(EntityFeeder.class, Names.Feeder_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
 		_id++;
 
+		//Hermit_Crab
+		EntityRegistry.registerModEntity(EntityHermitCrab.class, "hermit_crab", _id, FantasticMod.instance, 64, 3, true);
+		_id++;
+
 		
 		//EntityRegistry.addSpawn(EntityCatfish.class, 3, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.river, BiomeGenBase.roofedForest, BiomeGenBase.swampland});
 

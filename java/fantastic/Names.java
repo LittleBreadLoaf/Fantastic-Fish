@@ -134,6 +134,8 @@ public class Names
 	public static final String Starfish_Name[] = {"Red Starfish", "Orange Starfish", "Yellow Starfish", "Green Starfish", "Blue Starfish", "Purple Starfish", "Pink Starfish"};
 	public static final String SmallCrab_UnlocalizedName[] = {"small_crab_red", "small_crab_green", "small_crab_blue", "small_crab_yellow"};
 	public static final String SmallCrab_Name[] = {"Small Red Crab", "Small Green Crab", "Small Blue Crab", "Small Yellow Crab"};
+	public static final String HermitCrab_UnlocalizedName[] = {"hermit_crab_tan","hermit_crab_blue","hermit_crab_yellow","hermit_crab_pink"};
+	public static final String HermitCrab_Name[] = {"Tan Hermit Crab","Blue Hermit Crab","Yellow Hermit Crab","Pink Hermit Crab"};
 	
 	public static final String RandomFish_UnlocalizedName[] = {"sailfish", "nurse_shark", "nurse_shark_stripe", "nurse_shark_spot", "manta"};
 	public static final String RandomFish_Name[] = {"Sailfish", "Nurse Shark", "Striped Nurse Shark", "Spotted Nurse Shark", "Manta Ray"};
@@ -171,6 +173,11 @@ public class Names
 	public static final String Cooked_Musky_Fillet_UnlocalizedName = "cooked_musky_fillet";
 	public static final String Cooked_Musky_Fillet_Name = "Cooked Musky Fillet";
 	
+	public static final String Raw_Catfish_Fillet_UnlocalizedName = "raw_catfish_fillet";
+	public static final String Raw_Catfish_Fillet_Name = "Raw Catfish Fillet";
+	
+	public static final String Cooked_Catfish_Fillet_UnlocalizedName = "cooked_catfish_fillet";
+	public static final String Cooked_Catfish_Fillet_Name = "Cooked Catfish Fillet";
 	
 	
 }

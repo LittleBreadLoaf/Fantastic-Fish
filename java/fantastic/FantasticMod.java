@@ -28,6 +28,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import fantastic.armor.FantasticArmor;
 import fantastic.blocks.FantasticBlocks;
+import fantastic.blocks.decoration.TileSkeletonBlock;
 import fantastic.entities.FantasticEntities;
 import fantastic.events.FantasticEvents;
 import fantastic.events.VillagerTradeHandler;
@@ -35,7 +36,9 @@ import fantastic.gui.GuiHandler;
 import fantastic.items.FantasticItems;
 import fantastic.network.ACMessage;
 import fantastic.network.DecideMessage;
+import fantastic.network.FantasticNetwork;
 import fantastic.network.MoveMessage;
+import fantastic.network.TailSpeedMessage;
 import fantastic.proxies.CommonProxy;
 import fantastic.spawner.SmartSpawnerControl;
 import fantastic.tiles.TileAirCompressor;
@@ -57,20 +60,20 @@ public class FantasticMod
 	public static FantasticMod instance;
 
 
-	public static SimpleNetworkWrapper network;
+
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
 		//Set to true to turn on the debug mode in output window.
 		FantasticDebug.DebugMode=false;
+
+		//Init SimpleNetworkWrapper messages
+		FantasticNetwork.Init();
 		
 		proxy.initRenderers();
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
-		network = NetworkRegistry.INSTANCE.newSimpleChannel("FantasticChannel");
-		FantasticMod.network.registerMessage(DecideMessage.Handler.class, DecideMessage.class, 0, Side.SERVER);
-		FantasticMod.network.registerMessage(MoveMessage.Handler.class, MoveMessage.class, 1, Side.CLIENT);
-		FantasticMod.network.registerMessage(ACMessage.Handler.class, ACMessage.class, 2, Side.SERVER);
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		//DimensionManager.registerProviderType(BleachIds.worldHuecoMundoID, HuecoMundoWorldProvider.class, false);
 		//DimensionManager.registerDimension(BleachIds.worldHuecoMundoID, BleachIds.worldHuecoMundoID);
@@ -140,6 +143,7 @@ public class FantasticMod
 		proxy.initTileRenders();
 
 		GameRegistry.registerTileEntity(TileAirCompressor.class, "AirCompressor");
+		GameRegistry.registerTileEntity(TileSkeletonBlock.class, "SkeletonBlock");
 	}
 
 	@EventHandler

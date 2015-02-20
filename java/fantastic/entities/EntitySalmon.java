@@ -34,8 +34,10 @@ import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
 import fantastic.entities.AI.EntityFFAI.AIState;
+import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
 import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
+import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
 import fantastic.entities.AI.FFAI_SwimWander;
@@ -53,6 +55,7 @@ public class EntitySalmon extends EntityFantasticFish
 	public EntitySalmon(World aWorld)
 	{
 		super(aWorld);
+		brain=new EntityFFAI(this,10000,15000,22500,4000,9500,14000);
 		InitializeAI();
 	}
 
@@ -139,6 +142,12 @@ public class EntitySalmon extends EntityFantasticFish
     @Override
     public double GetSpeedFromAIState(AIState aState)
     {
+    	if (aState==AIState.Idle)
+    	{
+    		return 1;
+    	}
+
+    	
     	if (aState==AIState.StayStill)
     	{
     		return 1;
@@ -158,6 +167,12 @@ public class EntitySalmon extends EntityFantasticFish
     	{
     		return 10;
     	}
+    	
+    	if (aState==AIState.Pursuing)
+    	{
+    		return 6;
+    	}
+
     	
     	//default
     	return 1;
@@ -256,7 +271,8 @@ public class EntitySalmon extends EntityFantasticFish
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,2));
         brain.AddActionToList(new FFAI_SwimWander(brain,this,2,40,7,1,4));
-        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 3,70,3));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,3,20,7));
+        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 3,30,3));
         //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
 
         

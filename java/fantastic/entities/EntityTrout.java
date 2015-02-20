@@ -34,8 +34,10 @@ import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
 import fantastic.entities.AI.EntityFFAI.AIState;
+import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
 import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
+import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
 import fantastic.entities.AI.FFAI_SwimWander;
@@ -53,6 +55,7 @@ public class EntityTrout extends EntityFantasticFish
 	public EntityTrout(World aWorld)
 	{
 		super(aWorld);
+		brain=new EntityFFAI(this,10000,15000,22500,4000,9500,14000);
 		InitializeAI();
 	}
 
@@ -127,11 +130,11 @@ public class EntityTrout extends EntityFantasticFish
 		switch (GetFishSize())
 		{
 			case Tiny : return 0.15F;
-			case Small : return 0.40F;
-			case Medium : return 0.60F;
-			case Big : return 0.9F;
-			case Large : return 1.1F;
-			case Legendary : return 1.3F;
+			case Small : return 0.30F;
+			case Medium : return 0.40F;
+			case Big : return 0.7F;
+			case Large : return 0.9F;
+			case Legendary : return 1.2F;
 			default: return 0.15F; 
 		}
 	}
@@ -158,6 +161,12 @@ public class EntityTrout extends EntityFantasticFish
     	{
     		return 10;
     	}
+    	
+    	if (aState==AIState.Pursuing)
+    	{
+    		return 6;
+    	}
+
     	
     	//default
     	return 1;
@@ -240,9 +249,9 @@ public class EntityTrout extends EntityFantasticFish
 			case Tiny: return 1;
 			case Small: return 1;
 			case Medium: return 2;
-			case Big: return 3;
-			case Large: return 4;
-			case Legendary: return 6;
+			case Big: return 2;
+			case Large: return 3;
+			case Legendary: return 5;
 			default : return 1;
 		}
 	}
@@ -256,6 +265,7 @@ public class EntityTrout extends EntityFantasticFish
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,2));
         brain.AddActionToList(new FFAI_SwimWander(brain,this,2,40,7,1,4));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,3,20,7));
         brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 3,30,3));
         //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
 

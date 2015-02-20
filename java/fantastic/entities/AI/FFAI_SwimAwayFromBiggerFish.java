@@ -78,6 +78,7 @@ public class FFAI_SwimAwayFromBiggerFish extends FFAI_Base
 	        			
 	        		}
 	        	}
+	        	
         	}
         }
         

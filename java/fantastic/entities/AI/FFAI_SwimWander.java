@@ -45,8 +45,8 @@ public class FFAI_SwimWander extends FFAI_Base
         			boolean isDusk = ffai.isDusk();
         			boolean isDawn = ffai.isDawn();
         			
-        			FantasticDebug.Output("Dusk: "+Boolean.toString(isDusk)+"Time: "+Long.toString(ffish.worldObj.getWorldTime() % 24000),true);
-        			FantasticDebug.Output("Dawn: "+Boolean.toString(isDawn),true);
+        			FantasticDebug.Output("Dusk: "+Boolean.toString(isDusk)+"Time: "+Long.toString(ffish.worldObj.getWorldTime() % 24000));
+        			FantasticDebug.Output("Dawn: "+Boolean.toString(isDawn));
         			
         			int _sizeOrdinal = ffish.GetFishSize().ordinal();
         			if (_sizeOrdinal<=maxSizeThatChangeDepth)

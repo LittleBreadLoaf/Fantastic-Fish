@@ -58,6 +58,8 @@ public class FFAI_SwimAwayFromPlayer extends FFAI_Base
 	        		lastCoorTime = System.currentTimeMillis();
 	        		return true;
 	        	}
+
+
         	}
         }
         

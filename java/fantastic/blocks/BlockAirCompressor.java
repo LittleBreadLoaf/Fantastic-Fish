@@ -15,6 +15,7 @@ import fantastic.Names;
 import fantastic.armor.FantasticArmor;
 import fantastic.items.FantasticItems;
 import fantastic.network.ACMessage;
+import fantastic.network.FantasticNetwork;
 import fantastic.tiles.TileAirCompressor;
 
 public class BlockAirCompressor extends BlockContainer
@@ -63,7 +64,7 @@ public class BlockAirCompressor extends BlockContainer
 				{
 					ACEntity.setSingleTank(true);
 					ACEntity.setTankDamage(player.getCurrentEquippedItem().getItemDamage());
-					FantasticMod.network.sendToServer(new ACMessage(ACEntity, 1));
+					FantasticNetwork.network.sendToServer(new ACMessage(ACEntity, 1));
 					player.getCurrentEquippedItem().stackSize--;
 				}
 			}
@@ -73,7 +74,7 @@ public class BlockAirCompressor extends BlockContainer
 				{
 					ACEntity.setDoubleTank(true);
 					ACEntity.setTankDamage(player.getCurrentEquippedItem().getItemDamage());
-					FantasticMod.network.sendToServer(new ACMessage(ACEntity, 2));
+					FantasticNetwork.network.sendToServer(new ACMessage(ACEntity, 2));
 					player.getCurrentEquippedItem().stackSize--;
 				}
 			}
@@ -88,7 +89,7 @@ public class BlockAirCompressor extends BlockContainer
 					if(!world.isRemote)
 						world.spawnEntityInWorld(theTank);
 
-					FantasticMod.network.sendToServer(new ACMessage(ACEntity, 0));
+					FantasticNetwork.network.sendToServer(new ACMessage(ACEntity, 0));
 					ACEntity.setSingleTank(false);
 				}
 				if(ACEntity.getDoubleTank())
@@ -100,7 +101,7 @@ public class BlockAirCompressor extends BlockContainer
 					if(!world.isRemote)
 						world.spawnEntityInWorld(theTank);
 
-					FantasticMod.network.sendToServer(new ACMessage(ACEntity, 0));
+					FantasticNetwork.network.sendToServer(new ACMessage(ACEntity, 0));
 					ACEntity.setDoubleTank(false);
 				}
 			}
