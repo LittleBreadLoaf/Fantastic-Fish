@@ -79,7 +79,7 @@ public class RenderHermitCrab extends RenderLiving
     {
     	
         GL11.glTranslated(0.0, 0.45, 0.0);
-        GL11.glScaled(0.35F, 0.35F, 0.35F);
+        GL11.glScaled(1.5F, 1.5F, 1.5F);
         //if(par1.worldObj.getClosestPlayerToEntity(par1, 8) != null)
         	GL11.glRotated(90, 0, 1, 0);
     }

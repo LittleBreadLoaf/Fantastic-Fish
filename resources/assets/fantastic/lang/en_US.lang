@@ -259,3 +259,7 @@ item.raw_trout_fillet.name=Raw Trout Fillet
 item.cooked_trout_fillet.name=Cooked Trout Fillet
 item.raw_pike_fillet.name=Raw Pike Fillet
 item.cooked_pike_fillet.name=Cooked Pike Fillet
+item.raw_musky_fillet.name=Raw Musky Fillet
+item.cooked_musky_fillet.name=Cooked Musky Fillet
+item.raw_catfish_fillet.name=Raw Catfish Fillet
+item.cooked_catfish_fillet.name=Cooked Catfish Fillet
