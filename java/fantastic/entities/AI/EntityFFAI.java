@@ -119,6 +119,9 @@ public class EntityFFAI
 					{
 						FishMovementHelper.SwimTo(ffish, targetCoor.xCoord, targetCoor.yCoord, targetCoor.zCoord, ffish.GetSpeedFromAIState(this.currentAIState));
 					}
+					
+					FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(this.currentAIState));
+					
 				}
 			}
 			else

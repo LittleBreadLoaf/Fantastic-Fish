@@ -1,24 +1,62 @@
 package fantastic.entities;
 
+import java.util.List;
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityWaterMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityFishHook;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
+import fantastic.FantasticDebug;
+import fantastic.FantasticIds;
 import fantastic.FantasticInfo;
+import fantastic.entities.AI.EntityFFAI.AIState;
+import fantastic.entities.AI.EntityFFAI;
+import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
+import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
+import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
+import fantastic.entities.AI.FFAI_SwimJumpForFlies;
+import fantastic.entities.AI.FFAI_SwimStayStill;
+import fantastic.entities.AI.FFAI_SwimWanderDuskAndDawn;
+import fantastic.entities.AI.FFAI_SwimWanderLikeDeep;
+import fantastic.entities.AI.FFAI_SwimWanderLikeSunnyAfternoon;
+import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
 public class EntityFeeder extends EntityFantasticFish
 {
 	//Textures
-	private static final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/spotted_feeder.png");
-	
+	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/spotted_feeder.png");
+
 	
 	//CONSTRUCTOR
 	public EntityFeeder(World aWorld)
 	{
 		super(aWorld);
+		brain=new EntityFFAI(this,10000,15000,-1,-1,-1,-1);
 		InitializeAI();
 	}
 
@@ -38,6 +76,7 @@ public class EntityFeeder extends EntityFantasticFish
 		SetIsOutOfWater(isOutOfWater);
 		this.ignoreFrustumCheck = true;
 		SetHasNotSpawned(false);
+		this.setSize(1.0F, 1.0F);
 	}
 	
 	//This property tells if the class has different size of fish for the same class. By default, it return false. 
@@ -51,18 +90,24 @@ public class EntityFeeder extends EntityFantasticFish
 	@Override
 	public float GetTailFlapSpeed()
 	{
+		
+
 		//return 0.5F;
-		switch (GetFishSize())
-		{
-			case Tiny : return 1.0F;
-			case Small : return 0.8F;
-			case Medium : return 0.7F;
-			case Big : return 0.6F;
-			case Large : return 0.5F;
-			case Legendary : return 0.4F;
-			default: return 1.0F; 
-		}	
+			switch (GetFishSize())
+			{
+				
+				case Tiny : return 1.0F*currentTailFlapSpeedMult;
+				case Small : return 0.8F*currentTailFlapSpeedMult;
+				case Medium : return 0.7F*currentTailFlapSpeedMult;
+				case Big : return 0.6F*currentTailFlapSpeedMult;
+				case Large : return 0.5F*currentTailFlapSpeedMult;
+				case Legendary : return 0.4F*currentTailFlapSpeedMult;
+				default: return 1.0F; 
+
+
+			}
 	}
+	
 	
 	@Override
 	public void onDeath(DamageSource par1DamageSource)
@@ -78,36 +123,63 @@ public class EntityFeeder extends EntityFantasticFish
 		
 	}
 	
-    @Override
-    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
-    {
-    	this.moveEntity(this.motionX, this.motionY, this.motionZ);
-    }
+
 
     @Override
 	public float GetRenderValueFromSize()
 	{
 		switch (GetFishSize())
 		{
-			case Tiny : return 0.20F;
-			case Small : return 0.50F;
-			case Medium : return 0.75F;
-			case Big : return 1F;
-			case Large : return 1.1F;
-			case Legendary : return 1.4F;
-			default: return 0.20F; 
+			case Tiny : return 0.15F;
+			case Small : return 0.60F;
+			case Medium : return 0.70F;
+			case Big : return 0.9F;
+			case Large : return 1.3F;
+			case Legendary : return 1.7F;
+			default: return 0.15F; 
 		}
 	}
     
-    /*@Override
-    public float GetRenderDropDownFromSide()
+    @Override
+    public double GetSpeedFromAIState(AIState aState)
     {
-		switch (GetFishSize())
-		{
-			case Legendary : return 0.2F;
-			default: return 0F; 
-		}   
-    }*/
+    	if (aState==AIState.Idle)
+    	{
+    		return 1;
+    	}
+
+    	
+    	if (aState==AIState.StayStill)
+    	{
+    		return 1;
+    	}
+    	
+    	if (aState==AIState.Wander)
+    	{
+    		return 1;
+    	}
+
+    	if (aState==AIState.Fleeing)
+    	{
+    		return 5;
+    	}
+    	
+    	if (aState==AIState.Jump)
+    	{
+    		return 6;
+    	}
+    	
+    	if (aState==AIState.Pursuing)
+    	{
+    		return 5;
+    	}
+
+    	
+    	//default
+    	return 1;
+    	
+    }
+    
 	
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
@@ -116,14 +188,17 @@ public class EntityFeeder extends EntityFantasticFish
 	
 	public ResourceLocation GetTexture()
 	{
-
-		return texture1;
-
+		switch (GetTextureIndex())
+		{
+			case 1: return texture1;
+			default: return texture1;
+		}
+		
 	}
 	
 	public static int GetNumberOfTextures()
 	{
-		return 2;
+		return 1;
 	}
 	
 	//*** PROTECTED METHOD ***
@@ -139,7 +214,7 @@ public class EntityFeeder extends EntityFantasticFish
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
-		this.entityDropItem(new ItemStack(FantasticItems.rawSalmonFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
+		this.entityDropItem(new ItemStack(FantasticItems.filletRaw, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
 	}
 
 	/**
@@ -192,6 +267,11 @@ public class EntityFeeder extends EntityFantasticFish
         this.getNavigator().setAvoidsWater(false);
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
+        
+        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,5));
+        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
+        brain.AddActionToList(new FFAI_SwimWanderLikeDeep(brain,this,3,50,7,1,4));
+
         
 	}
 

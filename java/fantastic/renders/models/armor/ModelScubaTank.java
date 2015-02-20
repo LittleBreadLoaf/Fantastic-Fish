@@ -28,8 +28,8 @@ public class ModelScubaTank extends ModelBiped
   public ModelScubaTank(float f)
   {
 	  super(f, 0, 64, 64);
-    textureWidth = 64;
-    textureHeight = 64;
+    this.textureWidth = 64;
+    this.textureHeight = 64;
     
     straps = new ModelRenderer(this, 41, 35);
     straps.addBox(-4F, 0F, -2F, 8, 12, 4);

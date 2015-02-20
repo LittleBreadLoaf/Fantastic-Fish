@@ -130,7 +130,7 @@ public static Vec3 GetFleeingCoordinate(EntityWaterMob aWaterMob, Entity aScaryE
 
 public static Vec3 findRandomTarget(EntityCreature p_75463_0_, int p_75463_1_, int p_75463_2_)
 {
-
+	FantasticDebug.Output("FIND TAGET BLOCK AT ANY DEPTH",true);
     return findRandomTargetBlock(p_75463_0_, p_75463_1_, p_75463_2_, (Vec3)null);
 }
 
@@ -146,7 +146,7 @@ public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone,
     	{
     		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord+_i, (int)_block.zCoord) == Blocks.water)
     		{
-    			FantasticDebug.Output("ACSCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord+_i)+" z:"+Double.toString(_block.zCoord));
+    			FantasticDebug.Output("ACSCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord+_i)+" z:"+Double.toString(_block.zCoord),true);
     			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord+_i, _block.zCoord);
     		}
     	}
@@ -171,7 +171,7 @@ public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone
     	{
     		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord-_i, (int)_block.zCoord) == Blocks.water)
     		{
-    			FantasticDebug.Output("DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord-_i)+" z:"+Double.toString(_block.zCoord));
+    			FantasticDebug.Output("DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord-_i)+" z:"+Double.toString(_block.zCoord),true);
     			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord-_i, _block.zCoord);
     		}
     	}
@@ -299,7 +299,7 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 	{
 		if (!aWaterMob.worldObj.isRemote)
 		{
-	
+			
 			//Distance to target
 			double distX = Math.abs(xCoor - aWaterMob.posX);
 			double distY = Math.abs(yCoor - aWaterMob.posY);
@@ -314,12 +314,12 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 			}
 			else
 			{	
-				aWaterMob.SetCurrentTailFlapSpeedMult((float)speed);
+
 				//Create vector
 				Vec3 vec3 = Vec3.createVectorHelper(xCoor - aWaterMob.posX, yCoor - aWaterMob.posY, zCoor - aWaterMob.posZ).normalize();
 				
 				//Get approaching speed
-				speedAdjustment = ProvideApproachingSpeed(distX, distY, distZ);			
+				speedAdjustment = ProvideApproachingSpeed(distX, distY, distZ);	
 				
 				//Set motion and angles
 				aWaterMob.motionX = (vec3.xCoord * speed)*speedAdjustment;
@@ -338,7 +338,36 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 				//aWaterMob.rotationPitch += (-((float)Math.atan2((double)f, aWaterMob.motionY)) * 180.0F / (float)Math.PI - aWaterMob.rotationPitch) * 0.1F;
 	
 			}
+			
+	
+			
 		}
+	}
+}
+
+public static void SetFishTailSpeed(EntityFantasticFish aFish,double speed)
+{
+	long _currentTime = System.currentTimeMillis();
+	//Update of the last position every 500ms
+	if (_currentTime>=aFish.previousPosTimeReading+500)
+	{
+		FantasticDebug.Output("UPDATING FISH POSITION.");
+		aFish.previousPosTimeReading=_currentTime;
+		aFish.previousXPos=aFish.posX;
+		aFish.previousYPos=aFish.posY;
+		aFish.previousZPos=aFish.posZ;
+	}
+	
+	//Setting tail flap speed
+	double _x = aFish.getDistance(aFish.previousXPos, aFish.previousYPos, aFish.previousZPos);
+	FantasticDebug.Output("DISTANCE: "+Double.toString(_x));
+	if (_x<=1)
+	{
+		aFish.SetCurrentTailFlapSpeedMult(1);
+	}
+	else
+	{
+		aFish.SetCurrentTailFlapSpeedMult(Math.max(1,((float)speed-1.5F)));
 	}
 }
 

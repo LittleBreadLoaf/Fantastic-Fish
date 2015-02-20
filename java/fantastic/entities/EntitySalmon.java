@@ -40,7 +40,7 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWander;
+import fantastic.entities.AI.FFAI_SwimWanderDuskAndDawn;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
@@ -160,17 +160,17 @@ public class EntitySalmon extends EntityFantasticFish
 
     	if (aState==AIState.Fleeing)
     	{
-    		return 6;
+    		return 5;
     	}
     	
     	if (aState==AIState.Jump)
     	{
-    		return 10;
+    		return 6;
     	}
     	
     	if (aState==AIState.Pursuing)
     	{
-    		return 6;
+    		return 5;
     	}
 
     	
@@ -269,10 +269,10 @@ public class EntitySalmon extends EntityFantasticFish
         this.tasks.taskEntries.clear();
         
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
-        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,2));
-        brain.AddActionToList(new FFAI_SwimWander(brain,this,2,40,7,1,4));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,3,20,7));
-        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 3,30,3));
+        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
+        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 2,30,3));
+        brain.AddActionToList(new FFAI_SwimWanderDuskAndDawn(brain,this,3,50,7,1,4));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,4,20,7));
         //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
 
         

@@ -4,6 +4,7 @@ package fantastic.renders.entity;
 
 import org.lwjgl.opengl.GL11;
 
+import fantastic.FantasticDebug;
 import fantastic.FantasticInfo;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityMusky;
@@ -77,44 +78,13 @@ public class RenderMusky extends RenderLiving
 	protected void func_82430_a(EntityMusky par1, float par2, float par3, float par4)
     {		
 		float par6 = 0;
-	//if (par1.getIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY - 1, (int)par1.posZ) != Blocks.water)
-	if (par1.GetIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ) != Blocks.water)
-    {
-    	
-        par4 = 90F + par1.rotationYaw;
-        par6 = 90F;
-    }
-    else
-    {
-    	par4 = 0;
-    	par6 = 0;
-    }
-
-    GL11.glRotatef(par6, 0.0F, 0.0F, 1.0F);
-    GL11.glRotatef(par4, 1.0F, 0.0F, 0.0F);
-    /*if(par1.GetRenderValueFromSize() == 1.8F)
-    {
-        GL11.glTranslatef(0.0F, (float)(1.4F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else if(par1.GetRenderValueFromSize() == 1.3F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(1.2F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else if(par1.GetRenderValueFromSize() == 1.0F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(1.0F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else if(par1.GetRenderValueFromSize() == 0.8F)
-    {
-    	GL11.glTranslatef(0.0F, (float)(0.9F)*(-par1.GetRenderValueFromSize()), 0.0F);
-    }
-    else
-    {
-
-        GL11.glTranslatef(0.0F, (float)(-0.7F * par1.GetRenderValueFromSize()), 0.0F);
-    }*/
-    GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
-    super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
+		if (par1.worldObj.isAirBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ))
+		{
+			FantasticDebug.Output("JUMPING !!!!!!!!!!!!!");
+		    GL11.glRotatef(180F, 1.0F, 1.0F, 0.0F);
+		}
+		GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
+		super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);
 
 }
 	

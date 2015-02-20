@@ -57,7 +57,7 @@ public class TailSpeedMessage implements IMessage, IMessageHandler<TailSpeedMess
 	{
 		if (message!=null)
 		{
-			FantasticDebug.Output("MESSAGE RECEIVED. Entity: "+Integer.toString(message.entityId)+" Tail Speed:"+Float.toString(message.tailSpeedMult),true);
+			FantasticDebug.Output("MESSAGE RECEIVED. Entity: "+Integer.toString(message.entityId)+" Tail Speed:"+Float.toString(message.tailSpeedMult));
 			EntityPlayer player = FantasticMod.proxy.getPlayerFromMessage(ctx);
 			if (player!=null)
 			{
@@ -65,7 +65,7 @@ public class TailSpeedMessage implements IMessage, IMessageHandler<TailSpeedMess
 				if (_ent!=null)
 				{
 					((EntityFantasticFish)_ent).SetCurrentTailFlapSpeedMult(message.tailSpeedMult);
-					FantasticDebug.Output("New tail speed set to: Entity: "+Integer.toString(message.entityId)+" Tail Speed:"+Float.toString(message.tailSpeedMult),true);
+					FantasticDebug.Output("New tail speed set to: Entity: "+Integer.toString(message.entityId)+" Tail Speed:"+Float.toString(message.tailSpeedMult));
 					return null;
 					
 				}

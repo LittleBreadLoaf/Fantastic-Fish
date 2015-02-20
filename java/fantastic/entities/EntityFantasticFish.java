@@ -38,8 +38,14 @@ public class EntityFantasticFish extends EntityWaterMob
 	public FishSize currentSize = FishSize.Null;
 	
 	private boolean hasNotSpawned = true;
+	private boolean tickFilterPass = true;
 	
 	protected float currentTailFlapSpeedMult = 1.0F;
+	
+	public double previousXPos = 0;
+	public double previousYPos = 0;
+	public double previousZPos = 0;
+	public long previousPosTimeReading = 0;
 
 	
 
@@ -47,7 +53,6 @@ public class EntityFantasticFish extends EntityWaterMob
 	public EntityFantasticFish(World aWorld) 
 	{
 		super(aWorld);
-		
 	}
 
 	public void InitializeFish(FishSize aSize, int aTextureIndex, int isOutOfWater)
@@ -271,7 +276,18 @@ public class EntityFantasticFish extends EntityWaterMob
 	@Override
 	protected void updateAITasks()
 	{
-		brain.Tick();
+		if (!this.worldObj.isRemote)
+		{
+			if (tickFilterPass)
+			{
+				brain.Tick();
+				tickFilterPass=false;
+			}
+			else
+			{
+				tickFilterPass=true;
+			}
+		}
 	}
 
 	
@@ -342,7 +358,7 @@ public class EntityFantasticFish extends EntityWaterMob
 			if (!this.worldObj.isRemote)
 			{
 				
-				FantasticNetwork.network.sendToAll(new TailSpeedMessage(this.getEntityId(), currentTailFlapSpeedMult));
+				FantasticNetwork.network.sendToAll(new TailSpeedMessage(this.getEntityId(), aMult));
 			}
 			
 			currentTailFlapSpeedMult=aMult;
@@ -359,6 +375,13 @@ public class EntityFantasticFish extends EntityWaterMob
     {
     	//default
     	return 1;
+    }
+    
+    //Must be overriden. This property will adjust the dept so bigger fish will not swim half out of the water because of their size. This 
+    // is specifically useful for bigger fish like sharks, tunas and sailfish.
+    public double PositionSizeAdjust()
+    {
+    	return 0;
     }
 
 

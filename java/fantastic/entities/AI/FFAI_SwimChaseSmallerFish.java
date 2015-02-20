@@ -69,7 +69,7 @@ public class FFAI_SwimChaseSmallerFish extends FFAI_Base
 		        	
 		        	if (this.closestEntity!=null)
 		        	{
-		            	FantasticDebug.Output("CHASING SMALLER FISH",true);	
+		            	FantasticDebug.Output("CHASING SMALLER FISH");	
 		        		ffai.targetCoor = Vec3.createVectorHelper(this.closestEntity.posX, this.closestEntity.posY,this.closestEntity.posZ);
 		            	ffai.currentAIState = AIState.Pursuing;
 			        	lastCoorTime = System.currentTimeMillis();
@@ -77,7 +77,7 @@ public class FFAI_SwimChaseSmallerFish extends FFAI_Base
 		        	}
 		        	else
 		        	{
-		        		FantasticDebug.Output("NO SMALL FISH FOUND",true);
+		        		FantasticDebug.Output("NO SMALL FISH FOUND");
 		        	}
 
         		}

@@ -179,5 +179,12 @@ public class Names
 	public static final String Cooked_Catfish_Fillet_UnlocalizedName = "cooked_catfish_fillet";
 	public static final String Cooked_Catfish_Fillet_Name = "Cooked Catfish Fillet";
 	
+	public static final String Raw_Tuna_Darne_UnlocalizedName = "raw_tuna_darne";
+	public static final String Raw_Tuna_Darne_Name = "Raw Tuna Darne";
+	
+	public static final String Cooked_Tuna_Darne_UnlocalizedName = "cooked_tuna_darne";
+	public static final String Cooked_Tuna_Darne_Name = "Cooked Tuna Darne";
+
+
 	
 }

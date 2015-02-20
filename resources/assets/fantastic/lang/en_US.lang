@@ -22,10 +22,11 @@ tile.fantastic:plant_seaweed.name=Seaweed
 tile.fantastic:smoke_block.name=Smoke Rock
 tile.fantastic:air_compressor.name=Air Compressor
 tile.fantastic:aqua_glass.name=Aquarium Glass
-
 item.fishing_net.name=Fishing Net
 item.fillet_raw.name=Raw Fish Fillet
 item.fillet_cooked.name=Cooked Fish Fillet
+item.raw_tuna_darne.name=Raw Tuna Darne
+item.cooked_tuna_darne.name=Cooked Tuna Darne
 item.lobster_claw_raw.name=Raw Lobster Claw
 item.lobster_claw.name=Cooked Lobster Claw
 item.lobster_tail_raw.name=Raw Lobster Tail

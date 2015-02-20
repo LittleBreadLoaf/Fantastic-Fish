@@ -43,7 +43,7 @@ public class FantasticArmor
 
 	public static void init()
 	{
-		goggles = new ItemGoggles(FantasticTools.SCUBA, FantasticMod.proxy.addArmor("goggles"), 0);
+		//goggles = new ItemGoggles(FantasticTools.SCUBA, FantasticMod.proxy.addArmor("goggles"), 0);
 		singleTank = new ItemSingleTank(FantasticTools.STANK, FantasticMod.proxy.addArmor("single"), 1);
 		scubaTank = new ItemScubaTank(FantasticTools.TANK, FantasticMod.proxy.addArmor("scuba"), 1);
 		wetsuit = new ItemWetsuit(FantasticTools.SCUBA, FantasticMod.proxy.addArmor("wetsuit"), 2);
@@ -74,7 +74,7 @@ public class FantasticArmor
 		purpleShellLegs = new ItemPurpleShellArmor(FantasticTools.SHELL, FantasticMod.proxy.addArmor("purple_legs"), 2).setUnlocalizedName("shellbottom_purple");
 		purpleShellBoots = new ItemPurpleShellArmor(FantasticTools.SHELL, FantasticMod.proxy.addArmor("purple_boots"), 3).setUnlocalizedName("shellboots_purple");
 		
-		GameRegistry.registerItem(goggles, Names.Goggles_Name);
+		//GameRegistry.registerItem(goggles, Names.Goggles_Name);
 		GameRegistry.registerItem(singleTank, "Single Tank");
 		GameRegistry.registerItem(scubaTank, "Scuba Tank");
 		GameRegistry.registerItem(wetsuit, "Wet Suit");

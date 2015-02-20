@@ -85,7 +85,7 @@ public class ClientProxy extends CommonProxy
 	}
 	
 	
-	private static final ModelGoggles goggles = new ModelGoggles(0.0F);
+	//private static final ModelGoggles goggles = new ModelGoggles(0.0F);
 	private static final ModelScubaTank tank = new ModelScubaTank(0.01F);
 	private static final ModelSingleTank single = new ModelSingleTank(0.01F);
 	private static final ModelFlippers flippers = new ModelFlippers(0.01F);
@@ -102,7 +102,7 @@ public class ClientProxy extends CommonProxy
 		case 0:
 			return robes;
 		case 1:
-			return goggles;
+			//return goggles;
 		case 2:
 			return tank;
 		case 3:

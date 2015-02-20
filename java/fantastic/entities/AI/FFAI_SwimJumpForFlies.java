@@ -53,7 +53,7 @@ public class FFAI_SwimJumpForFlies extends FFAI_Base
 		        				
 		        				if ((_dist<=2) && (ffish.worldObj.isAirBlock((int)_coor.xCoord,(int)_coor.yCoord,(int)_coor.zCoord)))
 			        			{
-			        				FantasticDebug.Output("CAN JUMP",true);
+			        				FantasticDebug.Output("CAN JUMP");
 			        				ffai.LockActionCurrentTime = System.currentTimeMillis();
 			        				ffai.LockActionInterval = 1000; //pause of 1000ms, the fish cannot take any action while in the air.
 			        				ffai.targetCoor=Vec3.createVectorHelper(_coor.xCoord, _coor.yCoord-2, _coor.zCoord);

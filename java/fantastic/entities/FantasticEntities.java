@@ -32,7 +32,7 @@ public class FantasticEntities
 		_id++;
 		
 		//Salmon
-		EntityRegistry.registerModEntity(EntitySalmon.class, Names.Salmon_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySalmon.class, Names.Salmon_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		//EntityRegistry.addSpawn(EntitySalmon.class, 6, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river,BiomeGenBase.coldTaigaHills,BiomeGenBase.extremeHills,BiomeGenBase.iceMountains,BiomeGenBase.megaTaigaHills,BiomeGenBase.taigaHills});
 		_id++;
 		

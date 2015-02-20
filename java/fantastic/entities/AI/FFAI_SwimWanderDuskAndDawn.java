@@ -9,7 +9,7 @@ import fantastic.FantasticDebug;
 import fantastic.entities.EntityFantasticFish;
 import fantastic.entities.AI.EntityFFAI.AIState;
 
-public class FFAI_SwimWander extends FFAI_Base 
+public class FFAI_SwimWanderDuskAndDawn extends FFAI_Base 
 {
 
 	int xZone = 0;
@@ -17,7 +17,7 @@ public class FFAI_SwimWander extends FFAI_Base
 	int maxSizeThatChangeDepth = 0;
 	
 	
-	public FFAI_SwimWander(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMaxSizeThatChangeDepth) 
+	public FFAI_SwimWanderDuskAndDawn(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMaxSizeThatChangeDepth) 
 	{
 		super(anAI, aFish,aPriority,aPercentageOfExecution);
 		xZone = aXZone;

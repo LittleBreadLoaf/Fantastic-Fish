@@ -40,7 +40,7 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWander;
+import fantastic.entities.AI.FFAI_SwimWanderDuskAndDawn;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
@@ -93,13 +93,13 @@ public class EntityCatfish extends EntityFantasticFish
 			switch (GetFishSize())
 			{
 				
-				case Tiny : return 0.8F*currentTailFlapSpeedMult;
-				case Small : return 0.6F*currentTailFlapSpeedMult;
-				case Medium : return 0.4F*currentTailFlapSpeedMult;
-				case Big : return 0.3F*currentTailFlapSpeedMult;
-				case Large : return 0.2F*currentTailFlapSpeedMult;
-				case Legendary : return 0.2F*currentTailFlapSpeedMult;
-				default: return 0.8F; 
+			case Tiny : return 1.0F*currentTailFlapSpeedMult;
+			case Small : return 0.8F*currentTailFlapSpeedMult;
+			case Medium : return 0.7F*currentTailFlapSpeedMult;
+			case Big : return 0.6F*currentTailFlapSpeedMult;
+			case Large : return 0.5F*currentTailFlapSpeedMult;
+			case Legendary : return 0.4F*currentTailFlapSpeedMult;
+			default: return 1.0F;  
 
 
 			}
@@ -260,9 +260,9 @@ public class EntityCatfish extends EntityFantasticFish
         this.tasks.taskEntries.clear();
         
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
-        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,2));
-        brain.AddActionToList(new FFAI_SwimWander(brain,this,2,60,7,1,4));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,3,10,7));
+        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
+        brain.AddActionToList(new FFAI_SwimWanderDuskAndDawn(brain,this,2,60,7,1,4));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,3,20,7));
 
 
         

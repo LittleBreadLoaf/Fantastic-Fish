@@ -81,12 +81,13 @@ public class FantasticItems
 	public static Item cookedTroutFillet;
 	public static Item rawCatfishFillet;
 	public static Item cookedCatfishFillet;
-
-	
 	public static Item rawPikeFillet;
 	public static Item cookedPikeFillet;	
 	public static Item rawMuskyFillet;
 	public static Item cookedMuskyFillet;	
+	public static Item rawTunaDarne;
+	public static Item cookedTunaDarne;	
+
 	
 	public static final CreativeTabs tabFantastic = new CreativeTabs("Fantastic Fish Mod")
 	{
@@ -171,8 +172,10 @@ public class FantasticItems
 		cookedPikeFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Pike_Fillet_UnlocalizedName).setTextureName("fantastic:cooked_pike_fillet").setCreativeTab(FantasticItems.tabFantastic);
 		rawMuskyFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Musky_Fillet_UnlocalizedName).setTextureName("fantastic:raw_pike_fillet").setCreativeTab(FantasticItems.tabFantastic); //same fillet texture as the pike
 		cookedMuskyFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Musky_Fillet_UnlocalizedName).setTextureName("fantastic:cooked_pike_fillet").setCreativeTab(FantasticItems.tabFantastic); //same fillet texture as the pike
-		rawCatfishFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Catfish_Fillet_Name).setTextureName("fantastic:fillet_raw").setCreativeTab(FantasticItems.tabFantastic);
+		rawCatfishFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Catfish_Fillet_UnlocalizedName).setTextureName("fantastic:fillet_raw").setCreativeTab(FantasticItems.tabFantastic);
 		cookedCatfishFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Catfish_Fillet_UnlocalizedName).setTextureName("fantastic:fillet_cooked").setCreativeTab(FantasticItems.tabFantastic);
+		rawTunaDarne = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Tuna_Darne_UnlocalizedName).setTextureName("fantastic:raw_tuna_darne").setCreativeTab(FantasticItems.tabFantastic);
+		cookedTunaDarne = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Tuna_Darne_UnlocalizedName).setTextureName("fantastic:cooked_tuna_darne").setCreativeTab(FantasticItems.tabFantastic);
 
 		
 		GameRegistry.registerItem(reinforcedFishingRod, Names.ReinforcedFishingRod_Name);
@@ -225,6 +228,8 @@ public class FantasticItems
 		GameRegistry.registerItem(cookedMuskyFillet, Names.Cooked_Musky_Fillet_Name);
 		GameRegistry.registerItem(rawCatfishFillet, Names.Raw_Catfish_Fillet_Name);
 		GameRegistry.registerItem(cookedCatfishFillet, Names.Cooked_Catfish_Fillet_Name);
+		GameRegistry.registerItem(rawTunaDarne, Names.Raw_Tuna_Darne_Name);
+		GameRegistry.registerItem(cookedTunaDarne, Names.Cooked_Tuna_Darne_Name);
 
 		
 		//Smelting 
@@ -233,6 +238,7 @@ public class FantasticItems
 		GameRegistry.addSmelting(rawPikeFillet,new ItemStack(cookedPikeFillet), 1.0F);
 		GameRegistry.addSmelting(rawMuskyFillet,new ItemStack(cookedMuskyFillet), 1.0F);
 		GameRegistry.addSmelting(rawCatfishFillet,new ItemStack(cookedCatfishFillet), 1.0F);
+		GameRegistry.addSmelting(rawTunaDarne,new ItemStack(cookedTunaDarne), 1.0F);
 
 		
 	}

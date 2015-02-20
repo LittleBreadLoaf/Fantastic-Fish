@@ -17,6 +17,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityCatfish;
+import fantastic.entities.EntityFantasticFish;
  
 public class ModelLongSnout extends ModelBase
 {
@@ -286,34 +287,16 @@ public class ModelLongSnout extends ModelBase
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
   {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    
-    
-    	
-    
-    /*if(entity instanceof EntityCatfish)
-    {
-    	EntityCatfish Fish = (EntityCatfish)entity;
-    	extraSpeed = Fish.extraSpeed;
-    	if(Fish.isInWater())
-    	{
-    		sizeChange = (float)0.7/Fish.getRenderSize();
-    		if(Fish.getRenderSize() < 0.9F)
-    			sizeChange = 1.3F;
-    	}
-    	else
-    	{
-    		sizeChange = 1;
-    	}
-  }*/
-  
+    EntityFantasticFish _fish = (EntityFantasticFish)entity;
+
 
     
-    this.bodysegment1.rotateAngleY = 0.24F *(MathHelper.cos(f2 * sizeChange * 0.127F) );
-    this.bodysegment2.rotateAngleY = 0.22F  *(MathHelper.cos(f2 * sizeChange * 0.127F - (float)(Math.PI/6)) );
-    this.bodysegment3.rotateAngleY = 0.22F *(MathHelper.cos(f2 * sizeChange * 0.127F - (float)(Math.PI/3)) );
-    this.bodysegment4.rotateAngleY = 0.22F *(MathHelper.cos(f2 * sizeChange * 0.127F - (float)(Math.PI/2)) );
-    this.bodysegment5.rotateAngleY = 0.24F *(MathHelper.cos(f2 * sizeChange * 0.127F - (float)(2*Math.PI/3)) );
-    this.bodysegment6.rotateAngleY = 0.26F *(MathHelper.cos(f2 * sizeChange * 0.127F - (float)(5*Math.PI/6)) );
+    this.bodysegment1.rotateAngleY = 0.24F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F) );
+    this.bodysegment2.rotateAngleY = 0.22F  *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/6)) );
+    this.bodysegment3.rotateAngleY = 0.22F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/3)) );
+    this.bodysegment4.rotateAngleY = 0.22F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/2)) );
+    this.bodysegment5.rotateAngleY = 0.24F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(2*Math.PI/3)) );
+    this.bodysegment6.rotateAngleY = 0.26F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(5*Math.PI/6)) );
   }
  
 }
