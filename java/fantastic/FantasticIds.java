@@ -8,6 +8,10 @@ public class FantasticIds
 
 	public static int airCompressorRenderingID;
 	public static int ACRendID_Default = 123;
+	
+
+	public static int skeletonRenderingID;
+	public static int SkelRendID_Default = 124;
 
 	public static int fishermanID;
 	public static final int fishermanID_Default = 12;

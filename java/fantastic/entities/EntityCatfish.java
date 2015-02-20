@@ -189,7 +189,7 @@ public class EntityCatfish extends EntityFantasticFish
 	
 	public static int GetNumberOfTextures()
 	{
-		return 2;
+		return 1;
 	}
 	
 	//*** PROTECTED METHOD ***
