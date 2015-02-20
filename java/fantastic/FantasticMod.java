@@ -28,7 +28,6 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import fantastic.armor.FantasticArmor;
 import fantastic.blocks.FantasticBlocks;
-import fantastic.blocks.decoration.TileSkeletonBlock;
 import fantastic.entities.FantasticEntities;
 import fantastic.events.FantasticEvents;
 import fantastic.events.VillagerTradeHandler;
@@ -143,7 +142,7 @@ public class FantasticMod
 		proxy.initTileRenders();
 
 		GameRegistry.registerTileEntity(TileAirCompressor.class, "AirCompressor");
-		GameRegistry.registerTileEntity(TileSkeletonBlock.class, "SkeletonBlock");
+	
 	}
 
 	@EventHandler
