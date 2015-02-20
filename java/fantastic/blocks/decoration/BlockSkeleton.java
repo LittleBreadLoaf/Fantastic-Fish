@@ -79,7 +79,9 @@ public class BlockSkeleton extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata)
 	{
-        
-		return new TileSkeletonBlock(-rotation);
+        TileSkeletonBlock Skelly = new TileSkeletonBlock();
+        Skelly.setRotation(-rotation);
+		return Skelly;
+		
 	}
 }

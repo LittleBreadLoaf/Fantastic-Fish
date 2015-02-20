@@ -111,20 +111,19 @@ public class RenderSkeletonBlock extends TileEntitySpecialRenderer implements IS
   @Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float f)
 	{
-	  float rotation = 0;
 	  if(tile instanceof TileSkeletonBlock)
 	  {
 		  this.Skeleton = (TileSkeletonBlock)tile;
-		  rotation = Skeleton.getRotation();
-	  }
+	 
 
 		glPushMatrix();
 		glTranslated(x + 0.5D, y - 1.05D, z + 0.5D);
-		glRotatef(rotation, 0F, 1F, 0F);
+		glRotatef(Skeleton.getRotation(), 0F, 1F, 0F);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(this.TEXTURE);
 		this.render(0.0625F);
 		glPopMatrix();
+	  }
 	}
 
 @Override

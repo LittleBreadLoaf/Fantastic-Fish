@@ -12,10 +12,9 @@ public class TileSkeletonBlock extends TileEntity
 	
 	private float rotation;
 	
-	public TileSkeletonBlock(float rot)
+	public TileSkeletonBlock()
 	{
 		super();
-		rotation = rot;
 	}
 	
 	@Override
@@ -40,6 +39,7 @@ public class TileSkeletonBlock extends TileEntity
 
 		compound.setFloat("Rotation", this.getRotation());
 		super.writeToNBT(compound);
+		
 
 	}
 	@Override
@@ -47,16 +47,13 @@ public class TileSkeletonBlock extends TileEntity
 	{
 		this.setRotation(compound.getFloat("Rotation"));
 		super.readFromNBT(compound);
+
 	
 
 	}
 	
 	
-	public Packet getDescriptionPacket() {
-	    NBTTagCompound tagCompound = new NBTTagCompound();
-	    writeToNBT(tagCompound);
-	    return null;
-	}
+	
 	
 
 }
