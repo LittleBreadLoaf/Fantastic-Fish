@@ -14,14 +14,16 @@ public class FFAI_SwimWanderLikeSunnyAfternoon extends FFAI_Base
 
 	int xZone = 0;
 	int yZone = 0;
+	int minRangeSwim = -1;
 	int maxSizeThatChangeDepth = 0;
 	
 	
-	public FFAI_SwimWanderLikeSunnyAfternoon(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMaxSizeThatChangeDepth) 
+	public FFAI_SwimWanderLikeSunnyAfternoon(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMinRangeSwim, int aMaxSizeThatChangeDepth) 
 	{
 		super(anAI, aFish,aPriority,aPercentageOfExecution);
 		xZone = aXZone;
 		yZone = aYZone;
+		minRangeSwim=aMinRangeSwim;
 		maxSizeThatChangeDepth=aMaxSizeThatChangeDepth;
 	
 	}
@@ -50,18 +52,18 @@ public class FFAI_SwimWanderLikeSunnyAfternoon extends FFAI_Base
         				if ((_time>=6000) && (_time<=10000))
 	        			{
 	        				//Fish ascend during bright daylight between noon and 16h00 to get sunlight
-	        				ffai.targetCoor=FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4);
+	        				ffai.targetCoor=FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
 	        			}
 	        			else
 	        			{
 	        				//At another time its random
-	        				ffai.targetCoor=FishMovementHelper.findRandomTarget((EntityCreature)ffish, xZone,4);
+	        				ffai.targetCoor=FishMovementHelper.findRandomTarget((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
 	        			}
         			}
         			else
         			{
         				//Fish of size large and legendary will stay deep
-        				ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4);
+        				ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
         				
         			}
         			

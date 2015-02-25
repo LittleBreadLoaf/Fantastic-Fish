@@ -16,7 +16,7 @@ public class FantasticNetwork
 		network.registerMessage(DecideMessage.Handler.class, DecideMessage.class, 0, Side.SERVER);
 		network.registerMessage(MoveMessage.Handler.class, MoveMessage.class, 1, Side.CLIENT);
 		network.registerMessage(ACMessage.Handler.class, ACMessage.class, 2, Side.SERVER);
-		network.registerMessage(TailSpeedMessage.class, TailSpeedMessage.class, 3, Side.CLIENT);
+		network.registerMessage(FishSpeedMessage.class, FishSpeedMessage.class, 3, Side.CLIENT);
 	}
 	
 	

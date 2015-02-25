@@ -372,12 +372,12 @@ public class ModelBasicFish extends ModelBase
 //  
 //  
     //FantasticDebug.Output("TAIL SPEED "+Float.toString(_fish.GetTailFlapSpeed()),true);
-    this.bodysection1.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F) );
-    this.bodysection2.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/6)) );
-    this.bodysection3.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/3)) );
-    this.bodysection4.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/2)) );
-    this.bodysection5.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(2*Math.PI/3)) );
-    this.bodysection6.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(5*Math.PI/6)) );
+    this.bodysection1.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F) );
+    this.bodysection2.rotateAngleY = 0.2F *(MathHelper.cos(f2 *_fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/6)) );
+    this.bodysection3.rotateAngleY = 0.2F *(MathHelper.cos(f2 *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/3)) );
+    this.bodysection4.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/2)) );
+    this.bodysection5.rotateAngleY = 0.2F *(MathHelper.cos(f2 *  _fish.GetTailFlapSpeed() * 0.527F - (float)(2*Math.PI/3)) );
+    this.bodysection6.rotateAngleY = 0.2F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F - (float)(5*Math.PI/6)) );
 
     
 //    this.bodysection1.rotateAngleY = 0.2F *(MathHelper.cos(f2 *extraSpeed * sizeChange * 0.527F) );

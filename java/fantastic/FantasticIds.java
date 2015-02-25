@@ -431,7 +431,128 @@ public class FantasticIds
 	
 	public static int largeTunaMaxInstances;
 	public static int largeTunaMaxInstances_Default = 2;
+	
+	// Sailfish Tiny
+	public static int tinySailfishSpawnProbability;
+	public static int tinySailfishSpawnProbability_Default=400;
+	
+	public static int tinySailfishMinDepth;
+	public static int tinySailfishMinDepth_Default = -1;
+	
+	public static int tinySailfishMaxInstances;
+	public static int tinySailfishMaxInstances_Default = -1;
+	
+	// Sailfish Small
+	public static int smallSailfishSpawnProbability;
+	public static int smallSailfishSpawnProbability_Default=300;
+	
+	public static int smallSailfishMinDepth;
+	public static int smallSailfishMinDepth_Default = -1;
+	
+	public static int smallSailfishMaxInstances;
+	public static int smallSailfishMaxInstances_Default = -1;
 
+	// Sailfish Medium
+	public static int mediumSailfishSpawnProbability;
+	public static int mediumSailfishSpawnProbability_Default=150;
+	
+	public static int mediumSailfishMinDepth;
+	public static int mediumSailfishMinDepth_Default = 5;
+	
+	public static int mediumSailfishMaxInstances;
+	public static int mediumSailfishMaxInstances_Default = -1;
+	
+	// Sailfish Big
+	public static int bigSailfishSpawnProbability;
+	public static int bigSailfishSpawnProbability_Default=90;
+	
+	public static int bigSailfishMinDepth;
+	public static int bigSailfishMinDepth_Default = 6;
+	
+	public static int bigSailfishMaxInstances;
+	public static int bigSailfishMaxInstances_Default = -1;
+	
+	// Sailfish Large
+	public static int largeSailfishSpawnProbability;
+	public static int largeSailfishSpawnProbability_Default=50;
+	
+	public static int largeSailfishMinDepth;
+	public static int largeSailfishMinDepth_Default = 10;
+	
+	public static int largeSailfishMaxInstances;
+	public static int largeSailfishMaxInstances_Default = 2;
+
+	// Sailfish Legendary
+	public static int legSailfishSpawnProbability;
+	public static int legSailfishSpawnProbability_Default=10;
+	
+	public static int legSailfishMinDepth;
+	public static int legSailfishMinDepth_Default = 12;
+	
+	public static int legSailfishMaxInstances;
+	public static int legSailfishMaxInstances_Default = 2;
+
+	// MantaRay Tiny
+	public static int tinyMantaRaySpawnProbability;
+	public static int tinyMantaRaySpawnProbability_Default=400;
+	
+	public static int tinyMantaRayMinDepth;
+	public static int tinyMantaRayMinDepth_Default = -1;
+	
+	public static int tinyMantaRayMaxInstances;
+	public static int tinyMantaRayMaxInstances_Default = -1;
+	
+	// MantaRay Small
+	public static int smallMantaRaySpawnProbability;
+	public static int smallMantaRaySpawnProbability_Default=300;
+	
+	public static int smallMantaRayMinDepth;
+	public static int smallMantaRayMinDepth_Default = -1;
+	
+	public static int smallMantaRayMaxInstances;
+	public static int smallMantaRayMaxInstances_Default = -1;
+
+	// MantaRay Medium
+	public static int mediumMantaRaySpawnProbability;
+	public static int mediumMantaRaySpawnProbability_Default=150;
+	
+	public static int mediumMantaRayMinDepth;
+	public static int mediumMantaRayMinDepth_Default = 5;
+	
+	public static int mediumMantaRayMaxInstances;
+	public static int mediumMantaRayMaxInstances_Default = -1;
+	
+	// MantaRay Big
+	public static int bigMantaRaySpawnProbability;
+	public static int bigMantaRaySpawnProbability_Default=90;
+	
+	public static int bigMantaRayMinDepth;
+	public static int bigMantaRayMinDepth_Default = 6;
+	
+	public static int bigMantaRayMaxInstances;
+	public static int bigMantaRayMaxInstances_Default = -1;
+	
+	// MantaRay Large
+	public static int largeMantaRaySpawnProbability;
+	public static int largeMantaRaySpawnProbability_Default=50;
+	
+	public static int largeMantaRayMinDepth;
+	public static int largeMantaRayMinDepth_Default = 10;
+	
+	public static int largeMantaRayMaxInstances;
+	public static int largeMantaRayMaxInstances_Default = 2;
+
+	// MantaRay Legendary
+	public static int legMantaRaySpawnProbability;
+	public static int legMantaRaySpawnProbability_Default=10;
+	
+	public static int legMantaRayMinDepth;
+	public static int legMantaRayMinDepth_Default = 12;
+	
+	public static int legMantaRayMaxInstances;
+	public static int legMantaRayMaxInstances_Default = 2;
+
+	
 	// Tuna Legendary
 	public static int legTunaSpawnProbability;
 	public static int legTunaSpawnProbability_Default=10;
@@ -621,6 +742,74 @@ public class FantasticIds
 	
 	public static int legFeederMaxInstances;
 	public static int legFeederMaxInstances_Default = 2;
+	
+	
+	//*** SHARKS ***
+	
+	// WhiteTipShark Tiny
+	public static int tinyWhiteTipSharkSpawnProbability;
+	public static int tinyWhiteTipSharkSpawnProbability_Default=400;
+	
+	public static int tinyWhiteTipSharkMinDepth;
+	public static int tinyWhiteTipSharkMinDepth_Default = -1;
+	
+	public static int tinyWhiteTipSharkMaxInstances;
+	public static int tinyWhiteTipSharkMaxInstances_Default = -1;
+	
+	// WhiteTipShark Small
+	public static int smallWhiteTipSharkSpawnProbability;
+	public static int smallWhiteTipSharkSpawnProbability_Default=300;
+	
+	public static int smallWhiteTipSharkMinDepth;
+	public static int smallWhiteTipSharkMinDepth_Default = -1;
+	
+	public static int smallWhiteTipSharkMaxInstances;
+	public static int smallWhiteTipSharkMaxInstances_Default = -1;
+
+	// WhiteTipShark Medium
+	public static int mediumWhiteTipSharkSpawnProbability;
+	public static int mediumWhiteTipSharkSpawnProbability_Default=150;
+	
+	public static int mediumWhiteTipSharkMinDepth;
+	public static int mediumWhiteTipSharkMinDepth_Default = 5;
+	
+	public static int mediumWhiteTipSharkMaxInstances;
+	public static int mediumWhiteTipSharkMaxInstances_Default = -1;
+	
+	// WhiteTipShark Big
+	public static int bigWhiteTipSharkSpawnProbability;
+	public static int bigWhiteTipSharkSpawnProbability_Default=90;
+	
+	public static int bigWhiteTipSharkMinDepth;
+	public static int bigWhiteTipSharkMinDepth_Default = 6;
+	
+	public static int bigWhiteTipSharkMaxInstances;
+	public static int bigWhiteTipSharkMaxInstances_Default = -1;
+	
+	// WhiteTipShark Large
+	public static int largeWhiteTipSharkSpawnProbability;
+	public static int largeWhiteTipSharkSpawnProbability_Default=50;
+	
+	public static int largeWhiteTipSharkMinDepth;
+	public static int largeWhiteTipSharkMinDepth_Default = 10;
+	
+	public static int largeWhiteTipSharkMaxInstances;
+	public static int largeWhiteTipSharkMaxInstances_Default = 2;
+
+	// WhiteTipShark Legendary
+	public static int legWhiteTipSharkSpawnProbability;
+	public static int legWhiteTipSharkSpawnProbability_Default=10;
+	
+	public static int legWhiteTipSharkMinDepth;
+	public static int legWhiteTipSharkMinDepth_Default = 12;
+	
+	public static int legWhiteTipSharkMaxInstances;
+	public static int legWhiteTipSharkMaxInstances_Default = 2;
+	
+	
+	
+	
+	
 	
 	
 	public static int tinySpawnRate;

@@ -37,7 +37,6 @@ import fantastic.network.ACMessage;
 import fantastic.network.DecideMessage;
 import fantastic.network.FantasticNetwork;
 import fantastic.network.MoveMessage;
-import fantastic.network.TailSpeedMessage;
 import fantastic.proxies.CommonProxy;
 import fantastic.spawner.SmartSpawnerControl;
 import fantastic.tiles.TileAirCompressor;

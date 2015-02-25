@@ -14,14 +14,16 @@ public class FFAI_SwimWanderLikeDeep extends FFAI_Base
 
 	int xZone = 0;
 	int yZone = 0;
+	int minRangeSwim = -1;
 	int maxSizeThatChangeDepth = 0;
 	
 	
-	public FFAI_SwimWanderLikeDeep(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMaxSizeThatChangeDepth) 
+	public FFAI_SwimWanderLikeDeep(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMinRangeSwim, int aMaxSizeThatChangeDepth) 
 	{
 		super(anAI, aFish,aPriority,aPercentageOfExecution);
 		xZone = aXZone;
 		yZone = aYZone;
+		minRangeSwim=aMinRangeSwim;
 		maxSizeThatChangeDepth=aMaxSizeThatChangeDepth;
 	
 	}
@@ -43,7 +45,7 @@ public class FFAI_SwimWanderLikeDeep extends FFAI_Base
         		{
 
     				//Fish of size large and legendary will stay deep
-        			ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4);
+        			ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
     			
         			if(ffai.targetCoor!=null)
         			{

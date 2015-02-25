@@ -22,13 +22,16 @@ import fantastic.entities.EntityFantasticFish;
 import fantastic.entities.EntityFantasticFish.FishSize;
 import fantastic.entities.EntityFeeder;
 import fantastic.entities.EntityFungus;
+import fantastic.entities.EntityMantaRay;
 import fantastic.entities.EntityMossy;
 import fantastic.entities.EntityMusky;
 import fantastic.entities.EntityPike;
+import fantastic.entities.EntitySailfish;
 import fantastic.entities.EntitySalmon;
 import fantastic.entities.EntityTrout;
 import fantastic.entities.EntityTuna;
 import fantastic.entities.AI.FishMovementHelper;
+import fantastic.entities.sharks.EntityWhiteTipShark;
 
 public class SmartSpawnerControl 
 {
@@ -104,7 +107,23 @@ public class SmartSpawnerControl
 		AddClassControlItem(EntityTuna.class, FishSize.Big, FantasticIds.bigTunaMaxInstances, FantasticIds.bigTunaMinDepth, FantasticIds.bigTunaSpawnProbability);
 		AddClassControlItem(EntityTuna.class, FishSize.Large, FantasticIds.largeTunaMaxInstances, FantasticIds.largeTunaMinDepth, FantasticIds.largeTunaSpawnProbability);
 		AddClassControlItem(EntityTuna.class, FishSize.Legendary, FantasticIds.legTunaMaxInstances, FantasticIds.legTunaMinDepth, FantasticIds.legTunaSpawnProbability);
+		
+		//Sailfish
+		AddClassControlItem(EntitySailfish.class, FishSize.Tiny, FantasticIds.tinySailfishMaxInstances, FantasticIds.tinySailfishMinDepth, FantasticIds.tinySailfishSpawnProbability);
+		AddClassControlItem(EntitySailfish.class, FishSize.Small, FantasticIds.smallSailfishMaxInstances, FantasticIds.smallSailfishMinDepth, FantasticIds.smallSailfishSpawnProbability);
+		AddClassControlItem(EntitySailfish.class, FishSize.Medium, FantasticIds.mediumSailfishMaxInstances, FantasticIds.mediumSailfishMinDepth, FantasticIds.mediumSailfishSpawnProbability);
+		AddClassControlItem(EntitySailfish.class, FishSize.Big, FantasticIds.bigSailfishMaxInstances, FantasticIds.bigSailfishMinDepth, FantasticIds.bigSailfishSpawnProbability);
+		AddClassControlItem(EntitySailfish.class, FishSize.Large, FantasticIds.largeSailfishMaxInstances, FantasticIds.largeSailfishMinDepth, FantasticIds.largeSailfishSpawnProbability);
+		AddClassControlItem(EntitySailfish.class, FishSize.Legendary, FantasticIds.legSailfishMaxInstances, FantasticIds.legSailfishMinDepth, FantasticIds.legSailfishSpawnProbability);
 
+		//MantaRay
+		AddClassControlItem(EntityMantaRay.class, FishSize.Tiny, FantasticIds.tinyMantaRayMaxInstances, FantasticIds.tinyMantaRayMinDepth, FantasticIds.tinyMantaRaySpawnProbability);
+		AddClassControlItem(EntityMantaRay.class, FishSize.Small, FantasticIds.smallMantaRayMaxInstances, FantasticIds.smallMantaRayMinDepth, FantasticIds.smallMantaRaySpawnProbability);
+		AddClassControlItem(EntityMantaRay.class, FishSize.Medium, FantasticIds.mediumMantaRayMaxInstances, FantasticIds.mediumMantaRayMinDepth, FantasticIds.mediumMantaRaySpawnProbability);
+		AddClassControlItem(EntityMantaRay.class, FishSize.Big, FantasticIds.bigMantaRayMaxInstances, FantasticIds.bigMantaRayMinDepth, FantasticIds.bigMantaRaySpawnProbability);
+		AddClassControlItem(EntityMantaRay.class, FishSize.Large, FantasticIds.largeMantaRayMaxInstances, FantasticIds.largeMantaRayMinDepth, FantasticIds.largeMantaRaySpawnProbability);
+		AddClassControlItem(EntityMantaRay.class, FishSize.Legendary, FantasticIds.legMantaRayMaxInstances, FantasticIds.legMantaRayMinDepth, FantasticIds.legMantaRaySpawnProbability);
+		
 		//Fungus
 		AddClassControlItem(EntityFungus.class, FishSize.Tiny, FantasticIds.tinyFungusMaxInstances, FantasticIds.tinyFungusMinDepth, FantasticIds.tinyFungusSpawnProbability);
 		AddClassControlItem(EntityFungus.class, FishSize.Small, FantasticIds.smallFungusMaxInstances, FantasticIds.smallFungusMinDepth, FantasticIds.smallFungusSpawnProbability);
@@ -129,7 +148,15 @@ public class SmartSpawnerControl
 		AddClassControlItem(EntityFeeder.class, FishSize.Large, FantasticIds.largeFeederMaxInstances, FantasticIds.largeFeederMinDepth, FantasticIds.largeFeederSpawnProbability);
 		AddClassControlItem(EntityFeeder.class, FishSize.Legendary, FantasticIds.legFeederMaxInstances, FantasticIds.legFeederMinDepth, FantasticIds.legFeederSpawnProbability);
 
+		//WhiteTipShark
+		AddClassControlItem(EntityWhiteTipShark.class, FishSize.Tiny, FantasticIds.tinyWhiteTipSharkMaxInstances, FantasticIds.tinyWhiteTipSharkMinDepth, FantasticIds.tinyWhiteTipSharkSpawnProbability);
+		AddClassControlItem(EntityWhiteTipShark.class, FishSize.Small, FantasticIds.smallWhiteTipSharkMaxInstances, FantasticIds.smallWhiteTipSharkMinDepth, FantasticIds.smallWhiteTipSharkSpawnProbability);
+		AddClassControlItem(EntityWhiteTipShark.class, FishSize.Medium, FantasticIds.mediumWhiteTipSharkMaxInstances, FantasticIds.mediumWhiteTipSharkMinDepth, FantasticIds.mediumWhiteTipSharkSpawnProbability);
+		AddClassControlItem(EntityWhiteTipShark.class, FishSize.Big, FantasticIds.bigWhiteTipSharkMaxInstances, FantasticIds.bigWhiteTipSharkMinDepth, FantasticIds.bigWhiteTipSharkSpawnProbability);
+		AddClassControlItem(EntityWhiteTipShark.class, FishSize.Large, FantasticIds.largeWhiteTipSharkMaxInstances, FantasticIds.largeWhiteTipSharkMinDepth, FantasticIds.largeWhiteTipSharkSpawnProbability);
+		AddClassControlItem(EntityWhiteTipShark.class, FishSize.Legendary, FantasticIds.legWhiteTipSharkMaxInstances, FantasticIds.legWhiteTipSharkMinDepth, FantasticIds.legWhiteTipSharkSpawnProbability);
 
+		
 
 	}
 
@@ -249,7 +276,7 @@ public class SmartSpawnerControl
 				//Check the water depth
 				if (_item.IsCheckingWaterDept())
 				{
-					int _depth = FishMovementHelper.getWaterDept(anEntity.worldObj, anEntity.posX, anEntity.posY, anEntity.posZ);
+					int _depth = FishMovementHelper.GetWaterDepth(anEntity.worldObj, anEntity.posX, anEntity.posY, anEntity.posZ);
 					if (!_item.RespectWaterDepth(_depth))
 					{
 						//Water depth is not respected. Killing entity.
@@ -305,7 +332,7 @@ public class SmartSpawnerControl
 			List _itemList = new ArrayList();
 			
 			//Get the water depth
-			int _depth = FishMovementHelper.getWaterDept(anEntity.worldObj, anEntity.posX, anEntity.posY, anEntity.posZ);
+			int _depth = FishMovementHelper.GetWaterDepth(anEntity.worldObj, anEntity.posX, anEntity.posY, anEntity.posZ);
 			
 			//Get the spawn control item for all the sizes for that specific class of fish
 			if (anEntity.GetHasDifferentSize())

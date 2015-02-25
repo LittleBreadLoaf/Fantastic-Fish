@@ -291,12 +291,12 @@ public class ModelLongSnout extends ModelBase
 
 
     
-    this.bodysegment1.rotateAngleY = 0.24F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F) );
-    this.bodysegment2.rotateAngleY = 0.22F  *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/6)) );
-    this.bodysegment3.rotateAngleY = 0.22F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/3)) );
-    this.bodysegment4.rotateAngleY = 0.22F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/2)) );
-    this.bodysegment5.rotateAngleY = 0.24F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(2*Math.PI/3)) );
-    this.bodysegment6.rotateAngleY = 0.26F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.127F - (float)(5*Math.PI/6)) );
+    this.bodysegment1.rotateAngleY = 0.24F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.127F) );
+    this.bodysegment2.rotateAngleY = 0.22F  *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/6)) );
+    this.bodysegment3.rotateAngleY = 0.22F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/3)) );
+    this.bodysegment4.rotateAngleY = 0.22F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.127F - (float)(Math.PI/2)) );
+    this.bodysegment5.rotateAngleY = 0.24F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.127F - (float)(2*Math.PI/3)) );
+    this.bodysegment6.rotateAngleY = 0.26F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.127F - (float)(5*Math.PI/6)) );
   }
  
 }

@@ -1,5 +1,32 @@
 package fantastic.entities.sharks;
 
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import fantastic.entities.EntityFantasticFish;
+
+public class EntityFantasticShark extends EntityFantasticFish
+
+{
+
+	public EntityFantasticShark(World aWorld) 
+	{
+		super(aWorld);
+
+	}
+	
+	public ResourceLocation GetTexture()
+	{
+		return null;
+		
+	}
+	
+
+	
+}
+
+
+/*package fantastic.entities.sharks;
+
 import java.util.List;
 import java.util.Random;
 
@@ -93,9 +120,7 @@ public class EntityBasicShark extends EntityWaterMob
 		return EnumCreatureAttribute.UNDEFINED;
 	}
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
+
 	protected String getHurtSound()
 	{
 
@@ -104,9 +129,7 @@ public class EntityBasicShark extends EntityWaterMob
 
 	}
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
+
 	protected String getLivingSound()
 	{
 	
@@ -114,9 +137,7 @@ public class EntityBasicShark extends EntityWaterMob
 		
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
+
 	protected String getDeathSound()
 	{
 		return null;
@@ -139,9 +160,6 @@ public class EntityBasicShark extends EntityWaterMob
 	}
 
 
-	/**
-	 * Called when the mob's health reaches 0.
-	 */
 	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
@@ -162,9 +180,7 @@ public class EntityBasicShark extends EntityWaterMob
 		this.dataWatcher.addObject(19, Integer.valueOf(0));
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
+
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
@@ -172,9 +188,6 @@ public class EntityBasicShark extends EntityWaterMob
 		
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
@@ -182,11 +195,7 @@ public class EntityBasicShark extends EntityWaterMob
 	}
 
 	
-	/**
-	 * randomly selected ChunkCoordinates in a 7x6x7 box around the bat (y
-	 * offset -2 to 4) towards which it will fly. upon getting close a new
-	 * target will be selected
-	 */
+
 	
 	public void setPosition(double par1, double par3, double par5) {
 		super.setPosition(par1, par3, par5);
@@ -430,11 +439,8 @@ public class EntityBasicShark extends EntityWaterMob
 	
 	
 
-	 /**
-	     * Determines if an entity can be despawned, used on idle far away entities
-	     */
 	    protected boolean canDespawn()
 	    {
 	        return this.hasCustomNameTag() ? false : true;
 	    }
-}
+}*/

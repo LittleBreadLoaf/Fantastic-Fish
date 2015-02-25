@@ -14,14 +14,18 @@ public class FFAI_SwimJumpForFlies extends FFAI_Base
 {
 
 	int maxSizeThatJump=0;
+	private long startTime = -1;
+	private long stopTime = -1;
 	
 
 	
 	
-	public FFAI_SwimJumpForFlies(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution, int aMaxSizeThatJump) 
+	public FFAI_SwimJumpForFlies(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, long aStartTime, long aStopTime, int aPercentageOfExecution, int aMaxSizeThatJump) 
 	{
 		super(anAI, aFish,aPriority,aPercentageOfExecution);
 		maxSizeThatJump=aMaxSizeThatJump;
+		startTime=aStartTime;
+		stopTime=aStopTime;
 	
 	}
 
@@ -33,7 +37,7 @@ public class FFAI_SwimJumpForFlies extends FFAI_Base
 			
 			int _sizeOrdinal = ffish.GetFishSize().ordinal();
 
-			if (ffai.isDusk() && (_sizeOrdinal<=maxSizeThatJump)) //Only jump for flies at dusk
+			if ((ffai.CheckCurrentTimeBetweenInterval(startTime, stopTime)) && (_sizeOrdinal<=maxSizeThatJump)) //Only jump for flies at dusk
 			{
 	        	//First, check the roll time if the action can be done at this time.
 	        	long _currentTime = System.currentTimeMillis();

@@ -41,7 +41,7 @@ import fantastic.entities.EntityMossy;
 import fantastic.entities.EntityNurseShark;
 import fantastic.entities.EntitySalmon;
 import fantastic.entities.EntityTuna;
-import fantastic.entities.sharks.EntityBasicShark;
+import fantastic.entities.sharks.EntityFantasticShark;
 import fantastic.items.FantasticItems;
 import fantastic.proxies.CommonProxy;
 import fantastic.spawner.SmartSpawnerControl;
@@ -495,7 +495,7 @@ public class FantasticEvents
 	@SubscribeEvent
 	public void onLivingJumpEvent(LivingJumpEvent event)
 	{
-		if(event.entityLiving instanceof EntityNurseShark || event.entityLiving instanceof EntityBasicShark)
+		if(event.entityLiving instanceof EntityNurseShark || event.entityLiving instanceof EntityFantasticShark)
 		{
 			event.entityLiving.motionY -= 0.12F;
 		}
@@ -557,10 +557,10 @@ public class FantasticEvents
 				}
 			}
 		}
-		if(event.entityLiving instanceof EntityBasicShark)
+		if(event.entityLiving instanceof EntityFantasticShark)
 		{
-			EntityBasicShark shark = (EntityBasicShark)event.entityLiving;
-			shark.attackTimer = 60;
+			EntityFantasticShark shark = (EntityFantasticShark)event.entityLiving;
+			//shark.attackTimer = 60;
 		}
 		
 		
@@ -638,14 +638,15 @@ public class FantasticEvents
 		}
 		
 		
-		if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityBasicShark)
+		/*if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityBasicShark)
 		{
 
 				((EntityBasicShark)event.source.getEntity()).setHungry(1200);
 				((EntityBasicShark)event.source.getEntity()).heal(2.0F);
 			
 			
-		}
+		}*/
+		
 		if(!event.entity.worldObj.isRemote)
 		{
 			if(event.entity instanceof EntityPlayer)

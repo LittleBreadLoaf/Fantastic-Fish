@@ -40,7 +40,6 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWanderDuskAndDawn;
 import fantastic.entities.AI.FFAI_SwimWanderFullRandom;
 import fantastic.entities.AI.FFAI_SwimWanderLikeSurface;
 import fantastic.entities.AI.FishMovementHelper;
@@ -56,7 +55,7 @@ public class EntityTuna extends EntityFantasticFish
 	public EntityTuna(World aWorld)
 	{
 		super(aWorld);
-		brain=new EntityFFAI(this,1000,3000,-1,-1,-1,-1);
+		brain=new EntityFFAI(this,1000,3000);
 		InitializeAI();
 	}
 
@@ -87,7 +86,7 @@ public class EntityTuna extends EntityFantasticFish
 		return true;
 	}
 	
-	@Override
+	/*@Override
 	public float GetTailFlapSpeed()
 	{
 		
@@ -96,17 +95,17 @@ public class EntityTuna extends EntityFantasticFish
 			switch (GetFishSize())
 			{
 				
-				case Tiny : return 1.0F*currentTailFlapSpeedMult;
-				case Small : return 0.8F*currentTailFlapSpeedMult;
-				case Medium : return 0.7F*currentTailFlapSpeedMult;
-				case Big : return 0.6F*currentTailFlapSpeedMult;
-				case Large : return 0.5F*currentTailFlapSpeedMult;
-				case Legendary : return 0.4F*currentTailFlapSpeedMult;
-				default: return 1.0F; 
+				case Tiny : return 1.1F*currentTailFlapSpeedMult;
+				case Small : return 0.9F*currentTailFlapSpeedMult;
+				case Medium : return 0.8F*currentTailFlapSpeedMult;
+				case Big : return 0.7F*currentTailFlapSpeedMult;
+				case Large : return 0.6F*currentTailFlapSpeedMult;
+				case Legendary : return 0.5F*currentTailFlapSpeedMult;
+				default: return 1.1F; 
 
 
 			}
-	}
+	}*/
 	
 	
 	@Override
@@ -141,7 +140,7 @@ public class EntityTuna extends EntityFantasticFish
 	}
     
     @Override
-    public double GetSpeedFromAIState(AIState aState)
+    public float GetSpeedFromAIState(AIState aState)
     {
     	if (aState==AIState.Idle)
     	{
@@ -215,6 +214,24 @@ public class EntityTuna extends EntityFantasticFish
 			default: return 0; 
 		}
     }
+    
+    
+    //Must be override. Will determine what is the minimum depth for the fish to swim in an area. Bigger fish will avoid shallow water.
+    @Override
+    public int GetMinimumDepth()
+    {
+
+    	switch (this.currentSize)
+    	{
+	    	case Tiny: return 4;
+	    	case Small: return 4;
+	    	case Medium: return 5;
+	    	case Big: return 6;
+	    	case Large: return 6;
+	    	case Legendary: return 6;
+	    	default: return 6;
+        }
+    }
 	
 	//*** PROTECTED METHOD ***
 	@Override
@@ -285,8 +302,9 @@ public class EntityTuna extends EntityFantasticFish
         
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimWanderLikeSurface(brain,this,2,80,12,1));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,3,20,7));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,2,20,7));
+        brain.AddActionToList(new FFAI_SwimWanderLikeSurface(brain,this,3,100,12,1,8));
+
 
 
         

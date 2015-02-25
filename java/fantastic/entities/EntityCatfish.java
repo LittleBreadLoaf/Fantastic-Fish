@@ -40,7 +40,7 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWanderDuskAndDawn;
+import fantastic.entities.AI.FFAI_SwimWanderAscendAtTime;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
@@ -53,7 +53,7 @@ public class EntityCatfish extends EntityFantasticFish
 	public EntityCatfish(World aWorld)
 	{
 		super(aWorld);
-		brain=new EntityFFAI(this,10000,15000,22500,4000,9500,14000);
+		brain=new EntityFFAI(this,10000,15000);
 		InitializeAI();
 	}
 
@@ -84,7 +84,7 @@ public class EntityCatfish extends EntityFantasticFish
 		return true;
 	}
 	
-	@Override
+	/*@Override
 	public float GetTailFlapSpeed()
 	{
 		
@@ -103,7 +103,7 @@ public class EntityCatfish extends EntityFantasticFish
 
 
 			}
-	}
+	}*/
 	
 	
 	@Override
@@ -138,7 +138,7 @@ public class EntityCatfish extends EntityFantasticFish
 	}
     
     @Override
-    public double GetSpeedFromAIState(AIState aState)
+    public float GetSpeedFromAIState(AIState aState)
     {
     	if (aState==AIState.StayStill)
     	{
@@ -261,8 +261,9 @@ public class EntityCatfish extends EntityFantasticFish
         
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimWanderDuskAndDawn(brain,this,2,60,7,1,4));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,3,20,7));
+        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,2,22500,4000,50,7,1,-1,4));
+        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,3,9500,14000,50,7,1,-1,4));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,4,20,7));
 
 
         

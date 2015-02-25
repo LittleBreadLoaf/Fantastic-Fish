@@ -1,4 +1,4 @@
-package fantastic.entities;
+package fantastic.entities.sharks;
 
 import java.util.List;
 import java.util.Random;
@@ -40,27 +40,27 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWanderLikeDeep;
-import fantastic.entities.AI.FFAI_SwimWanderLikeSunnyAfternoon;
+import fantastic.entities.AI.FFAI_SwimWanderFullRandom;
+import fantastic.entities.AI.FFAI_SwimWanderLikeSurface;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
-public class EntityMusky extends EntityFantasticFish
+public class EntityWhiteTipShark extends EntityFantasticShark
 {
 	//Textures
-	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/musky1.png");
+	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/white_tip_shark.png");
 
 	
 	//CONSTRUCTOR
-	public EntityMusky(World aWorld)
+	public EntityWhiteTipShark(World aWorld)
 	{
 		super(aWorld);
-		brain=new EntityFFAI(this,10000,15000);
+		brain=new EntityFFAI(this,1000,3000);
 		InitializeAI();
 	}
 
 	//CONSTRUCTOR
-	public EntityMusky(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
+	public EntityWhiteTipShark(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
 	{
 		this(aWorld);
 		InitializeFish(aSize,aTextureIndex,isOutOfWater);
@@ -95,13 +95,13 @@ public class EntityMusky extends EntityFantasticFish
 			switch (GetFishSize())
 			{
 				
-				case Tiny : return 1.0F*currentTailFlapSpeedMult;
-				case Small : return 0.8F*currentTailFlapSpeedMult;
-				case Medium : return 0.7F*currentTailFlapSpeedMult;
-				case Big : return 0.6F*currentTailFlapSpeedMult;
-				case Large : return 0.5F*currentTailFlapSpeedMult;
-				case Legendary : return 0.4F*currentTailFlapSpeedMult;
-				default: return 1.0F; 
+				case Tiny : return 1.1F*currentTailFlapSpeedMult;
+				case Small : return 0.9F*currentTailFlapSpeedMult;
+				case Medium : return 0.8F*currentTailFlapSpeedMult;
+				case Big : return 0.7F*currentTailFlapSpeedMult;
+				case Large : return 0.6F*currentTailFlapSpeedMult;
+				case Legendary : return 0.5F*currentTailFlapSpeedMult;
+				default: return 1.1F; 
 
 
 			}
@@ -129,13 +129,13 @@ public class EntityMusky extends EntityFantasticFish
 	{
 		switch (GetFishSize())
 		{
-			case Tiny : return 0.15F;
-			case Small : return 0.60F;
-			case Medium : return 0.70F;
-			case Big : return 0.9F;
-			case Large : return 1.3F;
-			case Legendary : return 1.7F;
-			default: return 0.15F; 
+			case Tiny : return 0.50F;
+			case Small : return 0.90F;
+			case Medium : return 1.5F;
+			case Big : return 2.0F;
+			case Large : return 2.5F;
+			case Legendary : return 3.5F;
+			default: return 0.5F; 
 		}
 	}
     
@@ -155,7 +155,7 @@ public class EntityMusky extends EntityFantasticFish
     	
     	if (aState==AIState.Wander)
     	{
-    		return 1;
+    		return 3;
     	}
 
     	if (aState==AIState.Fleeing)
@@ -200,6 +200,41 @@ public class EntityMusky extends EntityFantasticFish
 		return 1;
 	}
 	
+    @Override
+	public double PositionSizeAdjust()
+    {
+		switch (GetFishSize())
+		{
+			case Tiny : return 0;
+			case Small : return 0;
+			case Medium : return 0;
+			case Big : return 1;
+			case Large : return 2;
+			case Legendary : return 2;
+			default: return 0; 
+		}
+    }
+    
+    
+    //Must be override. Will determine what is the minimum depth for the fish to swim in an area. Bigger fish will avoid shallow water.
+    @Override
+    public int GetMinimumDepth()
+    {
+
+    	switch (this.currentSize)
+    	{
+	    	case Tiny: return 4;
+	    	case Small: return 4;
+	    	case Medium: return 5;
+	    	case Big: return 6;
+	    	case Large: return 6;
+	    	case Legendary: return 6;
+	    	default: return 6;
+        }
+    }
+    
+
+	
 	//*** PROTECTED METHOD ***
 	@Override
 	protected void applyEntityAttributes()
@@ -213,7 +248,10 @@ public class EntityMusky extends EntityFantasticFish
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
-		this.entityDropItem(new ItemStack(FantasticItems.rawMuskyFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
+		if(rand.nextInt(10) == 0)
+			this.entityDropItem(new ItemStack(FantasticItems.sharkFin, 1), 0.0F);
+		
+		this.entityDropItem(new ItemStack(FantasticItems.sharkTooth, rand.nextInt(3)), 0.0F);	
 	}
 
 	/**
@@ -252,11 +290,11 @@ public class EntityMusky extends EntityFantasticFish
 		switch (this.GetFishSize())
 		{
 			case Tiny: return 1;
-			case Small: return 1;
-			case Medium: return 2;
-			case Big: return 3;
-			case Large: return 4;
-			case Legendary: return 6;
+			case Small: return 2;
+			case Medium: return 4;
+			case Big: return 6;
+			case Large: return 8;
+			case Legendary: return 10;
 			default : return 1;
 		}
 	}
@@ -267,11 +305,9 @@ public class EntityMusky extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,7));
-        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimWanderLikeDeep(brain,this,3,50,7,1,-1,4));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,4,50,7));
-        //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
+        brain.AddActionToList(new FFAI_SwimWanderLikeSurface(brain,this,0,100,12,1,8));
+
+
 
         
 	}

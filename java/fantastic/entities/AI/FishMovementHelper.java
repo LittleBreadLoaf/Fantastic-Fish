@@ -5,6 +5,7 @@ import java.util.Random;
 import scala.Int;
 import fantastic.FantasticDebug;
 import fantastic.entities.EntityFantasticFish;
+import fantastic.entities.AI.EntityFFAI.AIState;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
@@ -27,7 +28,7 @@ public class FishMovementHelper
 	// Return the total water depth on the Y axis at a specific location.
 	// The block passed in parameter must be a water block along the Y axis
 		
-	public static int getWaterDept(World aWorld, double xPos, double yPos, double zPos)
+	public static int GetWaterDepth(World aWorld, double xPos, double yPos, double zPos)
 	{
 		int _waterDepth = 0;
 		
@@ -62,11 +63,13 @@ public class FishMovementHelper
 			
 		}
 		
+
 		FantasticDebug.Output("Mesured water depth is: "+Integer.toString(_waterDepth));
 		return _waterDepth++;
 		
 	}
-
+	
+	
 	
 	
 public static void SwimStill(EntityWaterMob aWaterMob)
@@ -84,7 +87,7 @@ public static void SwimStill(EntityWaterMob aWaterMob)
 }
 
 
-public static void FleeOtherEntity(EntityWaterMob aWaterMob, Entity aScaryEntity, int xzFleeZoneSize, int yFleeZoneSize, int speed)
+public static void FleeOtherEntity(EntityWaterMob aWaterMob, Entity aScaryEntity, int xzFleeZoneSize, int yFleeZoneSize, int speed, int aMinRangeXZ, int aMinDepth)
 {
 	
 	if ((!aWaterMob.isDead) && (aWaterMob!=null) && (!aScaryEntity.isDead) && (aScaryEntity!=null))
@@ -93,7 +96,7 @@ public static void FleeOtherEntity(EntityWaterMob aWaterMob, Entity aScaryEntity
 		double scaryYPos = aScaryEntity.posY;
 		double scaryZPos = aScaryEntity.posZ;
 		Vec3 scaryVectorPos = Vec3.createVectorHelper(scaryXPos,scaryYPos,scaryZPos);
-		Vec3 _fleeingCoor = findRandomTargetBlockAwayFrom(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos);
+		Vec3 _fleeingCoor = findRandomTargetBlockAwayFrom(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos, aMinRangeXZ, aMinDepth);
 		
 		if (_fleeingCoor!=null)
 		{
@@ -104,7 +107,7 @@ public static void FleeOtherEntity(EntityWaterMob aWaterMob, Entity aScaryEntity
 	}
 }
 
-public static Vec3 GetFleeingCoordinate(EntityWaterMob aWaterMob, Entity aScaryEntity, int xzFleeZoneSize, int yFleeZoneSize)
+public static Vec3 GetFleeingCoordinate(EntityWaterMob aWaterMob, Entity aScaryEntity, int xzFleeZoneSize, int yFleeZoneSize, int aMinRangeXZ, int aMinDepth)
 {
 	
 	if ((!aWaterMob.isDead) && (aWaterMob!=null) && (!aScaryEntity.isDead) && (aScaryEntity!=null))
@@ -113,12 +116,12 @@ public static Vec3 GetFleeingCoordinate(EntityWaterMob aWaterMob, Entity aScaryE
 		double scaryYPos = aScaryEntity.posY;
 		double scaryZPos = aScaryEntity.posZ;
 		Vec3 scaryVectorPos = Vec3.createVectorHelper(scaryXPos,scaryYPos,scaryZPos);
-		Vec3 _fleeingCoor = findRandomTargetBlockAwayFrom(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos);
+		Vec3 _fleeingCoor = findRandomTargetBlockAwayFrom(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos,aMinRangeXZ,aMinDepth);
 		
 		if (_fleeingCoor==null)
 		{
 			//if not path was found away from the player, the fish may be cornered. A new set off coordinate will be tried close to the player
-			_fleeingCoor = findRandomTargetBlockTowards(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos);
+			_fleeingCoor = findRandomTargetBlockTowards(aWaterMob, xzFleeZoneSize, yFleeZoneSize, scaryVectorPos, aMinRangeXZ, aMinDepth);
 		}
 		
 		return _fleeingCoor;
@@ -128,16 +131,16 @@ public static Vec3 GetFleeingCoordinate(EntityWaterMob aWaterMob, Entity aScaryE
 
 }
 
-public static Vec3 findRandomTarget(EntityCreature p_75463_0_, int p_75463_1_, int p_75463_2_)
+public static Vec3 findRandomTarget(EntityCreature p_75463_0_, int p_75463_1_, int p_75463_2_,int aMinRangeXZ, int aMinDepth)
 {
 	FantasticDebug.Output("FIND TAGET BLOCK AT ANY DEPTH",true);
-    return findRandomTargetBlock(p_75463_0_, p_75463_1_, p_75463_2_, (Vec3)null);
+    return findRandomTargetBlock(p_75463_0_, p_75463_1_, p_75463_2_, (Vec3)null, aMinRangeXZ, aMinDepth);
 }
 
-public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone, int anAscendRate)
+public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone, int anAscendRate, int aMinRangeXZ, int aMinDepth)
 {
     Random random = aWaterMob.getRNG();
-    Vec3 _block = findRandomTargetBlock(aWaterMob, aXZZone,1, (Vec3)null);
+    Vec3 _block = findRandomTargetBlock(aWaterMob, aXZZone,1, (Vec3)null, aMinRangeXZ, aMinDepth);
     int _ascendValue = random.nextInt(anAscendRate)+1;
 
     if (_block!=null)
@@ -159,10 +162,10 @@ public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone,
     return _block;
 }
 
-public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone, int aDescendRate)
+public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone, int aDescendRate, int aMinRangeXZ, int aMinDepth)
 {
     Random random = aWaterMob.getRNG();
-    Vec3 _block = findRandomTargetBlock(aWaterMob, aXZZone,1, (Vec3)null);
+    Vec3 _block = findRandomTargetBlock(aWaterMob, aXZZone,1, (Vec3)null, aMinRangeXZ,aMinDepth);
     int _descendValue = random.nextInt(aDescendRate)+1;
 
     if (_block!=null)
@@ -189,26 +192,26 @@ public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone
 /**
  * finds a random target within par1(x,z) and par2 (y) blocks in the direction of the point par3
  */
-public static Vec3 findRandomTargetBlockTowards(EntityCreature aWaterMob, int xzFleeZoneSize, int yFleeZoneSize, Vec3 aTargetVectorPos)
+public static Vec3 findRandomTargetBlockTowards(EntityCreature aWaterMob, int xzFleeZoneSize, int yFleeZoneSize, Vec3 aTargetVectorPos, int aMinRangeXZ, int aMinDepth)
 {
 
     Vec3 _fleeingVector = Vec3.createVectorHelper(aTargetVectorPos.xCoord - aWaterMob.posX,aTargetVectorPos.yCoord - aWaterMob.posY,aTargetVectorPos.zCoord - aWaterMob.posZ);
-    return findRandomTargetBlock(aWaterMob, xzFleeZoneSize, yFleeZoneSize,_fleeingVector);
+    return findRandomTargetBlock(aWaterMob, xzFleeZoneSize, yFleeZoneSize,_fleeingVector,aMinRangeXZ,aMinDepth);
 }
 
 
-private static Vec3 findRandomTargetBlockAwayFrom(EntityWaterMob aWaterMob, int xzFleeZoneSize, int yFleeZoneSize, Vec3 aScaryVectorPos)
+private static Vec3 findRandomTargetBlockAwayFrom(EntityWaterMob aWaterMob, int xzFleeZoneSize, int yFleeZoneSize, Vec3 aScaryVectorPos, int aMinRangeXZ, int aMinDepth)
 {
     Vec3 _fleeingVector = Vec3.createVectorHelper((aWaterMob.posX - aScaryVectorPos.xCoord),(aWaterMob.posY - aScaryVectorPos.yCoord), (aWaterMob.posZ - aScaryVectorPos.zCoord));
-    return findRandomTargetBlock(aWaterMob, xzFleeZoneSize, yFleeZoneSize, _fleeingVector);
+    return findRandomTargetBlock(aWaterMob, xzFleeZoneSize, yFleeZoneSize, _fleeingVector, aMinRangeXZ, aMinDepth);
 }
 
 /** searches 10 blocks at random in a within par1(x,z) and par2 (y) distance, ignores those not in the direction of
 * par3Vec3, then points to the first water block available.
 */
-private static Vec3 findRandomTargetBlock(EntityCreature p_75462_0_, int p_75462_1_, int p_75462_2_, Vec3 p_75462_3_)
+/*private static Vec3 findRandomTargetBlock(EntityCreature anEntity, int p_75462_1_, int p_75462_2_, Vec3 p_75462_3_)
 {
-   Random random = p_75462_0_.getRNG();
+   Random random = anEntity.getRNG();
    boolean flag = false;
    int k = 0;
    int l = 0;
@@ -216,10 +219,10 @@ private static Vec3 findRandomTargetBlock(EntityCreature p_75462_0_, int p_75462
    boolean flag1;
    Block _targetBlock = Blocks.bedrock;
 
-   if (p_75462_0_.hasHome())
+   if (anEntity.hasHome())
    {
-       double d0 = (double)(p_75462_0_.getHomePosition().getDistanceSquared(MathHelper.floor_double(p_75462_0_.posX), MathHelper.floor_double(p_75462_0_.posY), MathHelper.floor_double(p_75462_0_.posZ)) + 4.0F);
-       double d1 = (double)(p_75462_0_.func_110174_bM() + (float)p_75462_1_);
+       double d0 = (double)(anEntity.getHomePosition().getDistanceSquared(MathHelper.floor_double(anEntity.posX), MathHelper.floor_double(anEntity.posY), MathHelper.floor_double(anEntity.posZ)) + 4.0F);
+       double d1 = (double)(anEntity.func_110174_bM() + (float)p_75462_1_);
        flag1 = d0 < d1 * d1;
    }
    else
@@ -235,16 +238,16 @@ private static Vec3 findRandomTargetBlock(EntityCreature p_75462_0_, int p_75462
 
        if (p_75462_3_ == null || (double)j1 * p_75462_3_.xCoord + (double)k1 * p_75462_3_.zCoord >= 0.0D)
        {
-           j1 += MathHelper.floor_double(p_75462_0_.posX);
-           i2 += MathHelper.floor_double(p_75462_0_.posY);
-           k1 += MathHelper.floor_double(p_75462_0_.posZ);
+           j1 += MathHelper.floor_double(anEntity.posX);
+           i2 += MathHelper.floor_double(anEntity.posY);
+           k1 += MathHelper.floor_double(anEntity.posZ);
 
            
-       	_targetBlock = p_75462_0_.worldObj.getBlock(j1, i2, k1);
+       	_targetBlock = anEntity.worldObj.getBlock(j1, i2, k1);
        	if (_targetBlock instanceof BlockLiquid)
        	{
        		//System.out.println("WATER BLOCK FOUND");
-		   if (!flag1 || p_75462_0_.isWithinHomeDistance(j1, i2, k1))
+		   if (!flag1 || anEntity.isWithinHomeDistance(j1, i2, k1))
 		   {
 		           k = j1;
 		           l = i2;
@@ -266,9 +269,100 @@ private static Vec3 findRandomTargetBlock(EntityCreature p_75462_0_, int p_75462
        FantasticDebug.Output("PATH NOT FOUND");
 	   return null;
    }
+}*/
+
+/** searches 10 blocks at random in a within par1(x,z) and par2 (y) distance, ignores those not in the direction of
+* par3Vec3, then points to the first water block available.
+*/
+private static Vec3 findRandomTargetBlock(EntityCreature anEntity, int p_75462_1_, int p_75462_2_, Vec3 p_75462_3_, int aMinRangeXZ, int aMinDepth)
+{
+   Random random = anEntity.getRNG();
+   boolean flag = false;
+   int k = 0;
+   int l = 0;
+   int i1 = 0;
+   boolean flag1;
+   Block _targetBlock = Blocks.bedrock;
+
+   if (anEntity.hasHome())
+   {
+       double d0 = (double)(anEntity.getHomePosition().getDistanceSquared(MathHelper.floor_double(anEntity.posX), MathHelper.floor_double(anEntity.posY), MathHelper.floor_double(anEntity.posZ)) + 4.0F);
+       double d1 = (double)(anEntity.func_110174_bM() + (float)p_75462_1_);
+       flag1 = d0 < d1 * d1;
+   }
+   else
+   {
+       flag1 = false;
+   }
+
+   for (int l1 = 0; l1 < 20; ++l1)
+   {
+       int j1 = random.nextInt(2 * p_75462_1_) - p_75462_1_;
+       int i2 = random.nextInt(2 * p_75462_2_) - p_75462_2_;
+       int k1 = random.nextInt(2 * p_75462_1_) - p_75462_1_;
+       
+       /*if (aMinRangeXZ!=-1)
+       {
+	       //Adjust X for range
+	       if (j1<=0)
+	       {
+	    	   j1=j1-aMinRangeXZ;
+	       }
+	       else
+	       {
+	    	   j1=j1+aMinRangeXZ;
+	       }
+	       
+	       //Adjust Z for range
+	       if (k1<=0)
+	       {
+	    	   k1=k1-aMinRangeXZ;
+	       }
+	       else
+	       {
+	    	   k1=k1+aMinRangeXZ;
+	       }
+       }*/
+       
+
+       if (p_75462_3_ == null || (double)j1 * p_75462_3_.xCoord + (double)k1 * p_75462_3_.zCoord >= 0.0D)
+       {
+           j1 += MathHelper.floor_double(anEntity.posX);
+           i2 += MathHelper.floor_double(anEntity.posY);
+           k1 += MathHelper.floor_double(anEntity.posZ);
+
+           
+       	_targetBlock = anEntity.worldObj.getBlock(j1, i2, k1);
+       	if (_targetBlock instanceof BlockLiquid)
+       	{
+       		//System.out.println("WATER BLOCK FOUND");
+		   if (!flag1 || anEntity.isWithinHomeDistance(j1, i2, k1))
+		   {
+		           
+			   if ((aMinDepth==-1) || (aMinDepth<=GetWaterDepth(anEntity.worldObj,anEntity.posX,anEntity.posY,anEntity.posZ)))
+			   {
+		   			//Will return the coordinate if the depth is not controlled or the minimum depth is respected
+				    k = j1;
+		   			l = i2;
+		   			i1 = k1;
+		   			flag = true;
+		   			break;
+		       }
+           }
+       	}
+      }
+   }
+
+   if (flag)
+   {
+       return Vec3.createVectorHelper((double)k, (double)l, (double)i1);
+   }
+   else
+   {
+       FantasticDebug.Output("PATH NOT FOUND");
+	   return null;
+   }
 }
-
-
 
 
 
@@ -311,6 +405,7 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 			{
 				//Stay still
 				aWaterMob.setVelocity(0, 0, 0);
+				aWaterMob.SetCurrentSpeed(0F);
 			}
 			else
 			{	
@@ -326,9 +421,13 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 				aWaterMob.motionY = (vec3.yCoord * speed)*speedAdjustment;
 				aWaterMob.motionZ = (vec3.zCoord * speed)*speedAdjustment;
 				
-				float f = (float) (Math.atan2(aWaterMob.motionZ, aWaterMob.motionX) * 180.0D / Math.PI) - 90.0F;
+				/*float f = (float) (Math.atan2(aWaterMob.motionZ, aWaterMob.motionX) * 180.0D / Math.PI) - 90.0F;
 				float f1 = MathHelper.wrapAngleTo180_float(f - aWaterMob.rotationYaw);
-				aWaterMob.rotationYaw += f1;
+				aWaterMob.rotationYaw += f1;*/
+				
+	            //Yaw from the ghast code
+				aWaterMob.renderYawOffset = aWaterMob.rotationYaw = -((float)Math.atan2(aWaterMob.motionX, aWaterMob.motionZ)) * 180.0F / (float)Math.PI;
+	            
 
 				//aWaterMob.renderYawOffset += (-((float)Math.atan2(aWaterMob.motionX, aWaterMob.motionZ)) * 180.0F / (float)Math.PI - aWaterMob.renderYawOffset) * 0.1F;
 				//aWaterMob.rotationYaw = aWaterMob.renderYawOffset;
@@ -345,7 +444,7 @@ public static void SwimTo(EntityFantasticFish aWaterMob, double xCoor, double yC
 	}
 }
 
-public static void SetFishTailSpeed(EntityFantasticFish aFish,double speed)
+public static void SetFishTailSpeed(EntityFantasticFish aFish,float aSpeed)
 {
 	long _currentTime = System.currentTimeMillis();
 	//Update of the last position every 500ms
@@ -363,11 +462,11 @@ public static void SetFishTailSpeed(EntityFantasticFish aFish,double speed)
 	FantasticDebug.Output("DISTANCE: "+Double.toString(_x));
 	if (_x<=1)
 	{
-		aFish.SetCurrentTailFlapSpeedMult(1);
+		aFish.SetCurrentSpeed(0); //Fish can be stuck
 	}
 	else
 	{
-		aFish.SetCurrentTailFlapSpeedMult(Math.max(1,((float)speed-1.5F)));
+		aFish.SetCurrentSpeed(aSpeed);
 	}
 }
 

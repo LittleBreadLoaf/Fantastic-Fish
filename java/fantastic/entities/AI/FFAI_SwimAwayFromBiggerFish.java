@@ -71,7 +71,15 @@ public class FFAI_SwimAwayFromBiggerFish extends FFAI_Base
 	        	{
 	        		if (ffish.IsAfraidOf((EntityFantasticFish)this.closestEntity))
 	        		{
-	            		ffai.targetCoor = FishMovementHelper.GetFleeingCoordinate(ffish,this.closestEntity, 7,4);
+	            		ffai.targetCoor = FishMovementHelper.GetFleeingCoordinate(ffish,this.closestEntity, 7,4,-1,ffish.GetMinimumDepth());
+	            		
+		        		//The target coor can be null if not enough depth is available. In this case, we will try to get a new coordinate with less depth.
+		        		//Its better to move in shallow water than stay still.
+		        		if (ffai.targetCoor==null)
+		        		{
+		        			ffai.targetCoor = FishMovementHelper.GetFleeingCoordinate(ffish,this.closestEntity, 8,2,3,-1);
+		        		}
+	            		
 	            		ffai.currentAIState = AIState.Fleeing;
 		        		lastCoorTime = System.currentTimeMillis();
 	            		return true;

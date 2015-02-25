@@ -190,12 +190,12 @@ public class ModelPike extends ModelBase
     EntityFantasticFish _fish = (EntityFantasticFish)entity;
     
     this._jaw.rotateAngleX = 0.17F*(MathHelper.cos(f2 * 0.06662F) ) + 1.343904F;
-    this.bodysegment1.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F) );
-    this.bodysegment2.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/6)) );
-    this.bodysegment3.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/3)) );
-    this.bodysegment4.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/2)) );
-    this.bodysegment5.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(2*Math.PI/3)) );
-    this.bodysegment6.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.currentSpeed *  _fish.GetTailFlapSpeed() * 0.527F - (float)(5*Math.PI/6)) );
+    this.bodysegment1.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F) );
+    this.bodysegment2.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/6)) );
+    this.bodysegment3.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/3)) );
+    this.bodysegment4.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F - (float)(Math.PI/2)) );
+    this.bodysegment5.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F - (float)(2*Math.PI/3)) );
+    this.bodysegment6.rotateAngleY = 0.15F *(MathHelper.cos(f2 * _fish.GetTailFlapSpeed() * 0.527F - (float)(5*Math.PI/6)) );
 
   }
 

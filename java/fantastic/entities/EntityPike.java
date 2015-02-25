@@ -40,7 +40,6 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWanderDuskAndDawn;
 import fantastic.entities.AI.FFAI_SwimWanderLikeSunnyAfternoon;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
@@ -56,7 +55,7 @@ public class EntityPike extends EntityFantasticFish
 	public EntityPike(World aWorld)
 	{
 		super(aWorld);
-		brain=new EntityFFAI(this,10000,15000,-1,-1,-1,-1);
+		brain=new EntityFFAI(this,10000,15000);
 		InitializeAI();
 	}
 
@@ -87,7 +86,7 @@ public class EntityPike extends EntityFantasticFish
 		return true;
 	}
 	
-	@Override
+	/*@Override
 	public float GetTailFlapSpeed()
 	{
 		
@@ -106,7 +105,7 @@ public class EntityPike extends EntityFantasticFish
 
 
 			}
-	}
+	}*/
 	
 	
 	@Override
@@ -141,7 +140,7 @@ public class EntityPike extends EntityFantasticFish
 	}
     
     @Override
-    public double GetSpeedFromAIState(AIState aState)
+    public float GetSpeedFromAIState(AIState aState)
     {
     	if (aState==AIState.Idle)
     	{
@@ -271,7 +270,7 @@ public class EntityPike extends EntityFantasticFish
         
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimWanderLikeSunnyAfternoon(brain,this,3,30,7,1,4));
+        brain.AddActionToList(new FFAI_SwimWanderLikeSunnyAfternoon(brain,this,3,30,7,1,-1,4));
         brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,4,40,7));
         //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
 

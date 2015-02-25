@@ -6,10 +6,8 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import fantastic.FantasticMod;
 import fantastic.Names;
 import fantastic.animations.common.EntitySerpentBoss;
-import fantastic.entities.sharks.EntityBullShark;
-import fantastic.entities.sharks.EntityGreatWhite;
-import fantastic.entities.sharks.EntityHammerHead;
-import fantastic.entities.sharks.EntityTigerShark;
+import fantastic.entities.sharks.EntityWhiteTipShark;
+
 
 public class FantasticEntities 
 
@@ -24,11 +22,11 @@ public class FantasticEntities
 		
 
 		//Reinforced Fishing Hook
-		EntityRegistry.registerModEntity(EntityReinforcedFishingHook.class, Names.ReinforcedFishingRod_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityReinforcedFishingHook.class, Names.ReinforcedFishingRod_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 		
 		//Basic Fish
-		EntityRegistry.registerModEntity(EntityBasicFish.class, Names.Colorfish_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityBasicFish.class, Names.Colorfish_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 		
 		//Salmon
@@ -37,38 +35,55 @@ public class FantasticEntities
 		_id++;
 		
 		//Trout
-		EntityRegistry.registerModEntity(EntityTrout.class, Names.Trout_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityTrout.class, Names.Trout_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		//EntityRegistry.addSpawn(EntitySalmon.class, 6, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river,BiomeGenBase.coldTaigaHills,BiomeGenBase.extremeHills,BiomeGenBase.iceMountains,BiomeGenBase.megaTaigaHills,BiomeGenBase.taigaHills});
 		_id++;
 
 		//Pike
-		EntityRegistry.registerModEntity(EntityPike.class, Names.Pike_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityPike.class, Names.Pike_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 		
 		//Musky Fish
-		EntityRegistry.registerModEntity(EntityMusky.class, Names.Musky_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityMusky.class, Names.Musky_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 		
 		//Catfish
-		EntityRegistry.registerModEntity(EntityCatfish.class, Names.Catfish_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityCatfish.class, Names.Catfish_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
 		//Tuna
-		EntityRegistry.registerModEntity(EntityTuna.class, Names.Tuna_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityTuna.class, Names.Tuna_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 		
 		//Fungus
-		EntityRegistry.registerModEntity(EntityFungus.class, Names.Fungus_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityFungus.class, Names.Fungus_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
 		//Mossy
-		EntityRegistry.registerModEntity(EntityMossy.class, Names.Mossy_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityMossy.class, Names.Mossy_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
 		//Feeder
-		EntityRegistry.registerModEntity(EntityFeeder.class, Names.Feeder_UnlocalizedName, _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityFeeder.class, Names.Feeder_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
+		_id++;
+		
+		//Sailfish
+		EntityRegistry.registerModEntity(EntitySailfish.class, Names.Sailfish_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
+		//Manta Ray
+		EntityRegistry.registerModEntity(EntitySailfish.class, Names.MantaRay_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
+		_id++;
+
+
+		//*** SHARKS ***
+
+		//White Tip Shark
+		EntityRegistry.registerModEntity(EntityWhiteTipShark.class, Names.WhiteTipShark_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
+		_id++;
+
+		
+		
 		//Hermit_Crab
 		EntityRegistry.registerModEntity(EntityHermitCrab.class, "hermit_crab", _id, FantasticMod.instance, 64, 3, true);
 		_id++;

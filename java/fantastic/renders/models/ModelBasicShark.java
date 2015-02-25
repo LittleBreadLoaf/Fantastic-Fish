@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
-import fantastic.entities.sharks.EntityBasicShark;
-import fantastic.entities.sharks.EntityHammerHead;
+import fantastic.entities.sharks.EntityFantasticShark;
 
 public class ModelBasicShark extends ModelBase
 {
@@ -186,14 +185,15 @@ public class ModelBasicShark extends ModelBase
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
   {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    EntityBasicShark Shark = (EntityBasicShark)entity;
+    EntityFantasticShark Shark = (EntityFantasticShark)entity;
     EntityPlayer target = Shark.worldObj.getClosestPlayerToEntity(Shark, 5);
     double distance = 0;
     if(target != null)
     	distance = Shark.getDistanceToEntity(target);
     
     
-    if(distance <= 5 && !(Shark instanceof EntityHammerHead))
+    //*** HAMMERHEAD TODO ******************************************!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /*if(distance <= 5 && !(Shark instanceof EntityHammerHead))
     {
     	this._jaw.rotateAngleX = 0.6F *(float) Math.sin(distance * Math.PI/5) + 1.22173F;
     	this.headtop.rotateAngleX = - 0.6F *(float) Math.sin(distance * Math.PI/5) + 0.3490659F;
@@ -202,7 +202,7 @@ public class ModelBasicShark extends ModelBase
     {
     	this._jaw.rotateAngleX = 1.22173F;
     	this.headtop.rotateAngleX = 0.3490659F;
-    }
+    }*/
     	
     this.headtop.rotateAngleY = 0.15F *(MathHelper.cos(f2  * 0.327F + (float)(Math.PI/6)) );
     this._jaw.rotateAngleY = 0.15F *(MathHelper.cos(f2  * 0.327F + (float)(Math.PI/6)) );

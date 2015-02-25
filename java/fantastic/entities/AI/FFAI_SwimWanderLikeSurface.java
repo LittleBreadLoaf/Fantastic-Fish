@@ -14,13 +14,15 @@ public class FFAI_SwimWanderLikeSurface extends FFAI_Base
 
 	int xZone = 0;
 	int yZone = 0;
+	int minRangeSwim = -1;
 	
 	
-	public FFAI_SwimWanderLikeSurface(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone) 
+	public FFAI_SwimWanderLikeSurface(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMinRangeSwim) 
 	{
 		super(anAI, aFish,aPriority,aPercentageOfExecution);
 		xZone = aXZone;
 		yZone = aYZone;
+		minRangeSwim=aMinRangeSwim;
 	
 	}
 
@@ -41,7 +43,7 @@ public class FFAI_SwimWanderLikeSurface extends FFAI_Base
         		{
 
     				//Fish of size large and legendary will stay close to the surface
-        			ffai.targetCoor=FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4);
+        			ffai.targetCoor=FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
         			if(ffai.targetCoor!=null)
         			{
         				ffai.currentAIState=AIState.Wander;

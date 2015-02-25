@@ -40,7 +40,7 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWanderDuskAndDawn;
+import fantastic.entities.AI.FFAI_SwimWanderAscendAtTime;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
@@ -55,7 +55,7 @@ public class EntitySalmon extends EntityFantasticFish
 	public EntitySalmon(World aWorld)
 	{
 		super(aWorld);
-		brain=new EntityFFAI(this,10000,15000,22500,4000,9500,14000);
+		brain=new EntityFFAI(this,10000,15000);
 		InitializeAI();
 	}
 
@@ -95,13 +95,13 @@ public class EntitySalmon extends EntityFantasticFish
 			switch (GetFishSize())
 			{
 				
-				case Tiny : return 1.0F*currentTailFlapSpeedMult;
-				case Small : return 0.8F*currentTailFlapSpeedMult;
-				case Medium : return 0.7F*currentTailFlapSpeedMult;
-				case Big : return 0.6F*currentTailFlapSpeedMult;
-				case Large : return 0.5F*currentTailFlapSpeedMult;
-				case Legendary : return 0.4F*currentTailFlapSpeedMult;
-				default: return 1.0F; 
+				case Tiny : return 0.5F+currentSpeed*0.5F;
+				case Small : return 0.5F+currentSpeed*0.5F;
+				case Medium : return 0.5F+currentSpeed*0.5F;
+				case Big : return 0.5F+currentSpeed*0.5F;
+				case Large : return 0.5F+currentSpeed*0.5F;
+				case Legendary : return 0.5F+currentSpeed*0.5F;
+				default: return 0.5F; 
 
 
 			}
@@ -140,17 +140,17 @@ public class EntitySalmon extends EntityFantasticFish
 	}
     
     @Override
-    public double GetSpeedFromAIState(AIState aState)
+    public float GetSpeedFromAIState(AIState aState)
     {
     	if (aState==AIState.Idle)
     	{
-    		return 1;
+    		return 0;
     	}
 
     	
     	if (aState==AIState.StayStill)
     	{
-    		return 1;
+    		return 0;
     	}
     	
     	if (aState==AIState.Wander)
@@ -160,7 +160,7 @@ public class EntitySalmon extends EntityFantasticFish
 
     	if (aState==AIState.Fleeing)
     	{
-    		return 5;
+    		return 3;
     	}
     	
     	if (aState==AIState.Jump)
@@ -170,7 +170,7 @@ public class EntitySalmon extends EntityFantasticFish
     	
     	if (aState==AIState.Pursuing)
     	{
-    		return 5;
+    		return 3;
     	}
 
     	
@@ -200,6 +200,7 @@ public class EntitySalmon extends EntityFantasticFish
 	{
 		return 2;
 	}
+	
 	
 	//*** PROTECTED METHOD ***
 	@Override
@@ -270,11 +271,10 @@ public class EntitySalmon extends EntityFantasticFish
         
         brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 2,30,3));
-        brain.AddActionToList(new FFAI_SwimWanderDuskAndDawn(brain,this,3,50,7,1,4));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,4,20,7));
-        //brain.AddActionToList(new FFAI_SwimStayStill(brain, this,0,100));
-
+        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 2,9500,14000,30,3));
+        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,3,22500,4000,50,7,1,-1,4));
+        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,4,9500,14000,50,7,1,-1,4));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,5,20,7));
         
 	}
 

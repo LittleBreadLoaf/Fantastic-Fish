@@ -9,19 +9,24 @@ import fantastic.FantasticDebug;
 import fantastic.entities.EntityFantasticFish;
 import fantastic.entities.AI.EntityFFAI.AIState;
 
-public class FFAI_SwimWanderDuskAndDawn extends FFAI_Base 
+public class FFAI_SwimWanderAscendAtTime extends FFAI_Base 
 {
-
-	int xZone = 0;
-	int yZone = 0;
-	int maxSizeThatChangeDepth = 0;
+	private long startTime = -1;
+	private long stopTime = -1;
+	private int xZone = 0;
+	private int yZone = 0;
+	private int minRangeSwim = -1;
+	private int maxSizeThatChangeDepth = 0;
 	
 	
-	public FFAI_SwimWanderDuskAndDawn(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMaxSizeThatChangeDepth) 
+	public FFAI_SwimWanderAscendAtTime(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, long aStartTime, long aStopTime, int aPercentageOfExecution,  int aXZone, int aYZone, int aMinRangeSwim, int aMaxSizeThatChangeDepth) 
 	{
 		super(anAI, aFish,aPriority,aPercentageOfExecution);
 		xZone = aXZone;
 		yZone = aYZone;
+		startTime=aStartTime;
+		stopTime=aStopTime;
+		minRangeSwim=aMinRangeSwim;
 		maxSizeThatChangeDepth=aMaxSizeThatChangeDepth;
 	
 	}
@@ -42,30 +47,29 @@ public class FFAI_SwimWanderDuskAndDawn extends FFAI_Base
         		if (ExecutionFilterCheck())
         		{
 
-        			boolean isDusk = ffai.isDusk();
-        			boolean isDawn = ffai.isDawn();
+        			boolean _inAscendTime = ffai.CheckCurrentTimeBetweenInterval(startTime,stopTime);
         			
-        			FantasticDebug.Output("Dusk: "+Boolean.toString(isDusk)+"Time: "+Long.toString(ffish.worldObj.getWorldTime() % 24000));
-        			FantasticDebug.Output("Dawn: "+Boolean.toString(isDawn));
+        			FantasticDebug.Output("AscendTime: "+Boolean.toString(_inAscendTime)+" Time: "+Long.toString(ffish.worldObj.getWorldTime() % 24000));
+
         			
         			int _sizeOrdinal = ffish.GetFishSize().ordinal();
         			if (_sizeOrdinal<=maxSizeThatChangeDepth)
         			{
         				//Fish of size big and smaller will change depth
-	        			if (ffai.isDusk() || ffai.isDawn())
+	        			if (_inAscendTime)
 	        			{
 	        				//Fish ascend at dusk and dawn
-	        				ffai.targetCoor=FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4);
+	        				ffai.targetCoor=FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
 	        			}
 	        			else
 	        			{
-	        				ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4);
+	        				ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
 	        			}
         			}
         			else
         			{
         				//Fish of size large and legendary will stay deep
-        				ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4);
+        				ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
         				
         			}
         			

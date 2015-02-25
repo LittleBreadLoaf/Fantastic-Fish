@@ -10,8 +10,9 @@ import fantastic.FantasticMod;
 import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.entities.AI.EntityFFAI.AIState;
+import fantastic.entities.sharks.EntityWhiteTipShark;
 import fantastic.network.FantasticNetwork;
-import fantastic.network.TailSpeedMessage;
+import fantastic.network.FishSpeedMessage;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityWaterMob;
@@ -34,19 +35,20 @@ public class EntityFantasticFish extends EntityWaterMob
 
 
 	public EntityFFAI brain;
-	public int currentSpeed=1;
+	
 	public FishSize currentSize = FishSize.Null;
 	
 	private boolean hasNotSpawned = true;
 	private boolean tickFilterPass = true;
 	
-	protected float currentTailFlapSpeedMult = 1.0F;
-	
+
 	public double previousXPos = 0;
 	public double previousYPos = 0;
 	public double previousZPos = 0;
 	public long previousPosTimeReading = 0;
 
+	protected float currentSpeed=0;
+	private AIState currentAIState = AIState.Idle;
 	
 
 	//CONSTRUCTOR
@@ -200,6 +202,9 @@ public class EntityFantasticFish extends EntityWaterMob
 			case 16 : SpawnSizedFish(aWorld,EntityMusky.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 			case 17 : SpawnSizedFish(aWorld,EntityTrout.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 			case 18 : SpawnSizedFish(aWorld,EntityTrout.class,2, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 19 : SpawnSizedFish(aWorld,EntitySailfish.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 20 : SpawnSizedFish(aWorld,EntityMantaRay.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 21 : SpawnSizedFish(aWorld,EntityWhiteTipShark.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 
 			default : SpawnSizedFish(aWorld,EntityBasicFish.class,1, aSize,isOutOfWater,posX,posY,posZ);break; //on a bug, a basic fish will be returned
 			
@@ -351,30 +356,12 @@ public class EntityFantasticFish extends EntityWaterMob
 		return 1.0F;
 	}
 	
-	public void SetCurrentTailFlapSpeedMult(float aMult)
-	{
-		if (aMult!=currentTailFlapSpeedMult)
-		{
-			if (!this.worldObj.isRemote)
-			{
-				
-				FantasticNetwork.network.sendToAll(new TailSpeedMessage(this.getEntityId(), aMult));
-			}
-			
-			currentTailFlapSpeedMult=aMult;
-		}
-
-	}
 	
-	public float GetCurrentTailFlapSpeedMult()
-	{
-		return currentTailFlapSpeedMult;
-	}
-	
-    public double GetSpeedFromAIState(AIState aState)
+	//Must be overwritten
+    public float GetSpeedFromAIState(AIState aState)
     {
     	//default
-    	return 1;
+    	return 1.0F;
     }
     
     //Must be overriden. This property will adjust the dept so bigger fish will not swim half out of the water because of their size. This 
@@ -382,6 +369,47 @@ public class EntityFantasticFish extends EntityWaterMob
     public double PositionSizeAdjust()
     {
     	return 0;
+    }
+
+    
+    //Must be override. Will determine what is the minimum depth for the fish to swim in an area. Bigger fish will avoid shallow water.
+    public int GetMinimumDepth()
+    {
+
+    	switch (this.currentSize)
+    	{
+	    	case Tiny: return 1;
+	    	case Small: return 1;
+	    	case Medium: return 1;
+	    	case Big: return 2;
+	    	case Large: return 2;
+	    	case Legendary: return 2;
+	    	default: return 2;
+        }
+    }
+    
+    //Must be overriden
+    public void SetAIState(AIState aState)
+    {
+    	if (currentAIState!=aState)
+    	{
+    		currentAIState=aState;
+    		SetCurrentSpeed(GetSpeedFromAIState(aState));
+    	}
+
+    }
+    
+    public void SetCurrentSpeed(float aSpeed)
+    {
+    	if (currentSpeed!=aSpeed)
+    	{
+    		currentSpeed=aSpeed;
+			if (!this.worldObj.isRemote)
+			{
+				
+				FantasticNetwork.network.sendToAll(new FishSpeedMessage(this.getEntityId(), currentSpeed));
+			}    		
+    	}
     }
 
 

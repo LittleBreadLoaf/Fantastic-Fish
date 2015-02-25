@@ -16,21 +16,21 @@ import fantastic.FantasticMod;
 import fantastic.entities.EntityFantasticFish;
 
 
-public class TailSpeedMessage implements IMessage, IMessageHandler<TailSpeedMessage, IMessage> 
+public class FishSpeedMessage implements IMessage, IMessageHandler<FishSpeedMessage, IMessage> 
 { 
     private int entityId;
-    private float tailSpeedMult;
+    private float speed;
 
 
-    public TailSpeedMessage() 
+    public FishSpeedMessage() 
     { 
     } 
 
 
-    public TailSpeedMessage(int anEntityId,float aTailSpeedMult) 
+    public FishSpeedMessage(int anEntityId,float aSpeed) 
     { 
         entityId=anEntityId;
-        tailSpeedMult=aTailSpeedMult;
+        speed=aSpeed;
 
 
     } 
@@ -40,7 +40,7 @@ public class TailSpeedMessage implements IMessage, IMessageHandler<TailSpeedMess
     public void fromBytes(ByteBuf buf) 
     { 
         entityId = buf.readInt(); 
-        tailSpeedMult = buf.readFloat(); 
+        speed = buf.readFloat(); 
     } 
 
 
@@ -48,24 +48,24 @@ public class TailSpeedMessage implements IMessage, IMessageHandler<TailSpeedMess
     public void toBytes(ByteBuf buf) 
     { 
         buf.writeInt(entityId); 
-        buf.writeFloat(tailSpeedMult); 
+        buf.writeFloat(speed); 
     } 
 
 
 	@Override
-	public IMessage onMessage(TailSpeedMessage message, MessageContext ctx) 
+	public IMessage onMessage(FishSpeedMessage message, MessageContext ctx) 
 	{
 		if (message!=null)
 		{
-			FantasticDebug.Output("MESSAGE RECEIVED. Entity: "+Integer.toString(message.entityId)+" Tail Speed:"+Float.toString(message.tailSpeedMult));
+			FantasticDebug.Output("MESSAGE RECEIVED. Entity: "+Integer.toString(message.entityId)+" Speed:"+Float.toString(message.speed));
 			EntityPlayer player = FantasticMod.proxy.getPlayerFromMessage(ctx);
 			if (player!=null)
 			{
 				Entity _ent = player.worldObj.getEntityByID(message.entityId);
 				if (_ent!=null)
 				{
-					((EntityFantasticFish)_ent).SetCurrentTailFlapSpeedMult(message.tailSpeedMult);
-					FantasticDebug.Output("New tail speed set to: Entity: "+Integer.toString(message.entityId)+" Tail Speed:"+Float.toString(message.tailSpeedMult));
+					((EntityFantasticFish)_ent).SetCurrentSpeed(message.speed);
+					FantasticDebug.Output("New speed set to: Entity: "+Integer.toString(message.entityId)+" Speed:"+Float.toString(message.speed));
 					return null;
 					
 				}
@@ -78,7 +78,7 @@ public class TailSpeedMessage implements IMessage, IMessageHandler<TailSpeedMess
 			}
 			else
 			{
-				FantasticDebug.Output("PLAYER IS NULL!",true);
+				FantasticDebug.Output("PLAYER IS NULL!");
 			}
 		}
 		else

@@ -29,11 +29,7 @@ import fantastic.entities.EntitySmallCrab;
 import fantastic.entities.EntityStarfish;
 import fantastic.entities.EntityTrout;
 import fantastic.entities.EntityTuna;
-import fantastic.entities.sharks.EntityBasicShark;
-import fantastic.entities.sharks.EntityBullShark;
-import fantastic.entities.sharks.EntityGreatWhite;
-import fantastic.entities.sharks.EntityHammerHead;
-import fantastic.entities.sharks.EntityTigerShark;
+import fantastic.entities.sharks.EntityWhiteTipShark;
 import fantastic.renders.models.ModelBasicFish;
 import fantastic.renders.models.ModelBasicShark;
 import fantastic.renders.models.ModelBlooper;
@@ -55,7 +51,6 @@ public class EntityRender
 	{
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityBasicFish.class, new RenderBasicFish(new ModelBasicFish(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCaveFish.class, new RenderCaveFish(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLobster.class, new RenderLobster(new ModelLobster(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityClam.class, new RenderClam(new ModelClam(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySalmon.class, new RenderSalmon(new ModelBasicFish(), 0.3F));
@@ -65,26 +60,25 @@ public class EntityRender
 		RenderingRegistry.registerEntityRenderingHandler(EntityMossy.class, new RenderMossy(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFungus.class, new RenderFungus(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySailfish.class, new RenderSailfish(new ModelLongSnout(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPatrick.class, new RenderPatrick(new ModelPatrick(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmallCrab.class, new RenderSmallCrab(new ModelSmallCrab(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHermitCrab.class, new RenderHermitCrab(new ModelHermitCrab(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBlooper.class, new RenderBlooper(new ModelBlooper(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCreepedo.class, new RenderCreepedo(new ModelBasicFish(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityNurseShark.class, new RenderNurseShark(new ModelNurseShark(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMantaRay.class, new RenderMantaRay(new ModelMantaRay(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCatfish.class, new RenderCatfish(new ModelLongSnout(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBasicShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGreatWhite.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBullShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTigerShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityHammerHead.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWhiteTipShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		//RenderingRegistry.registerEntityRenderingHandler(EntityGreatWhite.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		//RenderingRegistry.registerEntityRenderingHandler(EntityBullShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		//RenderingRegistry.registerEntityRenderingHandler(EntityTigerShark.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
+		//RenderingRegistry.registerEntityRenderingHandler(EntityHammerHead.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, new RenderPike(new ModelPike(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMusky.class, new RenderMusky(new ModelPike(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTrout.class, new RenderTrout(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityReinforcedFishingHook.class, new RenderFish());
-		
 
-
+		//RenderingRegistry.registerEntityRenderingHandler(EntityPatrick.class, new RenderPatrick(new ModelPatrick(), 0.3F));
+		//RenderingRegistry.registerEntityRenderingHandler(EntityCaveFish.class, new RenderCaveFish(new ModelBasicFish(), 0.3F));
+		//		RenderingRegistry.registerEntityRenderingHandler(EntityCreepedo.class, new RenderCreepedo(new ModelBasicFish(), 0.3F));
+		//		RenderingRegistry.registerEntityRenderingHandler(EntityNurseShark.class, new RenderNurseShark(new ModelNurseShark(), 0.3F));
+		// RenderingRegistry.registerEntityRenderingHandler(EntityBlooper.class, new RenderBlooper(new ModelBlooper(), 0.3F));
 		
 		
 	}

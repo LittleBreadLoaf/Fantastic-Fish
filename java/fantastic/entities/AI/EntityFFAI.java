@@ -23,11 +23,6 @@ public class EntityFFAI
 	protected Random rand = new Random();
 	private EntityFantasticFish ffish = null;
 	
-	private long startDuskTime = -1;
-	private long endDuskTime = -1;
-	private long startDawnTime = -1;
-	private long endDawnTime = -1;
-	
 	private long lastExecutionTime = System.currentTimeMillis();
 	private boolean executing = false;
 	protected int minTimerBetweenAction = -1; //in ms 
@@ -44,13 +39,9 @@ public class EntityFFAI
 	
 
 	
-	public EntityFFAI(EntityFantasticFish aFish, int aMinTimerBetweenAction, int aMaxTimerBetweenAction,long aStartDawnTime, long anEndDawnTime, long aStartDuskTime, long anEndDuskTime)
+	public EntityFFAI(EntityFantasticFish aFish, int aMinTimerBetweenAction, int aMaxTimerBetweenAction)
 	{
 		ffish = aFish;
-		startDuskTime = aStartDuskTime;
-		endDuskTime = anEndDuskTime;
-		startDawnTime = aStartDawnTime;
-		endDawnTime = anEndDawnTime;
 		targetCoor = Vec3.createVectorHelper(ffish.posX, ffish.posY, ffish.posZ);
 		minTimerBetweenAction=aMinTimerBetweenAction;
 		maxTimerBetweenAction=aMaxTimerBetweenAction;
@@ -118,9 +109,13 @@ public class EntityFFAI
 					if ((targetCoor!=null) && (LockActionCurrentTime==-1))
 					{
 						FishMovementHelper.SwimTo(ffish, targetCoor.xCoord, targetCoor.yCoord, targetCoor.zCoord, ffish.GetSpeedFromAIState(this.currentAIState));
+						FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(this.currentAIState));
 					}
-					
-					FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(this.currentAIState));
+					else
+					{
+						FishMovementHelper.SwimStill(ffish);
+						FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(AIState.Idle));
+					}
 					
 				}
 			}
@@ -143,46 +138,27 @@ public class EntityFFAI
 		return lastExecutionTime;
 	}
 	
-	public boolean isDusk()
+	public boolean CheckCurrentTimeBetweenInterval(long aStartTime, long aStopTime)
 	{
 		if (ffish!=null)
 		{
 			
-			long _time = ffish.worldObj.getWorldTime() % 24000;
-			FantasticDebug.Output("TIME: "+Long.toString(_time));
-			if (startDuskTime<=endDuskTime)
+			long _currentTime = ffish.worldObj.getWorldTime() % 24000;
+			FantasticDebug.Output("CURRENT TIME: "+Long.toString(_currentTime));
+			if (aStartTime<=aStopTime)
 			{
 				//Dusk begin before 6 am and ends after 6am. 6 am is time 0
-				return ((_time>=startDuskTime) && (_time<=endDuskTime));
+				return ((_currentTime>=aStartTime) && (_currentTime<=aStopTime));
 			}
 			else
 			{
-				return (((_time>=startDuskTime) && (_time<=24000)) || ((_time>=0) && (_time<=endDuskTime)));
+				return (((_currentTime>=aStartTime) && (_currentTime<=24000)) || ((_currentTime>=0) && (_currentTime<=aStopTime)));
 			}
 			
 		}
 		return false;
 	}
 	
-	public boolean isDawn()
-	{
-		if (ffish!=null)
-		{
-			
-			long _time = ffish.worldObj.getWorldTime() % 24000;
-			FantasticDebug.Output("TIME: "+Long.toString(_time));
-			if (startDawnTime<=endDawnTime)
-			{
-				return ((_time>=startDawnTime) && (_time<=endDawnTime));
-			}
-			else
-			{
-				return (((_time>=startDawnTime) && (_time<=24000)) || ((_time>=0) && (_time<=endDawnTime)));
-			}
-			
-		}
-		return false;
-	}
 	
 	private void ResetActionLock()
 	{
