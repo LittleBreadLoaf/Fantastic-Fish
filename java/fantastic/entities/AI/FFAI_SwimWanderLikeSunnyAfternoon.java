@@ -53,17 +53,38 @@ public class FFAI_SwimWanderLikeSunnyAfternoon extends FFAI_Base
 	        			{
 	        				//Fish ascend during bright daylight between noon and 16h00 to get sunlight
 	        				ffai.targetCoor=FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
+	        				
+	    	        		//The target coor can be null if not enough depth is available. In this case, we will try to get a new coordinate with less depth.
+	    	        		//Its better to move in shallow water than stay still.
+	    	        		if (ffai.targetCoor==null)
+	    	        		{
+	    	        			ffai.targetCoor = FishMovementHelper.findRandomTargetAscend((EntityCreature)ffish, xZone,4,minRangeSwim,-1);
+	    	        		}
 	        			}
 	        			else
 	        			{
 	        				//At another time its random
 	        				ffai.targetCoor=FishMovementHelper.findRandomTarget((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
+	        				
+	    	        		//The target coor can be null if not enough depth is available. In this case, we will try to get a new coordinate with less depth.
+	    	        		//Its better to move in shallow water than stay still.
+	    	        		if (ffai.targetCoor==null)
+	    	        		{
+	    	        			ffai.targetCoor = FishMovementHelper.findRandomTarget((EntityCreature)ffish, xZone,4,minRangeSwim,-1);
+	    	        		}
 	        			}
         			}
         			else
         			{
         				//Fish of size large and legendary will stay deep
         				ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
+        				
+    	        		//The target coor can be null if not enough depth is available. In this case, we will try to get a new coordinate with less depth.
+    	        		//Its better to move in shallow water than stay still.
+    	        		if (ffai.targetCoor==null)
+    	        		{
+    	        			ffai.targetCoor = FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,-1);
+    	        		}
         				
         			}
         			

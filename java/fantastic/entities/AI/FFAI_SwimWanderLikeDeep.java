@@ -46,6 +46,13 @@ public class FFAI_SwimWanderLikeDeep extends FFAI_Base
 
     				//Fish of size large and legendary will stay deep
         			ffai.targetCoor=FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,ffish.GetMinimumDepth());
+        			
+	        		//The target coor can be null if not enough depth is available. In this case, we will try to get a new coordinate with less depth.
+	        		//Its better to move in shallow water than stay still.
+	        		if (ffai.targetCoor==null)
+	        		{
+	        			ffai.targetCoor = FishMovementHelper.findRandomTargetDescend((EntityCreature)ffish, xZone,4,minRangeSwim,-1);
+	        		}
     			
         			if(ffai.targetCoor!=null)
         			{

@@ -106,17 +106,19 @@ public class EntityFFAI
 					}
 					
 					//Will now move to the location set by a previous action
-					if ((targetCoor!=null) && (LockActionCurrentTime==-1))
+					if (LockActionCurrentTime==-1)
 					{
-						FishMovementHelper.SwimTo(ffish, targetCoor.xCoord, targetCoor.yCoord, targetCoor.zCoord, ffish.GetSpeedFromAIState(this.currentAIState));
-						FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(this.currentAIState));
+						if (targetCoor!=null)
+						{
+							FishMovementHelper.SwimTo(ffish, targetCoor.xCoord, targetCoor.yCoord, targetCoor.zCoord, ffish.GetSpeedFromAIState(this.currentAIState));
+							FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(this.currentAIState));
+						}
+						else
+						{
+							FishMovementHelper.SwimStill(ffish);
+							FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(AIState.Idle));
+						}
 					}
-					else
-					{
-						FishMovementHelper.SwimStill(ffish);
-						FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(AIState.Idle));
-					}
-					
 				}
 			}
 			else

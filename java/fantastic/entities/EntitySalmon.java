@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -17,6 +18,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFishHook;
@@ -36,6 +38,7 @@ import fantastic.FantasticInfo;
 import fantastic.entities.AI.EntityFFAI.AIState;
 import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
+import fantastic.entities.AI.FFAI_SwimAwayFromEntity;
 import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
@@ -269,12 +272,13 @@ public class EntitySalmon extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
-        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 2,9500,14000,30,3));
-        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,3,22500,4000,50,7,1,-1,4));
-        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,4,9500,14000,50,7,1,-1,4));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,5,20,7));
+        brain.AddActionToList(new FFAI_SwimAwayFromEntity(brain, this, 0,EntityCreature.class,2));
+        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 1,6));
+        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 2,EntityFantasticFish.class,3));
+        brain.AddActionToList(new FFAI_SwimJumpForFlies(brain, this, 3,9500,14000,30,3));
+        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,4,22500,4000,50,7,1,-1,4));
+        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,5,9500,14000,50,7,1,-1,4));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,6,20,7));
         
 	}
 

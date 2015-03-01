@@ -36,7 +36,7 @@ import fantastic.FantasticInfo;
 import fantastic.entities.AI.EntityFFAI.AIState;
 import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
-import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
+import fantastic.entities.AI.FFAI_SwimAwayFromEntity;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
@@ -259,7 +259,7 @@ public class EntityCatfish extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
+        brain.AddActionToList(new FFAI_SwimAwayFromEntity(brain, this, 0,EntityPlayer.class,6));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
         brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,2,22500,4000,50,7,1,-1,4));
         brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,3,9500,14000,50,7,1,-1,4));

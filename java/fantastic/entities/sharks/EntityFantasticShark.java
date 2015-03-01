@@ -1,5 +1,6 @@
 package fantastic.entities.sharks;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import fantastic.entities.EntityFantasticFish;
@@ -8,6 +9,8 @@ public class EntityFantasticShark extends EntityFantasticFish
 
 {
 
+	private Entity currentTarget;
+	
 	public EntityFantasticShark(World aWorld) 
 	{
 		super(aWorld);
@@ -20,6 +23,15 @@ public class EntityFantasticShark extends EntityFantasticFish
 		
 	}
 	
+	public void SetCurrentTarget(Entity aTarget)
+	{
+		currentTarget=aTarget;
+	}
+	
+	public Entity GetCurrentTarget()
+	{
+		return currentTarget;
+	}
 
 	
 }
