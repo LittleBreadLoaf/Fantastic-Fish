@@ -15,6 +15,7 @@ import fantastic.network.FantasticNetwork;
 import fantastic.network.FishSpeedMessage;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.nbt.NBTTagCompound;
@@ -118,6 +119,7 @@ public class EntityFantasticFish extends EntityWaterMob
 		{
 			_isOut=0;
 		}
+	
 		
 		return _isOut;
 	}
@@ -254,10 +256,25 @@ public class EntityFantasticFish extends EntityWaterMob
 		if (aFishSize!=FishSize.Null)
 		{
 			currentSize=aFishSize;
+			SetHealthBySize(aFishSize);
 			if(FMLCommonHandler.instance().getEffectiveSide().isServer())
 				this.dataWatcher.updateObject(DATAWATCHER_FISH_SIZE, GetDataWatcherIntValueForSize(aFishSize));
 		}
 				
+	}
+	
+	protected void SetHealthBySize(FishSize aSize)
+	{
+		switch (aSize)
+		{
+			case Tiny : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);break;
+			case Small : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);break;
+			case Medium : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8D);break;
+			case Big : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20D);break;
+			case Large : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40D);break;
+			case Legendary : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80D);break;
+			default : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);break;
+		}
 	}
 	
     

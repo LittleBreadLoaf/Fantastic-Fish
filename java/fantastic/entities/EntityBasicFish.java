@@ -207,13 +207,13 @@ public class EntityBasicFish extends EntityFantasticFish
 	}
 	
 	//*** PROTECTED METHOD ***
-	@Override
+	/*@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D );
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(10);
-	}
+	}*/
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2)

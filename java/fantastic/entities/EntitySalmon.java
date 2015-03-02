@@ -204,6 +204,8 @@ public class EntitySalmon extends EntityFantasticFish
 		return 2;
 	}
 	
+
+	
 	
 	//*** PROTECTED METHOD ***
 	@Override
