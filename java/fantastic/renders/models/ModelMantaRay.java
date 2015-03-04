@@ -273,23 +273,23 @@ public class ModelMantaRay extends ModelBase
   {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     
-    EntityMantaRay ray = (EntityMantaRay)entity;
+    EntityMantaRay _fish = (EntityMantaRay)entity;
     
-    	this.wing1L.rotateAngleZ = 0.3F*(MathHelper.cos(f2 *0.07F) ) - 0.1F;
-    	this.wing2L.rotateAngleZ = 0.3F*(MathHelper.cos(f2 *0.07F) ) - 0.1F;
-    	this.wing3L.rotateAngleZ = 0.3F*(MathHelper.cos(f2 *0.07F) ) - 0.1F;
-    	this.wing4l.rotateAngleZ = 0.2F*(MathHelper.cos(f2 *0.07F) ) - 0.1F;
-    	this.wing_5L.rotateAngleZ = 0.05F*(MathHelper.cos(f2 *0.07F) ) - 0.1F;
+    	this.wing1L.rotateAngleZ = 0.3F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) - 0.1F;
+    	this.wing2L.rotateAngleZ = 0.3F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) - 0.1F;
+    	this.wing3L.rotateAngleZ = 0.3F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) - 0.1F;
+    	this.wing4l.rotateAngleZ = 0.2F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) - 0.1F;
+    	this.wing_5L.rotateAngleZ = 0.05F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) - 0.1F;
 
-    	this.wing1R.rotateAngleZ = -0.3F*(MathHelper.cos(f2 *0.07F) ) + 0.1F;
-    	this.wing2R.rotateAngleZ = -0.3F*(MathHelper.cos(f2 *0.07F) ) + 0.1F;
-    	this.wing3R.rotateAngleZ = -0.3F*(MathHelper.cos(f2 *0.07F) ) + 0.1F;
-    	this.wing4R.rotateAngleZ = -0.2F*(MathHelper.cos(f2 *0.07F) ) + 0.1F;
-    	this.wing_5R.rotateAngleZ = -0.05F*(MathHelper.cos(f2 *0.07F) ) + 0.1F;
+    	this.wing1R.rotateAngleZ = -0.3F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) + 0.1F;
+    	this.wing2R.rotateAngleZ = -0.3F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) + 0.1F;
+    	this.wing3R.rotateAngleZ = -0.3F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) + 0.1F;
+    	this.wing4R.rotateAngleZ = -0.2F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) + 0.1F;
+    	this.wing_5R.rotateAngleZ = -0.05F*(MathHelper.cos(f2  * _fish.GetTailFlapSpeed() * 0.07F) ) + 0.1F;
     
-    	this.tail1.rotateAngleX = -0.1F*(MathHelper.sin(f2 *0.07F) );
-    	this.tail2.rotateAngleX = -0.1F*(MathHelper.sin(f2 *0.07F) );
-    	this.tail3.rotateAngleX = -0.1F*(MathHelper.sin(f2 *0.07F) );
+    	this.tail1.rotateAngleX = -0.1F*(MathHelper.sin(f2  * _fish.GetTailFlapSpeed() * 0.07F) );
+    	this.tail2.rotateAngleX = -0.1F*(MathHelper.sin(f2  * _fish.GetTailFlapSpeed() * 0.07F) );
+    	this.tail3.rotateAngleX = -0.1F*(MathHelper.sin(f2  * _fish.GetTailFlapSpeed() * 0.07F) );
 
    
     

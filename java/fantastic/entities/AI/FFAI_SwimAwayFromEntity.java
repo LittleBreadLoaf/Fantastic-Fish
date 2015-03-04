@@ -15,7 +15,7 @@ import fantastic.entities.AI.EntityFFAI.AIState;
 public class FFAI_SwimAwayFromEntity extends FFAI_Base 
 {
 
-    private final int COORDINATE_CHECK_INTERVAL = 500; //in ms
+    private final int COORDINATE_CHECK_INTERVAL = 1000; //in ms
 
 
     /** The closest entity which is being watched by this one. */
@@ -58,7 +58,7 @@ public class FFAI_SwimAwayFromEntity extends FFAI_Base
 				while (_iterator.hasNext())
 				{
 					_scannedEntity = (Entity)_iterator.next();
-					if (!(_scannedEntity instanceof EntityFantasticFish))
+					if (!(_scannedEntity instanceof EntityFantasticFish) && (!(_scannedEntity instanceof EntityPlayer)) && (((Entity) _scannedEntity).isInWater()))
 					{
 							this.closestEntity = (Entity)_scannedEntity;
 							break;

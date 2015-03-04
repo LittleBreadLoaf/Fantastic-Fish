@@ -14,7 +14,7 @@ import fantastic.entities.AI.EntityFFAI.AIState;
 public class FFAI_SwimAwayFromBiggerFish extends FFAI_Base 
 {
 
-    private final int COORDINATE_CHECK_INTERVAL = 500; //in ms
+    private final int COORDINATE_CHECK_INTERVAL = 1000; //in ms
     
     /** The closest entity which is being watched by this one. */
     protected Entity closestEntity;

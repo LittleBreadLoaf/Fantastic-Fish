@@ -149,7 +149,7 @@ public static Vec3 findRandomTargetAscend(EntityCreature aWaterMob, int aXZZone,
     	{
     		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord+_i, (int)_block.zCoord) == Blocks.water)
     		{
-    			FantasticDebug.Output("ACSCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord+_i)+" z:"+Double.toString(_block.zCoord),true);
+    			FantasticDebug.Output("ACSCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord+_i)+" z:"+Double.toString(_block.zCoord));
     			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord+_i, _block.zCoord);
     		}
     	}
@@ -174,7 +174,7 @@ public static Vec3 findRandomTargetDescend(EntityCreature aWaterMob, int aXZZone
     	{
     		if (aWaterMob.worldObj.getBlock((int)_block.xCoord,(int)_block.yCoord-_i, (int)_block.zCoord) == Blocks.water)
     		{
-    			FantasticDebug.Output("DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord-_i)+" z:"+Double.toString(_block.zCoord),true);
+    			FantasticDebug.Output("DESCEND x:"+Double.toString(_block.xCoord)+" y:"+Integer.toString((int)_block.yCoord-_i)+" z:"+Double.toString(_block.zCoord));
     			return Vec3.createVectorHelper(_block.xCoord, _block.yCoord-_i, _block.zCoord);
     		}
     	}
@@ -301,7 +301,7 @@ private static Vec3 findRandomTargetBlock(EntityCreature anEntity, int p_75462_1
        int i2 = random.nextInt(2 * p_75462_2_) - p_75462_2_;
        int k1 = random.nextInt(2 * p_75462_1_) - p_75462_1_;
        
-       /*if (aMinRangeXZ!=-1)
+       if (aMinRangeXZ!=-1)
        {
 	       //Adjust X for range
 	       if (j1<=0)
@@ -322,7 +322,7 @@ private static Vec3 findRandomTargetBlock(EntityCreature anEntity, int p_75462_1
 	       {
 	    	   k1=k1+aMinRangeXZ;
 	       }
-       }*/
+       }
        
 
        if (p_75462_3_ == null || (double)j1 * p_75462_3_.xCoord + (double)k1 * p_75462_3_.zCoord >= 0.0D)
@@ -450,6 +450,18 @@ public static void SetFishTailSpeed(EntityFantasticFish aFish,float aSpeed)
 	//Update of the last position every 500ms
 	if (_currentTime>=aFish.previousPosTimeReading+500)
 	{
+		//Setting tail flap speed
+		double _x = aFish.getDistance(aFish.previousXPos, aFish.previousYPos, aFish.previousZPos);
+		FantasticDebug.Output("DISTANCE: "+Double.toString(_x));
+		if (_x<=1)
+		{
+			aFish.SetCurrentSpeed(0); //Fish can be stuck
+		}
+		else
+		{
+			aFish.SetCurrentSpeed(aSpeed);
+		}
+		
 		FantasticDebug.Output("UPDATING FISH POSITION.");
 		aFish.previousPosTimeReading=_currentTime;
 		aFish.previousXPos=aFish.posX;
@@ -457,17 +469,7 @@ public static void SetFishTailSpeed(EntityFantasticFish aFish,float aSpeed)
 		aFish.previousZPos=aFish.posZ;
 	}
 	
-	//Setting tail flap speed
-	double _x = aFish.getDistance(aFish.previousXPos, aFish.previousYPos, aFish.previousZPos);
-	FantasticDebug.Output("DISTANCE: "+Double.toString(_x));
-	if (_x<=1)
-	{
-		aFish.SetCurrentSpeed(0); //Fish can be stuck
-	}
-	else
-	{
-		aFish.SetCurrentSpeed(aSpeed);
-	}
+
 }
 
 private static double ProvideApproachingSpeed(double aDistX, double aDistY, double aDistZ)

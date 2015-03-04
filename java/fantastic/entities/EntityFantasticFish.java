@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 
 import sun.security.action.GetIntegerAction;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
 import fantastic.FantasticMod;
@@ -13,12 +14,15 @@ import fantastic.entities.AI.EntityFFAI.AIState;
 import fantastic.entities.sharks.EntityWhiteTipShark;
 import fantastic.network.FantasticNetwork;
 import fantastic.network.FishSpeedMessage;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityFantasticFish extends EntityWaterMob
@@ -257,6 +261,7 @@ public class EntityFantasticFish extends EntityWaterMob
 		{
 			currentSize=aFishSize;
 			SetHealthBySize(aFishSize);
+			FantasticDebug.Output("HEALTH: "+Float.toString(this.getHealth()) + " on " + Float.toString(this.getMaxHealth()));
 			if(FMLCommonHandler.instance().getEffectiveSide().isServer())
 				this.dataWatcher.updateObject(DATAWATCHER_FISH_SIZE, GetDataWatcherIntValueForSize(aFishSize));
 		}
@@ -267,13 +272,13 @@ public class EntityFantasticFish extends EntityWaterMob
 	{
 		switch (aSize)
 		{
-			case Tiny : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);break;
-			case Small : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);break;
-			case Medium : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8D);break;
-			case Big : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20D);break;
-			case Large : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40D);break;
-			case Legendary : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80D);break;
-			default : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);break;
+			case Tiny : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);this.setHealth(4F);break;
+			case Small : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);this.setHealth(4F);break;
+			case Medium : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10D);this.setHealth(10F);break;
+			case Big : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40D);this.setHealth(40F);break;
+			case Large : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80D);this.setHealth(80F);break;
+			case Legendary : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100D);this.setHealth(100F);break;
+			default : this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4D);this.setHealth(4F);break;
 		}
 	}
 	
@@ -424,12 +429,72 @@ public class EntityFantasticFish extends EntityWaterMob
 			if (!this.worldObj.isRemote)
 			{
 				
-				FantasticNetwork.network.sendToAll(new FishSpeedMessage(this.getEntityId(), currentSpeed));
+				//FantasticNetwork.network.sendToAll(new FishSpeedMessage(this.getEntityId(), currentSpeed));
+				FantasticNetwork.network.sendToAllAround(new FishSpeedMessage(this.getEntityId(), currentSpeed),new TargetPoint(this.worldObj.provider.dimensionId,this.posX,this.posY,this.posZ,20));
 			}    		
     	}
     }
 
+	/**
+	 * Returns the sound this mob makes when it is hurt.
+	 */
+	
+	@Override
+    protected String getHurtSound()
+	{
+		return null;
+	}
 
+	/**
+	 * Returns the sound this mob makes while it's alive.
+	 */
+	@Override
+	protected String getLivingSound()
+	{
+			return null;
+	}
+
+	/**
+	 * Returns the sound this mob makes on death.
+	 */
+	@Override
+	protected String getDeathSound()
+	{
+		return null;
+	}
+
+	@Override
+	protected boolean canDespawn()
+	{
+	    return this.hasCustomNameTag() ? false : true;
+	}
+	
+	@Override
+	public void onDeath(DamageSource par1DamageSource)
+	{
+		super.onDeath(par1DamageSource);
+
+	}
+	
+	@Override
+	public boolean canBeCollidedWith()
+	{
+		return true;
+		
+	}
+
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
+		return EnumCreatureAttribute.UNDEFINED;
+	}
+	
+    
+    @Override
+    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)
+    {
+    	//This call was overriden to kill the annoying stepping sound when the fish was swimming around.
+    	//Must be kept empty.
+    }
 
 	protected void entityInit()
 	{

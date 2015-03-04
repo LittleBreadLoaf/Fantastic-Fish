@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -37,6 +38,7 @@ import fantastic.entities.AI.EntityFFAI.AIState;
 import fantastic.entities.AI.EntityFFAI;
 import fantastic.entities.AI.FFAI_SwimAwayFromBiggerFish;
 import fantastic.entities.AI.FFAI_SwimAwayFromEntity;
+import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
@@ -95,34 +97,16 @@ public class EntitySailfish extends EntityFantasticFish
 			switch (GetFishSize())
 			{
 				
-				case Tiny : return (float) (1.1F+currentSpeed);
-				case Small : return (float) (0.9F+currentSpeed);
-				case Medium : return (float) (0.8F+currentSpeed);
-				case Big : return (float) (0.7F+currentSpeed);
-				case Large : return (float) (0.6F+currentSpeed);
-				case Legendary : return (float) (0.5F+currentSpeed);
-				default: return 1.1F; 
-
-
+				case Tiny : return 1F+currentSpeed*1F;
+				case Small : return 1F+currentSpeed*1F;
+				case Medium : return 1F+currentSpeed*1F;
+				case Big : return 1F+currentSpeed*1F;
+				case Large : return 1F+currentSpeed*1F;
+				case Legendary : return 1F+currentSpeed*1F;
+				default: return 1F; 
 			}
 	}
 	
-	
-	@Override
-	public void onDeath(DamageSource par1DamageSource)
-	{
-		super.onDeath(par1DamageSource);
-
-	}
-	
-	@Override
-	public boolean canBeCollidedWith()
-	{
-		return true;
-		
-	}
-	
-
 
     @Override
 	public float GetRenderValueFromSize()
@@ -155,12 +139,12 @@ public class EntitySailfish extends EntityFantasticFish
     	
     	if (aState==AIState.Wander)
     	{
-    		return 3;
+    		return 2;
     	}
 
     	if (aState==AIState.Fleeing)
     	{
-    		return 6;
+    		return 4;
     	}
     	
     	if (aState==AIState.Jump)
@@ -170,7 +154,7 @@ public class EntitySailfish extends EntityFantasticFish
     	
     	if (aState==AIState.Pursuing)
     	{
-    		return 6;
+    		return 4;
     	}
 
     	
@@ -178,14 +162,7 @@ public class EntitySailfish extends EntityFantasticFish
     	return 0;
     	
     }
-    
 
-    
-	
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.UNDEFINED;
-	}
 	
 	public ResourceLocation GetTexture()
 	{
@@ -236,48 +213,13 @@ public class EntitySailfish extends EntityFantasticFish
     }
 	
 	//*** PROTECTED METHOD ***
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D );
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(10);
-	}
+
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
 		this.entityDropItem(new ItemStack(FantasticItems.rawSailfishDarne, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
-	}
-
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	protected String getHurtSound()
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	protected String getLivingSound()
-	{
-			return null;
-	}
-
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	protected String getDeathSound()
-	{
-		return null;
-	}
-
-	protected boolean canDespawn()
-	{
-	    return this.hasCustomNameTag() ? false : true;
 	}
 
 	
@@ -302,12 +244,10 @@ public class EntitySailfish extends EntityFantasticFish
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-        //brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 0,EntityPlayer.class,6));
-        //brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 1,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimWanderLikeSurface(brain,this,3,100,12,1,8));
-
-
-
+        brain.AddActionToList(new FFAI_SwimAwayFromEntity(brain, this, 0,EntityCreature.class,2));
+        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 1,6));
+        brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 2,EntityFantasticFish.class,3));
+        brain.AddActionToList(new FFAI_SwimWanderFullRandom(brain,this,3,100,12,1,8,-1));
         
 	}
 

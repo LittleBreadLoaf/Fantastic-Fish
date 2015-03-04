@@ -110,13 +110,13 @@ public class EntityFFAI
 					{
 						if (targetCoor!=null)
 						{
-							FishMovementHelper.SwimTo(ffish, targetCoor.xCoord, targetCoor.yCoord, targetCoor.zCoord, ffish.GetSpeedFromAIState(this.currentAIState));
 							FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(this.currentAIState));
+							FishMovementHelper.SwimTo(ffish, targetCoor.xCoord, targetCoor.yCoord, targetCoor.zCoord, ffish.GetSpeedFromAIState(this.currentAIState));
 						}
 						else
 						{
-							FishMovementHelper.SwimStill(ffish);
 							FishMovementHelper.SetFishTailSpeed(ffish, ffish.GetSpeedFromAIState(AIState.Idle));
+							FishMovementHelper.SwimStill(ffish);
 						}
 					}
 				}

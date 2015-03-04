@@ -206,9 +206,6 @@ public class Recipes
 				GameRegistry.addShapelessRecipe(new ItemStack(FantasticItems.sushi, 1), new ItemStack(FantasticItems.seaweed, 1), new ItemStack(FantasticItems.filletRaw, 1));
 			//Salmon
 				GameRegistry.addShapelessRecipe(new ItemStack(FantasticItems.tinyFish, 1, 12), new ItemStack(Items.fish, 1, 1));
-			//Aquarium Glass
-				GameRegistry.addShapelessRecipe(new ItemStack(FantasticBlocks.aquariumGlass, 1), new ItemStack(Blocks.glass_pane, 1));
-				
 				
 		//Fish Fillets
 

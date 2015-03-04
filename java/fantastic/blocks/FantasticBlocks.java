@@ -29,7 +29,6 @@ import fantastic.blocks.wholecoral.BlockSpongeCoralPink;
 
 public class FantasticBlocks 
 {
-	public static Block aquariumGlass;
 	/*
      * Corals/SeaPlants
      */
@@ -84,7 +83,7 @@ public class FantasticBlocks
 	public static void init() 
 	{
 		
-		//aquariumGlass = new BlockAquariumGlass(Material.rock).setBlockTextureName("glass");
+
 		//Base Blocks
     	coralWholeBlock = new BlockCoral(Material.coral);
     	coralBushBlock = new BlockBushCoral(Material.water);
@@ -135,7 +134,7 @@ public class FantasticBlocks
     	 * Register Blocks
     	 */
         
-        //GameRegistry.registerBlock(aquariumGlass, "Aquarium Glass");
+
         //Anemones
         GameRegistry.registerBlock(anemoneSmall, "Small Anemone");
         GameRegistry.registerBlock(anemoneTall, "Tall Anemone");

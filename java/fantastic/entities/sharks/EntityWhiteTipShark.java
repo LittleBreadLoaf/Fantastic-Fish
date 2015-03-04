@@ -305,7 +305,7 @@ public class EntityWhiteTipShark extends EntityFantasticShark
 		this.getNavigator().setCanSwim(true);
         this.tasks.taskEntries.clear();
         
-        brain.AddActionToList(new FFAI_SwimWanderLikeSurface(brain,this,0,100,12,1,8));
+        brain.AddActionToList(new FFAI_SwimWanderLikeSurface(brain,this,0,100,12,8));
 
 
 

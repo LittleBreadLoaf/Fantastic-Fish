@@ -72,7 +72,7 @@ public class FantasticEntities
 		_id++;
 
 		//Manta Ray
-		EntityRegistry.registerModEntity(EntitySailfish.class, Names.MantaRay_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
+		EntityRegistry.registerModEntity(EntityMantaRay.class, Names.MantaRay_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
 

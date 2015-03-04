@@ -78,7 +78,7 @@ public class RenderSailfish extends RenderLiving
 		if (par1.worldObj.isAirBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ))
 		{
 			FantasticDebug.Output("JUMPING !!!!!!!!!!!!!");
-		    GL11.glRotatef(180F, 1.0F, 1.0F, 0.0F);
+		    //GL11.glRotatef(180F, 1.0F, 1.0F, 0.0F);
 		}
 		GL11.glTranslatef(0.0F, (float)(-par1.GetRenderValueFromSize()), 0.0F);
 		super.rotateCorpse((EntityLivingBase)par1, par2, par3, par6);}

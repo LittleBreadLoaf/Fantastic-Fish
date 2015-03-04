@@ -154,9 +154,9 @@ public class FantasticMod
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent event)
 	{
-		MinecraftServer server = MinecraftServer.getServer();
-		ICommandManager command = server.getCommandManager();
-		ServerCommandManager serverCommand = ((ServerCommandManager) command);
+		//MinecraftServer server = MinecraftServer.getServer();
+		//ICommandManager command = server.getCommandManager();
+		//ServerCommandManager serverCommand = ((ServerCommandManager) command);
 
 		//serverCommand.registerCommand(new CommandResetSpirit());
 	}
@@ -164,9 +164,6 @@ public class FantasticMod
 	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
-		if(Loader.isModLoaded("craftingpillars"))
-		{
-			
-		}
+
 	}
 }

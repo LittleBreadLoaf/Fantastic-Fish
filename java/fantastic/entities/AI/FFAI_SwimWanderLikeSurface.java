@@ -13,15 +13,13 @@ public class FFAI_SwimWanderLikeSurface extends FFAI_Base
 {
 
 	int xZone = 0;
-	int yZone = 0;
 	int minRangeSwim = -1;
 	
 	
-	public FFAI_SwimWanderLikeSurface(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aYZone, int aMinRangeSwim) 
+	public FFAI_SwimWanderLikeSurface(EntityFFAI anAI, EntityFantasticFish aFish,int aPriority, int aPercentageOfExecution,  int aXZone, int aMinRangeSwim) 
 	{
 		super(anAI, aFish,aPriority,aPercentageOfExecution);
 		xZone = aXZone;
-		yZone = aYZone;
 		minRangeSwim=aMinRangeSwim;
 	
 	}
