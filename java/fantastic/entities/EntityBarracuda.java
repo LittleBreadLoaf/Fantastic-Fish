@@ -42,17 +42,17 @@ import fantastic.entities.AI.FFAI_SwimAwayFromPlayer;
 import fantastic.entities.AI.FFAI_SwimChaseSmallerFish;
 import fantastic.entities.AI.FFAI_SwimJumpForFlies;
 import fantastic.entities.AI.FFAI_SwimStayStill;
-import fantastic.entities.AI.FFAI_SwimWanderAscendAtTime;
+import fantastic.entities.AI.FFAI_SwimWanderLikeSunnyAfternoon;
 import fantastic.entities.AI.FishMovementHelper;
 import fantastic.items.FantasticItems;
 
-public class EntityCatfish extends EntityFantasticFish
+public class EntityBarracuda extends EntityFantasticFish
 {
 	//Textures
-	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/catfish.png");
+	private final ResourceLocation texture1 = new ResourceLocation(FantasticInfo.ID.toLowerCase() + ":textures/models/mobs/barracuda.png");
 	
 	//CONSTRUCTOR
-	public EntityCatfish(World aWorld)
+	public EntityBarracuda(World aWorld)
 	{
 		super(aWorld);
 		brain=new EntityFFAI(this,10000,15000);
@@ -60,7 +60,7 @@ public class EntityCatfish extends EntityFantasticFish
 	}
 
 	//CONSTRUCTOR
-	public EntityCatfish(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
+	public EntityBarracuda(World aWorld, FishSize aSize, int aTextureIndex, int isOutOfWater)
 	{
 		this(aWorld);
 		InitializeFish(aSize,aTextureIndex,isOutOfWater);
@@ -93,19 +93,17 @@ public class EntityCatfish extends EntityFantasticFish
 			switch (GetFishSize())
 			{
 				
-				case Tiny : return 0.75F+currentSpeed*1F;
-				case Small : return 0.75F+currentSpeed*1F;
-				case Medium : return 0.70F+currentSpeed*1F;
-				case Big : return 0.70F+currentSpeed*1F;
-				case Large : return 0.5F+currentSpeed*1F;
-				case Legendary : return 0.5F+currentSpeed*1F;
+				case Tiny : return 0.5F+currentSpeed*0.3F;
+				case Small : return 0.5F+currentSpeed*0.3F;
+				case Medium : return 0.4F+currentSpeed*0.3F;
+				case Big : return 0.4F+currentSpeed*0.3F;
+				case Large : return 0.3F+currentSpeed*0.3F;
+				case Legendary : return 0.3F+currentSpeed*0.3F;
 				default: return 0.5F; 
 
 
 			}
 	}
-	
-	
 
     @Override
 	public float GetRenderValueFromSize()
@@ -113,11 +111,11 @@ public class EntityCatfish extends EntityFantasticFish
 		switch (GetFishSize())
 		{
 			case Tiny : return 0.15F;
-			case Small : return 0.30F;
-			case Medium : return 0.50F;
-			case Big : return 0.7F;
-			case Large : return 0.9F;
-			case Legendary : return 1.4F;
+			case Small : return 0.40F;
+			case Medium : return 0.60F;
+			case Big : return 0.8F;
+			case Large : return 1.1F;
+			case Legendary : return 1.5F;
 			default: return 0.15F; 
 		}
 	}
@@ -125,9 +123,15 @@ public class EntityCatfish extends EntityFantasticFish
     @Override
     public float GetSpeedFromAIState(AIState aState)
     {
+    	if (aState==AIState.Idle)
+    	{
+    		return 0;
+    	}
+
+    	
     	if (aState==AIState.StayStill)
     	{
-    		return 1;
+    		return 0;
     	}
     	
     	if (aState==AIState.Wander)
@@ -137,7 +141,7 @@ public class EntityCatfish extends EntityFantasticFish
 
     	if (aState==AIState.Fleeing)
     	{
-    		return 3;
+    		return 4;
     	}
     	
     	if (aState==AIState.Jump)
@@ -147,7 +151,7 @@ public class EntityCatfish extends EntityFantasticFish
     	
     	if (aState==AIState.Pursuing)
     	{
-    		return 3;
+    		return 4;
     	}
 
     	
@@ -156,6 +160,7 @@ public class EntityCatfish extends EntityFantasticFish
     	
     }
     
+
 	public ResourceLocation GetTexture()
 	{
 		switch (GetTextureIndex())
@@ -171,12 +176,30 @@ public class EntityCatfish extends EntityFantasticFish
 		return 1;
 	}
 	
+
+
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
-		this.entityDropItem(new ItemStack(FantasticItems.rawCatfishFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
+		this.entityDropItem(new ItemStack(FantasticItems.rawBarracudaFillet, 1 + rand.nextInt(this.getNumberOfItemDroppedFromSize())), 0.0F);
 	}
+
+    @Override
+	public double PositionSizeAdjust()
+    {
+		switch (GetFishSize())
+		{
+			case Tiny : return 0;
+			case Small : return 0;
+			case Medium : return 0;
+			case Big : return 0;
+			case Large : return 1;
+			case Legendary : return 1;
+			default: return 0; 
+		}
+    }
+
 
 	
 	//*** PRIVATE METHOD ***
@@ -201,13 +224,10 @@ public class EntityCatfish extends EntityFantasticFish
         this.tasks.taskEntries.clear();
         
         brain.AddActionToList(new FFAI_SwimAwayFromEntity(brain, this, 0,EntityCreature.class,2));
-        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 1,6));
+        brain.AddActionToList(new FFAI_SwimAwayFromPlayer(brain, this, 1,4));
         brain.AddActionToList(new FFAI_SwimAwayFromBiggerFish(brain, this, 2,EntityFantasticFish.class,3));
-        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,3,22500,4000,50,7,1,-1,4));
-        brain.AddActionToList(new FFAI_SwimWanderAscendAtTime(brain,this,4,9500,14000,50,7,1,-1,4));
-        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,5,20,7));
-
-
+        brain.AddActionToList(new FFAI_SwimWanderLikeSunnyAfternoon(brain,this,3,30,7,1,-1,4));
+        brain.AddActionToList(new FFAI_SwimChaseSmallerFish(brain,this,4,40,7));
         
 	}
 

@@ -77,7 +77,7 @@ public class RenderMantaRay extends RenderLiving
     {		
 		float par6 = 0;
 	//if (par1.getIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY - 1, (int)par1.posZ) != Blocks.water)
-	if (par1.GetIsOutOfWater() == 0 && par1.worldObj.getBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ) != Blocks.water)
+	if (par1.worldObj.getBlock((int)par1.posX, (int)par1.posY, (int)par1.posZ) != Blocks.water)
     {
     	
         par4 = 90F + par1.rotationYaw;

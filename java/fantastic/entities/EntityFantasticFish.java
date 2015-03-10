@@ -30,20 +30,22 @@ public class EntityFantasticFish extends EntityWaterMob
 	public static enum FishSize { Null,Tiny,Small,Medium,Big,Large,Legendary, OneSize};
 
 
-	private static int DATAWATCHER_OUT_OF_WATER = 17;
+	//private static int DATAWATCHER_OUT_OF_WATER = 17;
 	private static int DATAWATCHER_TEXTURE = 19;
 	private static int DATAWATCHER_FISH_SIZE = 21;
-	private static String DATAWATCHER_OUT_OF_WATER_STRING = "IsOutOfWater";
+	private static int DATAWATCHER_MANUAL_SPAWN = 23;
+	//private static String DATAWATCHER_OUT_OF_WATER_STRING = "IsOutOfWater";
 	private static String DATAWATCHER_TEXTURE_STRING = "TextureIndex";
 	private static String DATAWATCHER_FISH_SIZE_STRING = "FishSize";
-	private static String DATAWATCHER_HAS_NOT_SPAWNED_STRING = "HasNotSpawned";
+	//private static String DATAWATCHER_HAS_NOT_SPAWNED_STRING = "HasNotSpawned";
+	private static String DATAWATCHER_MANUAL_SPAWN_STRING = "ManualSpawn";
 
 
 	public EntityFFAI brain;
 	
 	public FishSize currentSize = FishSize.Null;
 	
-	private boolean hasNotSpawned = true;
+	private int manualSpawn = 0;
 	private boolean tickFilterPass = true;
 	
 
@@ -60,6 +62,8 @@ public class EntityFantasticFish extends EntityWaterMob
 	public EntityFantasticFish(World aWorld) 
 	{
 		super(aWorld);
+		//Not manually spawned by default
+		this.SetManualSpawn(0);
 	}
 
 	public void InitializeFish(FishSize aSize, int aTextureIndex, int isOutOfWater)
@@ -96,17 +100,32 @@ public class EntityFantasticFish extends EntityWaterMob
 		return 1;
 	}
 	
-	public boolean GetHasNotSpawned()
+	public int GetManualSpawn()
 	{
-		return this.hasNotSpawned;
+		int _manualSpawn;
+		try
+		{
+			_manualSpawn = this.dataWatcher.getWatchableObjectInt(DATAWATCHER_MANUAL_SPAWN);
+		}
+		catch (Exception ex)
+		{
+			_manualSpawn=0;
+		}
+		
+		manualSpawn=_manualSpawn;
+		
+		return manualSpawn;
 	}
 	
-	public void SetHasNotSpawned(boolean hasSpawned)
+	public void SetManualSpawn(int isManuallySpawned)
 	{
-		this.hasNotSpawned = hasSpawned;
+
+		manualSpawn=isManuallySpawned;
+		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+			this.dataWatcher.updateObject(DATAWATCHER_MANUAL_SPAWN, Integer.valueOf(isManuallySpawned));
 	}
 	
-	public void SetIsOutOfWater(int par1)
+	/*public void SetIsOutOfWater(int par1)
 	{
 		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
 		this.dataWatcher.updateObject(DATAWATCHER_OUT_OF_WATER, Integer.valueOf(par1));
@@ -126,7 +145,7 @@ public class EntityFantasticFish extends EntityWaterMob
 	
 		
 		return _isOut;
-	}
+	}*/
 	
 
 	public int GetTextureIndex()
@@ -211,6 +230,7 @@ public class EntityFantasticFish extends EntityWaterMob
 			case 19 : SpawnSizedFish(aWorld,EntitySailfish.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 			case 20 : SpawnSizedFish(aWorld,EntityMantaRay.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 			case 21 : SpawnSizedFish(aWorld,EntityWhiteTipShark.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
+			case 22 : SpawnSizedFish(aWorld,EntityBarracuda.class,1, aSize,isOutOfWater,posX,posY,posZ);break;
 
 			default : SpawnSizedFish(aWorld,EntityBasicFish.class,1, aSize,isOutOfWater,posX,posY,posZ);break; //on a bug, a basic fish will be returned
 			
@@ -236,9 +256,14 @@ public class EntityFantasticFish extends EntityWaterMob
 				//Instantiate the fish
 				Object _newFish = _cons.newInstance(_objList);
 				
+				//The fish was manually spawned
+				((EntityFantasticFish)_newFish).SetManualSpawn(1);
+				
 				//Spawn it
 				((Entity)_newFish).setLocationAndAngles(posX, posY, posZ, 0, 0);
 				aWorld.spawnEntityInWorld((Entity)_newFish);
+				((Entity)_newFish).setVelocity(0, 0, 0);
+				
 				
 			} catch (Exception e) 
 			{
@@ -466,7 +491,8 @@ public class EntityFantasticFish extends EntityWaterMob
 	@Override
 	protected boolean canDespawn()
 	{
-	    return this.hasCustomNameTag() ? false : true;
+		//Will not despawn if it has a name tag or it is manually spawned
+		return !((this.hasCustomNameTag()) || (this.GetManualSpawn()==1));
 	}
 	
 	@Override
@@ -499,9 +525,10 @@ public class EntityFantasticFish extends EntityWaterMob
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(DATAWATCHER_OUT_OF_WATER, Integer.valueOf(0));
+		//this.dataWatcher.addObject(DATAWATCHER_OUT_OF_WATER, Integer.valueOf(0));
 		this.dataWatcher.addObject(DATAWATCHER_TEXTURE, Integer.valueOf(0));
 		this.dataWatcher.addObject(DATAWATCHER_FISH_SIZE, Integer.valueOf(0));
+		this.dataWatcher.addObject(DATAWATCHER_MANUAL_SPAWN, Integer.valueOf(0));
 		//this.dataWatcher.addObject(22, Integer.valueOf(-1));
 	}
 
@@ -513,9 +540,10 @@ public class EntityFantasticFish extends EntityWaterMob
 		FantasticDebug.Output("writeEntityToNbt");
 		super.writeEntityToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setInteger(DATAWATCHER_TEXTURE_STRING, this.GetTextureIndex());
+		par1NBTTagCompound.setInteger(DATAWATCHER_MANUAL_SPAWN_STRING, this.GetManualSpawn());
 		par1NBTTagCompound.setInteger(DATAWATCHER_FISH_SIZE_STRING, GetDataWatcherIntValueForSize(this.GetFishSize()));
-		par1NBTTagCompound.setBoolean(DATAWATCHER_HAS_NOT_SPAWNED_STRING, this.GetHasNotSpawned());
-		par1NBTTagCompound.setInteger(DATAWATCHER_OUT_OF_WATER_STRING, this.GetIsOutOfWater());
+		//par1NBTTagCompound.setBoolean(DATAWATCHER_HAS_NOT_SPAWNED_STRING, this.GetHasNotSpawned());
+		//par1NBTTagCompound.setInteger(DATAWATCHER_OUT_OF_WATER_STRING, this.GetIsOutOfWater());
 		
 	}
 
@@ -527,9 +555,10 @@ public class EntityFantasticFish extends EntityWaterMob
 		FantasticDebug.Output("readEntityFromNbt",true);
 		super.readEntityFromNBT(par1NBTTagCompound);
 		this.SetTextureIndex(par1NBTTagCompound.getInteger(DATAWATCHER_TEXTURE_STRING));
+		this.SetManualSpawn(par1NBTTagCompound.getInteger(DATAWATCHER_MANUAL_SPAWN_STRING));
 		this.SetFishSize(GetDataWatcherSizeForValue(par1NBTTagCompound.getInteger(DATAWATCHER_FISH_SIZE_STRING)));
-		this.SetHasNotSpawned(par1NBTTagCompound.getBoolean(DATAWATCHER_HAS_NOT_SPAWNED_STRING));
-		this.SetIsOutOfWater(par1NBTTagCompound.getInteger(DATAWATCHER_OUT_OF_WATER_STRING));
+		//this.SetHasNotSpawned(par1NBTTagCompound.getBoolean(DATAWATCHER_HAS_NOT_SPAWNED_STRING));
+		//this.SetIsOutOfWater(par1NBTTagCompound.getInteger(DATAWATCHER_OUT_OF_WATER_STRING));
 	}
 
 	

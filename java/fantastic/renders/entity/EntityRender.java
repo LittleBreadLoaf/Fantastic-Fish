@@ -6,6 +6,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import fantastic.animations.client.ModelSerpentBoss;
 import fantastic.animations.client.RenderSerpentBoss;
 import fantastic.animations.common.EntitySerpentBoss;
+import fantastic.entities.EntityBarracuda;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityBlooper;
 import fantastic.entities.EntityCatfish;
@@ -71,6 +72,7 @@ public class EntityRender
 		//RenderingRegistry.registerEntityRenderingHandler(EntityHammerHead.class, new RenderBasicShark(new ModelBasicShark(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, new RenderPike(new ModelPike(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMusky.class, new RenderMusky(new ModelPike(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBarracuda.class, new RenderBarracuda(new ModelPike(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTrout.class, new RenderTrout(new ModelBasicFish(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityReinforcedFishingHook.class, new RenderFish());
 

@@ -135,7 +135,7 @@ public class FantasticMod
 		contents.getInfo("FISHERMAN").addItem(new WeightedRandomChestContent(new ItemStack(Items.stick, 1), 3, 5, 23));//15%
 		contents.getInfo("FISHERMAN").addItem(new WeightedRandomChestContent(new ItemStack(Items.lead, 1), 1, 1, 14));//9%
 		contents.getInfo("FISHERMAN").addItem(new WeightedRandomChestContent(new ItemStack(Items.name_tag, 1), 1, 1, 6));//%4
-		contents.getInfo("FISHERMAN").addItem(new WeightedRandomChestContent(new ItemStack(FantasticItems.randomFish, 0), 1, 1, 3));//2%
+		//contents.getInfo("FISHERMAN").addItem(new WeightedRandomChestContent(new ItemStack(FantasticItems.randomFish, 0), 1, 1, 3));//2%
 		contents.setMin(9);
 		contents.setMax(5);
 		proxy.initTileRenders();

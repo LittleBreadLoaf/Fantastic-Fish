@@ -65,7 +65,7 @@ public class FantasticItems
 	public static Item swordfishSword;
 	public static Item creeperFish;
 	//public static Item woodenRod;
-	public static Item randomFish;
+	//public static Item randomFish;
 	public static Item harpoon;
 	public static Item sharkFin;
 	public static Item finSoup;
@@ -89,6 +89,8 @@ public class FantasticItems
 	public static Item cookedTunaDarne;	
 	public static Item rawSailfishDarne;
 	public static Item cookedSailfishDarne;	
+	public static Item rawBarracudaFillet;
+	public static Item cookedBarracudaFillet;	
 
 	
 	public static final CreativeTabs tabFantastic = new CreativeTabs("Fantastic Fish Mod")
@@ -157,7 +159,7 @@ public class FantasticItems
 		squid = new ItemSquid().setTextureName("fantastic:" + Names.Squid_UnlocalizedName);
 		swordfishSword = new ItemFishSword(ToolMaterial.IRON).setUnlocalizedName(Names.SwordfishSword_UnlocalizedName).setCreativeTab(tabFantastic).setTextureName("fantastic:" + Names.SwordfishSword_UnlocalizedName);
 		creeperFish = new ItemCreeperFish().setTextureName("fantastic:" + Names.CreeperFish_UnlocalizedName);
-		randomFish = new ItemRandomFish().setTextureName("fantastic:" + Names.RandomFish_UnlocalizedName);
+		//randomFish = new ItemRandomFish().setTextureName("fantastic:" + Names.RandomFish_UnlocalizedName);
 		harpoon = new ItemHarpoon().setTextureName("fantastic:harpoon");
 		sharkFin = new ItemSharkFin().setTextureName("fantastic:sharkfin");
 		finSoup = (new ItemFinSoup(7, 0.8F, true)).setUnlocalizedName("finsoup").setTextureName("fantastic:finsoup");
@@ -179,6 +181,8 @@ public class FantasticItems
 		cookedTunaDarne = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Tuna_Darne_UnlocalizedName).setTextureName("fantastic:cooked_tuna_darne").setCreativeTab(FantasticItems.tabFantastic);
 		rawSailfishDarne = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Sailfish_Darne_UnlocalizedName).setTextureName("fantastic:raw_sailfish_darne").setCreativeTab(FantasticItems.tabFantastic);
 		cookedSailfishDarne = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Sailfish_Darne_UnlocalizedName).setTextureName("fantastic:cooked_sailfish_darne").setCreativeTab(FantasticItems.tabFantastic);
+		rawBarracudaFillet = new ItemFood(4, 0.6F, true).setUnlocalizedName(Names.Raw_Barracuda_Fillet_UnlocalizedName).setTextureName("fantastic:fillet_raw").setCreativeTab(FantasticItems.tabFantastic); //same fillet texture as the pike
+		cookedBarracudaFillet = new ItemFood(7, 0.8F, true).setUnlocalizedName(Names.Cooked_Barracuda_Fillet_UnlocalizedName).setTextureName("fantastic:fillet_cooked").setCreativeTab(FantasticItems.tabFantastic); //same fillet texture as the pike
 
 		
 		
@@ -214,7 +218,7 @@ public class FantasticItems
 		GameRegistry.registerItem(swordfishSword, Names.SwordfishSword_Name); 
 		GameRegistry.registerItem(creeperFish, "Creepedo");
 		//GameRegistry.registerItem(woodenRod, "Rod");
-		GameRegistry.registerItem(randomFish , "Fish");
+		//GameRegistry.registerItem(randomFish , "Fish");
 		GameRegistry.registerItem(harpoon, "Harpoon");
 		GameRegistry.registerItem(sharkFin, "Shark Fin");
 		GameRegistry.registerItem(finSoup, "Shark Fin Soup");
@@ -236,6 +240,8 @@ public class FantasticItems
 		GameRegistry.registerItem(cookedTunaDarne, Names.Cooked_Tuna_Darne_Name);
 		GameRegistry.registerItem(rawSailfishDarne, Names.Raw_Sailfish_Darne_Name);
 		GameRegistry.registerItem(cookedSailfishDarne, Names.Cooked_Sailfish_Darne_Name);
+		GameRegistry.registerItem(rawBarracudaFillet, Names.Raw_Barracuda_Fillet_Name);
+		GameRegistry.registerItem(cookedBarracudaFillet, Names.Cooked_Barracuda_Fillet_Name);
 
 		
 		//Smelting 
@@ -246,6 +252,7 @@ public class FantasticItems
 		GameRegistry.addSmelting(rawCatfishFillet,new ItemStack(cookedCatfishFillet), 1.0F);
 		GameRegistry.addSmelting(rawTunaDarne,new ItemStack(cookedTunaDarne), 1.0F);
 		GameRegistry.addSmelting(rawSailfishDarne,new ItemStack(cookedSailfishDarne), 1.0F);
+		GameRegistry.addSmelting(rawBarracudaFillet,new ItemStack(cookedBarracudaFillet), 1.0F);
 
 		
 	}

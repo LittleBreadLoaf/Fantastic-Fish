@@ -37,9 +37,7 @@ public class EntityCaveFish extends EntityFantasticFish
 	{
 		SetFishSize(aSize);
 		SetTextureIndex(aTextureIndex);
-		SetIsOutOfWater(isOutOfWater);
 		this.ignoreFrustumCheck = true;
-		SetHasNotSpawned(false);
 	}
 	
 	//This property tells if the class has different size of fish for the same class. By default, it return false. 

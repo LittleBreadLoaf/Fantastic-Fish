@@ -209,7 +209,7 @@ public class Recipes
 				
 		//Fish Fillets
 
-				ItemStack sailfish = new ItemStack(FantasticItems.randomFish, 1, 0);
+				//ItemStack sailfish = new ItemStack(FantasticItems.randomFish, 1, 0);
 				for(int i = 0; i < 14; i++)
 				{
 					
@@ -302,7 +302,7 @@ public class Recipes
 				GameRegistry.addSmelting(FantasticItems.largeFish, new ItemStack(FantasticItems.filletCooked, 5), 0.45F);
 				GameRegistry.addSmelting(FantasticItems.legendaryFish, new ItemStack(FantasticItems.filletCooked, 10), 0.55F);
 				}
-				GameRegistry.addRecipe(new ItemStack(FantasticItems.filletRaw, 6), new Object[]{
+				/*GameRegistry.addRecipe(new ItemStack(FantasticItems.filletRaw, 6), new Object[]{
 					"*",
 
 					'*', sailfish
@@ -312,7 +312,7 @@ public class Recipes
 					"#",
 
 					'*', sailfish, '#', Items.stick
-				});
+				});*/
 				GameRegistry.addSmelting(FantasticItems.filletRaw, new ItemStack(FantasticItems.filletCooked), 0.35F);
 				GameRegistry.addSmelting(FantasticItems.tailRaw, new ItemStack(FantasticItems.tailCooked), 0.35F);
 				GameRegistry.addSmelting(FantasticItems.clawRaw, new ItemStack(FantasticItems.clawCooked), 0.35F);

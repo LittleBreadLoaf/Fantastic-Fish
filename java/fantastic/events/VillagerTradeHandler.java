@@ -54,7 +54,7 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 		recipeList.add(new MerchantRecipe(new ItemStack(FantasticItems.pearl, 4), new ItemStack(FantasticItems.clawCooked, 8)));
 		recipeList.add(new MerchantRecipe(new ItemStack(FantasticItems.pearl, 6), new ItemStack(FantasticItems.tailRaw, 8)));
 		recipeList.add(new MerchantRecipe(new ItemStack(FantasticItems.clamShell, 8, rand.nextInt(4)),new ItemStack(FantasticItems.pearl, 2)));
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 4), new ItemStack(FantasticItems.pearl, 4), new ItemStack(FantasticItems.randomFish, rand.nextInt(5))));
+		//recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 4), new ItemStack(FantasticItems.pearl, 4), new ItemStack(FantasticItems.randomFish, rand.nextInt(5))));
 		recipeList.add(new MerchantRecipe(new ItemStack(Blocks.glass, 4), new ItemStack(Items.emerald, 7), new ItemStack(FantasticArmor.goggles, 1)));
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.leather_chestplate, 1), new ItemStack(Items.emerald, 7), new ItemStack(FantasticArmor.wetsuit, 1)));
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.leather, 4), new ItemStack(Items.emerald, 7), new ItemStack(FantasticArmor.flippers, 1)));

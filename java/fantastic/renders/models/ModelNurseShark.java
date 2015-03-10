@@ -532,11 +532,11 @@ public class ModelNurseShark extends ModelBase
     this.Head2.rotateAngleY = (float)(0.1*(MathHelper.cos(f2 * 0.2F)) ) + 0.05F;
     this.Body2.rotateAngleZ = (float)(0.15*(MathHelper.cos(f2 * 0.2F - (float)(Math.PI/2) )) );
     this.Body3.rotateAngleY = (float)(0.2*(MathHelper.cos(f2 * 0.2F)) );
-    if(((EntityNurseShark)entity).GetIsOutOfWater() == 0)
+    /*if(((EntityNurseShark)entity).GetIsOutOfWater() == 0)
     {
     	this.FinL.rotateAngleZ = -(float)(0.2*(MathHelper.cos(f2 * 0.6F)) );
     	this.FinR.rotateAngleZ = -(float)(0.2*(MathHelper.sin(f2 * 0.6F)) );
-    }
+    }*/
 
 	this.FinL.rotateAngleY = (float)(0.1*(MathHelper.cos(f2 * 0.2F)) ) + 1.117011F;
 	this.FinR.rotateAngleY = (float)(0.1*(MathHelper.cos(f2 * 0.2F)) ) - 1.117011F;

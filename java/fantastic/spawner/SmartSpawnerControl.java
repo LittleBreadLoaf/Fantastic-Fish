@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import fantastic.FantasticDebug;
 import fantastic.FantasticIds;
+import fantastic.entities.EntityBarracuda;
 import fantastic.entities.EntityBasicFish;
 import fantastic.entities.EntityCatfish;
 import fantastic.entities.EntityFantasticFish;
@@ -147,6 +148,14 @@ public class SmartSpawnerControl
 		AddClassControlItem(EntityFeeder.class, FishSize.Big, FantasticIds.bigFeederMaxInstances, FantasticIds.bigFeederMinDepth, FantasticIds.bigFeederSpawnProbability);
 		AddClassControlItem(EntityFeeder.class, FishSize.Large, FantasticIds.largeFeederMaxInstances, FantasticIds.largeFeederMinDepth, FantasticIds.largeFeederSpawnProbability);
 		AddClassControlItem(EntityFeeder.class, FishSize.Legendary, FantasticIds.legFeederMaxInstances, FantasticIds.legFeederMinDepth, FantasticIds.legFeederSpawnProbability);
+		
+		//Barracuda
+		AddClassControlItem(EntityBarracuda.class, FishSize.Tiny, FantasticIds.tinyBarracudaMaxInstances, FantasticIds.tinyBarracudaMinDepth, FantasticIds.tinyBarracudaSpawnProbability);
+		AddClassControlItem(EntityBarracuda.class, FishSize.Small, FantasticIds.smallBarracudaMaxInstances, FantasticIds.smallBarracudaMinDepth, FantasticIds.smallBarracudaSpawnProbability);
+		AddClassControlItem(EntityBarracuda.class, FishSize.Medium, FantasticIds.mediumBarracudaMaxInstances, FantasticIds.mediumBarracudaMinDepth, FantasticIds.mediumBarracudaSpawnProbability);
+		AddClassControlItem(EntityBarracuda.class, FishSize.Big, FantasticIds.bigBarracudaMaxInstances, FantasticIds.bigBarracudaMinDepth, FantasticIds.bigBarracudaSpawnProbability);
+		AddClassControlItem(EntityBarracuda.class, FishSize.Large, FantasticIds.largeBarracudaMaxInstances, FantasticIds.largeBarracudaMinDepth, FantasticIds.largeBarracudaSpawnProbability);
+		AddClassControlItem(EntityBarracuda.class, FishSize.Legendary, FantasticIds.legBarracudaMaxInstances, FantasticIds.legBarracudaMinDepth, FantasticIds.legBarracudaSpawnProbability);
 
 		//WhiteTipShark
 		AddClassControlItem(EntityWhiteTipShark.class, FishSize.Tiny, FantasticIds.tinyWhiteTipSharkMaxInstances, FantasticIds.tinyWhiteTipSharkMinDepth, FantasticIds.tinyWhiteTipSharkSpawnProbability);

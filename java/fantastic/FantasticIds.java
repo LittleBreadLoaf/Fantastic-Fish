@@ -744,6 +744,68 @@ public class FantasticIds
 	public static int legFeederMaxInstances_Default = 2;
 	
 	
+	// Barracuda Tiny
+	public static int tinyBarracudaSpawnProbability;
+	public static int tinyBarracudaSpawnProbability_Default=400;
+	
+	public static int tinyBarracudaMinDepth;
+	public static int tinyBarracudaMinDepth_Default = -1;
+	
+	public static int tinyBarracudaMaxInstances;
+	public static int tinyBarracudaMaxInstances_Default = -1;
+	
+	// Barracuda Small
+	public static int smallBarracudaSpawnProbability;
+	public static int smallBarracudaSpawnProbability_Default=300;
+	
+	public static int smallBarracudaMinDepth;
+	public static int smallBarracudaMinDepth_Default = -1;
+	
+	public static int smallBarracudaMaxInstances;
+	public static int smallBarracudaMaxInstances_Default = -1;
+
+	// Barracuda Medium
+	public static int mediumBarracudaSpawnProbability;
+	public static int mediumBarracudaSpawnProbability_Default=150;
+	
+	public static int mediumBarracudaMinDepth;
+	public static int mediumBarracudaMinDepth_Default = 4;
+	
+	public static int mediumBarracudaMaxInstances;
+	public static int mediumBarracudaMaxInstances_Default = -1;
+	
+	// Barracuda Big
+	public static int bigBarracudaSpawnProbability;
+	public static int bigBarracudaSpawnProbability_Default=90;
+	
+	public static int bigBarracudaMinDepth;
+	public static int bigBarracudaMinDepth_Default = 6;
+	
+	public static int bigBarracudaMaxInstances;
+	public static int bigBarracudaMaxInstances_Default = -1;
+	
+	// Barracuda Large
+	public static int largeBarracudaSpawnProbability;
+	public static int largeBarracudaSpawnProbability_Default=50;
+	
+	public static int largeBarracudaMinDepth;
+	public static int largeBarracudaMinDepth_Default = 8;
+	
+	public static int largeBarracudaMaxInstances;
+	public static int largeBarracudaMaxInstances_Default = 2;
+
+	// Barracuda Legendary
+	public static int legBarracudaSpawnProbability;
+	public static int legBarracudaSpawnProbability_Default=10;
+	
+	public static int legBarracudaMinDepth;
+	public static int legBarracudaMinDepth_Default = 10;
+	
+	public static int legBarracudaMaxInstances;
+	public static int legBarracudaMaxInstances_Default = 2;	
+
+	
+	
 	//*** SHARKS ***
 	
 	// WhiteTipShark Tiny

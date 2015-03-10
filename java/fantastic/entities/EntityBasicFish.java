@@ -79,9 +79,7 @@ public class EntityBasicFish extends EntityFantasticFish
 	{
 		SetFishSize(aSize);
 		SetTextureIndex(aTextureIndex);
-		SetIsOutOfWater(isOutOfWater);
 		this.ignoreFrustumCheck = true;
-		SetHasNotSpawned(false);
 		this.setSize(1.0F, 1.0F);
 	}
 	

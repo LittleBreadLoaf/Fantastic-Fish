@@ -1,5 +1,7 @@
 package fantastic.entities;
 
+import com.sun.imageio.spi.InputStreamImageInputStreamSpi;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -20,10 +22,13 @@ public class FantasticEntities
 	{
 		int _id = 1;
 		
+		
 
 		//Reinforced Fishing Hook
 		EntityRegistry.registerModEntity(EntityReinforcedFishingHook.class, Names.ReinforcedFishingRod_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
+		
+		//*** FISH ***
 		
 		//Basic Fish
 		EntityRegistry.registerModEntity(EntityBasicFish.class, Names.Colorfish_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
@@ -31,7 +36,6 @@ public class FantasticEntities
 		
 		//Salmon
 		EntityRegistry.registerModEntity(EntitySalmon.class, Names.Salmon_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
-		//EntityRegistry.addSpawn(EntitySalmon.class, 6, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river,BiomeGenBase.coldTaigaHills,BiomeGenBase.extremeHills,BiomeGenBase.iceMountains,BiomeGenBase.megaTaigaHills,BiomeGenBase.taigaHills});
 		_id++;
 		
 		//Trout
@@ -75,6 +79,10 @@ public class FantasticEntities
 		EntityRegistry.registerModEntity(EntityMantaRay.class, Names.MantaRay_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
+		//Barracuda
+		EntityRegistry.registerModEntity(EntityBarracuda.class, Names.Barracuda_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
+		_id++;
+		
 
 		//*** SHARKS ***
 
@@ -82,12 +90,28 @@ public class FantasticEntities
 		EntityRegistry.registerModEntity(EntityWhiteTipShark.class, Names.WhiteTipShark_UnlocalizedName, _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
+		//*** Crabs and lobsters ***
 		
 		
 		//Hermit_Crab
-		EntityRegistry.registerModEntity(EntityHermitCrab.class, "hermit_crab", _id, FantasticMod.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityHermitCrab.class, "hermit_crab", _id, FantasticMod.instance, 64, 2, true);
 		_id++;
 
+		//Lobster
+		EntityRegistry.registerModEntity(EntityLobster.class, "lobster", _id, FantasticMod.instance, 64, 2, true);
+		_id++;
+
+		//Small Crab
+		EntityRegistry.registerModEntity(EntitySmallCrab.class, "smallcrab", _id, FantasticMod.instance, 64, 2, true);
+		_id++;
+
+		//Clam
+		EntityRegistry.registerModEntity(EntityClam.class, "clam", _id, FantasticMod.instance, 64, 2, true);
+		_id++;
+
+		
+		//Init the spawning
+		//initSpawning();
 		
 		//EntityRegistry.addSpawn(EntityCatfish.class, 3, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.river, BiomeGenBase.roofedForest, BiomeGenBase.swampland});
 
@@ -178,9 +202,6 @@ public class FantasticEntities
 		//EntityRegistry.registerGlobalEntityID(EntityHammerHead.class, "HammerShark", EntityRegistry.findGlobalUniqueEntityId(), 0x6E538A, 0x6B6BB2);
 		//EntityRegistry.addSpawn(EntityHammerHead.class, 1, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.ocean, BiomeGenBase.deepOcean});
 		
-		
-	
-		
 		//Blooper
 		//EntityRegistry.registerGlobalEntityID(EntityBlooper.class, "Blooper", EntityRegistry.findGlobalUniqueEntityId());
 				
@@ -191,6 +212,36 @@ public class FantasticEntities
 		//EntityRegistry.registerGlobalEntityID(EntityCreepedo.class, "Creepedo", EntityRegistry.findGlobalUniqueEntityId());
 								
 		
+	}
+	
+	private static void initSpawning()
+	{
+		
+		//*** Fish ***
+		EntityRegistry.addSpawn(EntityBasicFish.class, 3, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.beach, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.coldBeach, BiomeGenBase.coldTaiga, BiomeGenBase.coldTaigaHills, BiomeGenBase.deepOcean, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.extremeHillsPlus, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.jungle, BiomeGenBase.jungleEdge, BiomeGenBase.jungleHills, BiomeGenBase.megaTaiga, BiomeGenBase.megaTaigaHills, BiomeGenBase.mesa, BiomeGenBase.mesaPlateau, BiomeGenBase.mesaPlateau_F, BiomeGenBase.ocean, BiomeGenBase.plains, BiomeGenBase.river, BiomeGenBase.roofedForest, BiomeGenBase.savanna, BiomeGenBase.savannaPlateau, BiomeGenBase.stoneBeach, BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.taigaHills, BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver, BiomeGenBase.icePlains, BiomeGenBase.mushroomIsland, BiomeGenBase.mushroomIslandShore});
+		EntityRegistry.addSpawn(EntitySalmon.class, 8, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river,BiomeGenBase.coldTaigaHills,BiomeGenBase.extremeHills,BiomeGenBase.iceMountains,BiomeGenBase.megaTaigaHills,BiomeGenBase.taigaHills,BiomeGenBase.frozenRiver,BiomeGenBase.icePlains});
+		EntityRegistry.addSpawn(EntityTrout.class, 10, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.beach, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.coldBeach, BiomeGenBase.coldTaiga, BiomeGenBase.coldTaigaHills, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.extremeHillsPlus, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.megaTaiga, BiomeGenBase.megaTaigaHills, BiomeGenBase.mesa, BiomeGenBase.mesaPlateau, BiomeGenBase.mesaPlateau_F, BiomeGenBase.plains, BiomeGenBase.river, BiomeGenBase.roofedForest, BiomeGenBase.stoneBeach, BiomeGenBase.taiga, BiomeGenBase.taigaHills, BiomeGenBase.frozenRiver, BiomeGenBase.icePlains, BiomeGenBase.mushroomIsland, BiomeGenBase.mushroomIslandShore});
+		EntityRegistry.addSpawn(EntityPike.class, 8, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.coldTaiga, BiomeGenBase.coldTaigaHills, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.megaTaiga, BiomeGenBase.megaTaigaHills, BiomeGenBase.mesa, BiomeGenBase.mesaPlateau, BiomeGenBase.mesaPlateau_F, BiomeGenBase.plains, BiomeGenBase.river, BiomeGenBase.roofedForest, BiomeGenBase.taiga, BiomeGenBase.taigaHills, BiomeGenBase.mushroomIsland, BiomeGenBase.mushroomIslandShore,BiomeGenBase.swampland});
+		EntityRegistry.addSpawn(EntityMusky.class, 3, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.coldTaiga, BiomeGenBase.coldTaigaHills, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.megaTaiga, BiomeGenBase.megaTaigaHills, BiomeGenBase.mesa, BiomeGenBase.mesaPlateau, BiomeGenBase.mesaPlateau_F, BiomeGenBase.plains, BiomeGenBase.river, BiomeGenBase.roofedForest, BiomeGenBase.taiga, BiomeGenBase.taigaHills, BiomeGenBase.mushroomIsland, BiomeGenBase.mushroomIslandShore,BiomeGenBase.swampland});
+		EntityRegistry.addSpawn(EntityCatfish.class, 10, 1, 3, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.desert,BiomeGenBase.desertHills,BiomeGenBase.jungle,BiomeGenBase.jungleEdge,BiomeGenBase.jungleHills,BiomeGenBase.mesa,BiomeGenBase.mesaPlateau,BiomeGenBase.mesaPlateau_F,BiomeGenBase.mushroomIsland,BiomeGenBase.mushroomIslandShore,BiomeGenBase.plains,BiomeGenBase.roofedForest,BiomeGenBase.savanna,BiomeGenBase.savannaPlateau,BiomeGenBase.swampland});
+		EntityRegistry.addSpawn(EntityTuna.class, 5, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		EntityRegistry.addSpawn(EntityFungus.class, 5, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.mushroomIsland, BiomeGenBase.mushroomIslandShore});
+		EntityRegistry.addSpawn(EntityMossy.class, 3, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.swampland});
+		EntityRegistry.addSpawn(EntityFeeder.class, 5, 3, 1, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest, BiomeGenBase.swampland, BiomeGenBase.jungle,BiomeGenBase.jungleEdge, BiomeGenBase.jungleHills,BiomeGenBase.plains, BiomeGenBase.roofedForest});
+		EntityRegistry.addSpawn(EntitySailfish.class, 2, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		EntityRegistry.addSpawn(EntityMantaRay.class, 2, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		EntityRegistry.addSpawn(EntityBarracuda.class, 2, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+
+		//*** Sharks ***
+		EntityRegistry.addSpawn(EntityWhiteTipShark.class, 1, 1, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		
+		//Other critters
+		EntityRegistry.addSpawn(EntityLobster.class, 5, 1, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		EntityRegistry.addSpawn(EntityHermitCrab.class, 5, 1, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.beach,BiomeGenBase.coldBeach,BiomeGenBase.stoneBeach, BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		EntityRegistry.addSpawn(EntitySmallCrab.class, 5, 1, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.beach,BiomeGenBase.coldBeach,BiomeGenBase.stoneBeach, BiomeGenBase.ocean, BiomeGenBase.deepOcean});
+		EntityRegistry.addSpawn(EntityClam.class, 7, 1, 5, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.deepOcean});
+		
+
 	}
 	
 
